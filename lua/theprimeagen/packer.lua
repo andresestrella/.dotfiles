@@ -64,14 +64,27 @@ return require('packer').startup(function(use)
     use("eandrju/cellular-automaton.nvim")
     use("laytan/cloak.nvim")
     use("numToStr/Comment.nvim")
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional, for file icons
-        },
-        tag = 'nightly' -- optional, updated every week. (see issue #1193)
-    }
     use("nvim-lualine/lualine.nvim")
+
+    -- Unless you are still migrating, remove the deprecated commands from v1.x
+    vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        }
+    }
+    -- use {
+        --     'nvim-tree/nvim-tree.lua',
+        --     requires = {
+            --         'nvim-tree/nvim-web-devicons', -- optional, for file icons
+            --     },
+            --     tag = 'nightly' -- optional, updated every week. (see issue #1193)
+            -- }
     -- use("ryanoasis/vim-devicons")
 end)
 

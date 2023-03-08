@@ -59,10 +59,7 @@ return require('packer').startup(function(use)
         }
     }
 
-    use("folke/zen-mode.nvim")
     use("github/copilot.vim")
-    use("eandrju/cellular-automaton.nvim")
-    use("laytan/cloak.nvim")
     use("numToStr/Comment.nvim")
     use("nvim-lualine/lualine.nvim")
 
@@ -85,6 +82,7 @@ return require('packer').startup(function(use)
             --     },
             --     tag = 'nightly' -- optional, updated every week. (see issue #1193)
             -- }
-    -- use("ryanoasis/vim-devicons")
+    --use("ryanoasis/vim-devicons")
+    use("theprimeagen/vim-be-good")
 end)
 

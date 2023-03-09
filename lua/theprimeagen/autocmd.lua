@@ -1,3 +1,4 @@
+
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 -- Persistent Folds
@@ -16,7 +17,6 @@ autocmd("BufWinEnter", {
   end,
   group = save_fold,
 })
-
 -- Persistent Cursor
 autocmd("BufReadPost", {
   callback = function()
@@ -25,5 +25,19 @@ autocmd("BufReadPost", {
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
+  end,
+})
+
+-- set up folding based on treesitter
+
+local opt = vim.opt
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
+--open all fold on startup
+autocmd("BufReadPost", {
+  pattern = "*.*",
+  callback = function()
+    vim.cmd("normal! zR")
   end,
 })

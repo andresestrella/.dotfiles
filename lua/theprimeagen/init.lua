@@ -1,6 +1,6 @@
 require("theprimeagen.set")
 require("theprimeagen.remap")
-
+require("theprimeagen.autocmd")
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
@@ -10,7 +10,6 @@ local yank_group = augroup('HighlightYank', {})
 function R(name)
     require("plenary.reload").reload_module(name)
 end
-
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',

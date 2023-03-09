@@ -5,6 +5,8 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
+  'eslint',
+  'lua_ls',
 })
 
 -- Fix Undefined global 'vim'
@@ -28,6 +30,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
+--disable autocompletion for tab and shift-tab
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
@@ -65,4 +68,3 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true
 })
-

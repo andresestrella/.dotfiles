@@ -7,14 +7,16 @@ return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
+  --file finding
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  --theme, colors
   use { "catppuccin/nvim", as = "catppuccin" }
 
+  -- LSP troubleshooting
   use({
     "folke/trouble.nvim",
     config = function()
@@ -27,15 +29,18 @@ return require('packer').startup(function(use)
     end
   })
 
-
+--parse tree
   use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
   use("nvim-treesitter/playground")
-  use("theprimeagen/harpoon")
-  use("theprimeagen/refactoring.nvim")
-  use("mbbill/undotree")
-  use("tpope/vim-fugitive")
   use("nvim-treesitter/nvim-treesitter-context");
+  use("theprimeagen/harpoon") --quick file access
+  use("theprimeagen/refactoring.nvim")
+  --undo history
+  use("mbbill/undotree")
+  --git
+  use("tpope/vim-fugitive")
 
+  --lsp all in one
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v1.x',
@@ -59,13 +64,14 @@ return require('packer').startup(function(use)
     }
   }
 
-  use("github/copilot.vim")
-  use("numToStr/Comment.nvim")
-  use("nvim-lualine/lualine.nvim")
+  use("github/copilot.vim") --AI completion
+  use("numToStr/Comment.nvim") --commenting
+  use("nvim-lualine/lualine.nvim") --status line
 
   -- Unless you are still migrating, remove the deprecated commands from v1.x
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
+  -- file tree
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -76,12 +82,22 @@ return require('packer').startup(function(use)
     }
   }
   --use("ryanoasis/vim-devicons")
-  use("Shatur/neovim-session-manager")
   use("theprimeagen/vim-be-good")
+
+  --sessions
   use {
     'Shatur/neovim-session-manager',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use("chentoast/marks.nvim") --marks visualizer
+  use("tpope/vim-sleuth") --auto detect indent
+  --debugging
+  use("mfussenegger/nvim-dap")
+  use("rcarriga/nvim-dap-ui")
+  use("theHamsta/nvim-dap-virtual-text")
+
+  --git signs
+  use("lewis6991/gitsigns.nvim")
 
 end)
 

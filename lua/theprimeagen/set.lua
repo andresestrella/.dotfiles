@@ -18,6 +18,7 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.backup = false -- creates a backup file
+
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
@@ -28,7 +29,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
-
-vim.opt.colorcolumn = "80"
+--vim.opt.colorcolumn = "80"
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.opt.title = true -- set the title of window to the value of the titlestring

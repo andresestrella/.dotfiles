@@ -10,11 +10,15 @@ return require('packer').startup(function(use)
   --file finding
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
+  --media files previewing
+  use('nvim-telescope/telescope-media-files.nvim')
+  use('nvim-lua/popup.nvim')
 
   --theme, colors
   use { "catppuccin/nvim", as = "catppuccin" }
+  use("sainnhe/gruvbox-material")
 
   -- LSP troubleshooting
   use({
@@ -29,9 +33,9 @@ return require('packer').startup(function(use)
     end
   })
 
---parse tree
-  use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
-  use("nvim-treesitter/playground")
+  --parse tree
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  --use("nvim-treesitter/playground")
   use("nvim-treesitter/nvim-treesitter-context");
   use("theprimeagen/harpoon") --quick file access
   use("theprimeagen/refactoring.nvim")
@@ -43,29 +47,33 @@ return require('packer').startup(function(use)
   --lsp all in one
   use {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
+    branch = 'v2.x',
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim' },
+      { 'williamboman/mason-lspconfig.nvim' },
 
       -- Autocompletion
-      {'hrsh7th/nvim-cmp'},
-      {'hrsh7th/cmp-buffer'},
-      {'hrsh7th/cmp-path'},
-      {'saadparwaiz1/cmp_luasnip'},
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'hrsh7th/cmp-nvim-lua'},
+      { 'hrsh7th/nvim-cmp' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-path' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-nvim-lua' },
 
       -- Snippets
-      {'L3MON4D3/LuaSnip'},
-      {'rafamadriz/friendly-snippets'},
+      { 'L3MON4D3/LuaSnip' },
+      { 'rafamadriz/friendly-snippets' },
     }
   }
 
-  use("github/copilot.vim") --AI completion
-  use("numToStr/Comment.nvim") --commenting
+  --use("pangloss/vim-javascript")
+  --use("othree/html5.vim")
+  --use("evanleck/vim-svelte")--requires the 2 above this
+  use("leafOfTree/vim-svelte-plugin")
+  use("github/copilot.vim")        --AI completion
+  use("numToStr/Comment.nvim")     --commenting
   use("nvim-lualine/lualine.nvim") --status line
 
   -- Unless you are still migrating, remove the deprecated commands from v1.x
@@ -79,18 +87,21 @@ return require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
+      "s1n7ax/nvim-window-picker",
     }
   }
-  --use("ryanoasis/vim-devicons")
+  --practice vim
   use("theprimeagen/vim-be-good")
 
   --sessions
   use {
     'Shatur/neovim-session-manager',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use("chentoast/marks.nvim") --marks visualizer
-  use("tpope/vim-sleuth") --auto detect indent
+  use("tpope/vim-sleuth")     --auto detect indent
+  use("tpope/vim-surround")   --surrounding
+  use("jiangmiao/auto-pairs") --auto pairs
   --debugging
   use("mfussenegger/nvim-dap")
   use("rcarriga/nvim-dap-ui")
@@ -98,6 +109,11 @@ return require('packer').startup(function(use)
 
   --git signs
   use("lewis6991/gitsigns.nvim")
+  --
+  --dap setup
+  use("mfussenegger/nvim-dap-python")
+  use("jay-babu/mason-nvim-dap.nvim")
 
+  use("akinsho/toggleterm.nvim") --terminal
+  use("nanozuki/tabby.nvim") --prettier tabs
 end)
-

@@ -1,4 +1,6 @@
+--open neo tree
 vim.keymap.set('n', '<leader>e', ':Neotree filesystem toggle left<cr>')
+vim.keymap.set('n', '<leader>eb', ':Neotree buffers toggle left<cr>')
 require('neo-tree').setup {
   window = {
     mappings = {
@@ -41,3 +43,4 @@ require('neo-tree').setup {
 }
 
 
+require 'window-picker'.setup()

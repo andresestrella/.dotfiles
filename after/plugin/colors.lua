@@ -1,2 +1,5 @@
 catppuccin = "catppuccin-mocha"
-vim.cmd.colorscheme(catppuccin)
+--catppuccin = "catppuccin-macchiato"
+--vim.cmd.colorscheme(catppuccin)
+vim.g.gruvbox_material_background = "medium" -- hard, medium, soft, none
+vim.cmd.colorscheme("gruvbox-material")

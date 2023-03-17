@@ -14,17 +14,3 @@ vim.keymap.set('n', '<leader>ps', function()
 end)
 vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
 
-
-
-require('telescope').load_extension('media_files')
-require'telescope'.setup {
-  extensions = {
-    media_files = {
-      -- filetypes whitelist
-      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = {"png", "webp", "jpg", "jpeg"},
-      -- find command (defaults to `fd`)
-      find_cmd = "rg"
-    }
-  },
-}

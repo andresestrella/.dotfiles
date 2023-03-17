@@ -12,9 +12,6 @@ return require('packer').startup(function(use)
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
-  --media files previewing
-  use('nvim-telescope/telescope-media-files.nvim')
-  use('nvim-lua/popup.nvim')
 
   --theme, colors
   use { "catppuccin/nvim", as = "catppuccin" }
@@ -72,7 +69,8 @@ return require('packer').startup(function(use)
   --use("othree/html5.vim")
   --use("evanleck/vim-svelte")--requires the 2 above this
   use("leafOfTree/vim-svelte-plugin")
-  use("github/copilot.vim")        --AI completion
+  --use("github/copilot.vim")        --AI completion
+  use("zbirenbaum/copilot.lua")
   use("numToStr/Comment.nvim")     --commenting
   use("nvim-lualine/lualine.nvim") --status line
 
@@ -115,5 +113,5 @@ return require('packer').startup(function(use)
   use("jay-babu/mason-nvim-dap.nvim")
 
   use("akinsho/toggleterm.nvim") --terminal
-  use("nanozuki/tabby.nvim") --prettier tabs
+  use("nanozuki/tabby.nvim")     --prettier tabs
 end)

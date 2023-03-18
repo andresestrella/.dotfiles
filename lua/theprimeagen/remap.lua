@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 
 --exit insert mode with jk
 vim.keymap.set("i", "jk", "<ESC>")
@@ -50,9 +49,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 --makes Q do nothing
 vim.keymap.set("n", "Q", "<nop>")
-
---maps leader f to format code
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")

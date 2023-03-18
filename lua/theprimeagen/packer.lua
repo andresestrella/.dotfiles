@@ -40,6 +40,8 @@ return require('packer').startup(function(use)
   use("mbbill/undotree")
   --git
   use("tpope/vim-fugitive")
+  use("theprimeagen/git-worktree.nvim")
+
 
   --lsp all in one
   use {
@@ -114,4 +116,5 @@ return require('packer').startup(function(use)
 
   use("akinsho/toggleterm.nvim") --terminal
   use("nanozuki/tabby.nvim")     --prettier tabs
+  use("karb94/neoscroll.nvim")  --smooth scrolling"
 end)

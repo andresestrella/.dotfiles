@@ -1,7 +1,7 @@
 local lsp = require("lsp-zero")
 
 lsp.preset({
-    name = "recommended",
+    name = "minimal",
     set_lsp_keypmaps = true,
     suggest_lsp_servers = false,
     manage_nvim_cmp = true,
@@ -36,10 +36,8 @@ lsp.on_attach(function(client, bufnr)
         ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
         ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-S-J>'] = cmp.mapping.confirm({ select = true }),
         --['<CR>'] = cmp.mapping.confirm({ select = false }),
     })
-
 
     --disable autocompletion for tab and shift-tab
     cmp_mappings['<Tab>'] = nil
@@ -54,23 +52,6 @@ lsp.on_attach(function(client, bufnr)
             completeopt = 'menu,menuone,noinsert,noselect'
         },
     })
-    lsp.setup()
-
-    -- lsp.set_preferences({
-    --     suggest_lsp_servers = false,
-    --     sign_icons = {
-    --         error = 'E',--
-    --         warn = 'W',--
-    --         hint = 'H',--󰞋
-    --         info = 'I'--
-    --     }
-    -- })
-
-    -- local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-    -- for type, icon in pairs(signs) do
-    --   local hl = "LspDiagnosticsSign" .. type
-    --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    -- end
 
     local signs = {
         Error = " ",
@@ -111,6 +92,22 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 end)
 
+lsp.configure('pylsp', {
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = {'W391'},
+                    maxLineLength = 150,
+                    max_line_length = 160,
+                }
+            }
+        }
+    }
+})
+
+
+lsp.setup()
 
 
 -- show diagnostics in virtual text

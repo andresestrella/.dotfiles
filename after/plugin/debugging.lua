@@ -11,6 +11,11 @@ vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", n
 vim.fn.sign_define("DapStopped", { text = "⏸", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapLogPoint", { text = "📝", texthl = "", linehl = "", numhl = "" })
 
+--these work on windows
+local CODELLDB_DIR = require('mason-registry').get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb'
+local PYTHON_DIR = require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/Scripts/python'
+local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
+
 local codelldb_port = "1300" --rust debugger port
 local dap = require('dap')
 require 'mason-nvim-dap'.setup_handlers {
@@ -54,7 +59,7 @@ require 'mason-nvim-dap'.setup_handlers {
                     elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
                         return cwd .. '/.venv/bin/python'
                     else
-                        return '/usr/bin/python'
+                        return PYTHON_DIR
                     end
                 end,
             },
@@ -102,10 +107,6 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
 end
-
-local CODELLDB_DIR = require('mason-registry').get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb'
-local PYTHON_DIR = require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/Scripts/python'
-local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
 
 dap.adapters.node2 = {
   type = 'executable',

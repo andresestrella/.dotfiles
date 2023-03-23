@@ -2,7 +2,7 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 
 -- set timeoutlen to 200 ms
-vim.opt.timeoutlen = 200
+vim.opt.timeoutlen = 300
 
 --tabs
 vim.opt.showtabline = 4 -- always show tabs

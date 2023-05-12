@@ -86,7 +86,8 @@ local plugins = {
       { 'rafamadriz/friendly-snippets' },
     }
   },
-
+  "jose-elias-alvarez/null-ls.nvim",
+  "jay-babu/mason-null-ls.nvim",
   --"pangloss/vim-javascript",
   --"othree/html5.vim",
   --"evanleck/vim-svelte",--requires the 2 above this

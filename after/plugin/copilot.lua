@@ -38,7 +38,7 @@ require('copilot').setup({
       accept_line = "<M-l",
       next = "<M-n>",
       prev = "<M-p>",
-      dismiss = "<C-]>",
+      dismiss = "<M-e>",
     },
   },
   filetypes = {

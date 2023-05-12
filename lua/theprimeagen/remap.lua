@@ -74,6 +74,9 @@ vim.keymap.set("n", "<C-Up>", ":resize -4<CR>");
 vim.keymap.set("n", "<C-Down>", ":resize +4<CR>");
 vim.keymap.set("n", "<C-Left>", ":vertical resize +6<CR>");
 vim.keymap.set("n", "<C-Right>", ":vertical resize -6<CR>");
+--window splitting
+vim.keymap.set("n", "<A-S>", ":split<CR>");
+vim.keymap.set("n", "<C-s>", ":vsplit<CR>");
 
 --better indenting
 vim.keymap.set("v", "<", "<gv");
@@ -83,6 +86,7 @@ vim.keymap.set("v", ">", ">gv");
 vim.keymap.set("n", "<Tab>", "gt");
 vim.keymap.set("n", "<S-Tab>", "gT");
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>");
+--vim.keymap.set("n", "<C-W>", ":tabclose<CR>");
 vim.keymap.set("n", "<A-Left>", ":tabmove -<CR>");
 vim.keymap.set("n", "<A-Right>", ":tabmove +<CR>");
 
@@ -104,5 +108,3 @@ vim.keymap.set("n", "[l", ":lprevious<CR>");
 vim.keymap.set("n", "]l", ":lnext<CR>");
 vim.keymap.set("n", "[L", ":lfirst<CR>");
 vim.keymap.set("n", "]L", ":llast<CR>");
-
-

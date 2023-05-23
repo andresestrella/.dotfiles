@@ -8,11 +8,13 @@ vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
 --delete current letter without yankin
 vim.keymap.set("n", "x", '"_x')
 
+-- maps shift tab to insert backwards tab
+vim.keymap.set("i", "<S-Tab>", "<C-d>")
+
 
 --add new below current line in normal mode and maintain cursor postion
 vim.keymap.set("n", "oo", "m`o<Esc>``")
 vim.keymap.set("n", "OO", "m`O<Esc>``")
-
 --add new line above and below current line in normal mode and maintain cursor postion
 vim.keymap.set("n", "<leader>o", "m`o<Esc>kO<Esc>``i")
 
@@ -35,7 +37,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- greatest remap ever
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("x", "<leader>p", [["_dP]]) -- paste over selected text without yanking it
 
 -- maps pressing y and Y to yank to system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -75,8 +77,10 @@ vim.keymap.set("n", "<C-Down>", ":resize +4<CR>");
 vim.keymap.set("n", "<C-Left>", ":vertical resize +6<CR>");
 vim.keymap.set("n", "<C-Right>", ":vertical resize -6<CR>");
 --window splitting
-vim.keymap.set("n", "<A-S>", ":split<CR>");
+vim.keymap.set("n", "<A-s>", ":split<CR>");
 vim.keymap.set("n", "<C-s>", ":vsplit<CR>");
+vim.keymap.set("n", "<C-w>s", ":vsplit<CR>");
+vim.keymap.set("n", "<C-w>S", ":split<CR>");
 
 --better indenting
 vim.keymap.set("v", "<", "<gv");

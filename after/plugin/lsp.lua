@@ -4,7 +4,7 @@ lsp.preset({
 	name = "minimal",
 	set_lsp_keypmaps = true,
 	manage_nvim_cmp = true,
-	suggest_lsp_servers = false,
+	suggest_lsp_servers = true,
 })
 
 lsp.ensure_installed({
@@ -26,29 +26,6 @@ lsp.on_attach(function(client, bufnr)
 		return
 	end
 	local opts = { buffer = bufnr, remap = false }
-
-	local cmp = require("cmp")
-	local cmp_select = { behavior = cmp.SelectBehavior.Select }
-	local cmp_mappings = lsp.defaults.cmp_mappings({
-		["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-		["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-		["<C-y>"] = cmp.mapping.confirm({ select = true }),
-		--['<CR>'] = cmp.mapping.confirm({ select = false }),
-	})
-
-	--disable autocompletion for tab and shift-tab
-	cmp_mappings["<Tab>"] = nil
-	cmp_mappings["<S-Tab>"] = nil
-
-	--lets me use enter freely
-	lsp.setup_nvim_cmp({
-		mapping = cmp_mappings,
-		preselect = "none",
-		completion = {
-			completeopt = "menu,menuone,noinsert,noselect",
-		},
-	})
 
 	local signs = {
 		Error = " ",
@@ -132,6 +109,57 @@ lsp.configure("pylsp", {
 
 lsp.setup()
 
+local cmp = require("cmp")
+local cmp_action = require("lsp-zero").cmp_action()
+require("luasnip.loaders.from_vscode").lazy_load()
+-- load snippets from path/of/your/nvim/config/my-cool-snippets
+-- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my-cool-snippets" } })
+
+cmp.setup({
+	sources = {
+		{ name = "buffer" },
+		{ name = "path" },
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+	},
+	mapping = {
+		["C-n"] = cmp_action.luasnip_jump_forward(),
+		["C-p"] = cmp_action.luasnip_jump_backward(),
+		["<Tab>"] = cmp_action.luasnip_supertab(),
+		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+		-- ['<C-Space>'] = cmp.mapping.complete(), -- need to disable autocompletion for this to work
+		--disable autocompletion for tab and shift-tab
+		-- ["<Tab>"] = nil,
+		-- ["<S-Tab>"] = nil,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	}
+})
+
+-- remaps to jump around snippet placeholders
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+keymap("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
+keymap("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
+
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+--lets me use enter freely
+lsp.setup_nvim_cmp({
+	mapping = cmp_mappings,
+	preselect = "none",
+	completion = {
+		completeopt = "menu,menuone,noinsert,noselect",
+	},
+})
+
+-- allow html snippets in htmldjango files
+require'luasnip'.filetype_extend("htmldjango", {"html"})
+
 -- show diagnostics in virtual text
 vim.diagnostic.config({
 	virtual_text = true,
@@ -161,4 +189,4 @@ require("mason-null-ls").setup({
 })
 
 -- Required when `automatic_setup` is true
-require("mason-null-ls").setup_handlers()
+--require("mason-null-ls").setup_handlers()

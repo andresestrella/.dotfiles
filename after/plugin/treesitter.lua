@@ -1,3 +1,5 @@
+-- set html files to filetype htmldjango
+vim.cmd [[autocmd BufNewFile,BufRead *.html set filetype=htmldjango]]
 return {
   {
     "nvim-treesitter/nvim-treesitter",

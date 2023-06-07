@@ -21,16 +21,16 @@ lsp.ensure_installed({
 
 --comment this out to enable eslint
 lsp.on_attach(function(client, bufnr)
-	if client.name == "eslint" then
-		vim.cmd([[ LspStop eslint ]])
-		return
-	end
+	-- if client.name == "eslint" then
+	-- 	vim.cmd([[ LspStop eslint ]])
+	-- 	return
+	-- end
 	local opts = { buffer = bufnr, remap = false }
 
 	local signs = {
-		Error = " ",
+		Error = " ",
 		Warn = " ",
-		Hint = " ",
+		Hint = "󰋗 ",
 		Info = " ",
 	}
 
@@ -84,7 +84,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.lsp.buf.rename()
 	end, opts)
 	--show signature help
-	vim.keymap.set("i", "<C-h>", function()
+	vim.keymap.set("i", "<A-h>", function()
 		vim.lsp.buf.signature_help()
 	end, opts)
 
@@ -135,7 +135,7 @@ cmp.setup({
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
-	}
+	},
 })
 
 -- remaps to jump around snippet placeholders
@@ -158,7 +158,7 @@ lsp.setup_nvim_cmp({
 })
 
 -- allow html snippets in htmldjango files
-require'luasnip'.filetype_extend("htmldjango", {"html"})
+require("luasnip").filetype_extend("htmldjango", { "html" })
 
 -- show diagnostics in virtual text
 vim.diagnostic.config({
@@ -167,15 +167,14 @@ vim.diagnostic.config({
 
 local null_ls = require("null-ls")
 local null_opts = lsp.build_options("null-ls", {})
-
 null_ls.setup({
 	on_attach = function(client, bufnr)
 		null_opts.on_attach(client, bufnr)
 	end,
 	sources = {
-		null_ls.builtins.formatting.prettier,
-		--null_ls.builtins.diagnostics.eslint,
-		null_ls.builtins.formatting.stylua,
+		-- null_ls.builtins.formatting.prettier,
+		-- null_ls.builtins.diagnostics.eslint,
+		-- null_ls.builtins.formatting.stylua,
 		-- You can add tools not supported by mason.nvim
 	},
 })
@@ -183,10 +182,35 @@ null_ls.setup({
 -- See mason-null-ls.nvim's documentation for more details:
 -- https://github.com/jay-babu/mason-null-ls.nvim#setup
 require("mason-null-ls").setup({
-	ensure_installed = nil,
+	ensure_installed = {"prettier", "eslint"},
 	automatic_installation = true, -- You can still set this to `true`
 	automatic_setup = true,
 })
 
--- Required when `automatic_setup` is true
---require("mason-null-ls").setup_handlers()
+
+-- specifying to use null-ls for formatting
+local lsp_formatting = function(bufnr)
+    vim.lsp.buf.format({
+        filter = function(client)
+            -- apply whatever logic you want (in this example, we'll only use null-ls)
+            return client.name == "null-ls"
+        end,
+        bufnr = bufnr,
+    })
+end
+
+-- run formatting on save
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- add to your shared on_attach callback
+local on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                lsp_formatting(bufnr)
+            end,
+        })
+    end
+end

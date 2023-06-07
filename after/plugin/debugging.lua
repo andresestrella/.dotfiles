@@ -62,7 +62,6 @@ vim.fn.sign_define("DapLogPoint", { text = "📝", texthl = "", linehl = "", num
 local CODELLDB_DIR = require('mason-registry').get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb'
 local PYTHON_DIR = require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/Scripts/python'
 local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
-
 local codelldb_port = "1300" --rust debugger port
 local dap = require('dap')
 

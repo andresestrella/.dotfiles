@@ -15,15 +15,24 @@ require('telescope').setup{
 		}
 	},
 	pickers = {},
-	extensions = {}
 }
 
+-- enable neoclip extension
+require('telescope').load_extension('neoclip')
+
+--enable macroscope
+require('telescope').load_extension('macroscope')
+
 --keybind that maps <leader>pt to execute ':Telescope' command
-vim.keymap.set('n', '<leader>pt', ":Telescope<CR>")
-vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
-vim.keymap.set('n', '<leader>pg', builtin.git_files, {})
+vim.keymap.set('n', '<leader>ft', ":Telescope<CR>")
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
 vim.keymap.set('n', '?', builtin.current_buffer_fuzzy_find, {})
-vim.keymap.set('n', '<leader>ps', function()
+vim.keymap.set('n', '<leader>fs', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
 end)
-vim.keymap.set('n', '<leader>vh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fd', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fh', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fp', ":Telescope neoclip <CR>", {})
+vim.keymap.set('n', '<leader>fq', ":Telescope macroscope <CR>", {})

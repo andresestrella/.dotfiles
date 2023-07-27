@@ -15,12 +15,29 @@ local plugins = {
   --file finding
   {
     'nvim-telescope/telescope.nvim',
-    version = '0.1.1',
+    version = '0.1.2',
     -- or                              , branch = '0.1.1',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {},
   },
 
-  --theme, colors
+  --neoclip
+  {
+    'AckslD/nvim-neoclip.lua',
+    config = function()
+      require('neoclip').setup({
+        -- uncomment if I want to use persistent history
+        -- enable_persistant_history = true,
+      })
+    end,
+  },
+
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+
+  --themes, colors
   -- {
   --   "catppuccin/nvim", name = "catppuccin"
   -- },
@@ -138,10 +155,11 @@ local plugins = {
       dashboard.button( "a", "  New file" , ":ene <BAR> startinsert <CR>"),
       dashboard.button("SPC f f", "󰈞 Find file", ":Telescope find_files hidden=true no_ignore=true<CR>"),
       dashboard.button("SPC f h", "󰷊 Recently opened files", "<cmd>Telescope oldfiles<CR>"),
-      dashboard.button("SPC f r", "  Frecency/MRU"),
+      -- dashboard.button("SPC f r", "  Frecency/MRU"),
       dashboard.button("SPC f g", "  Find word",  "<cmd>Telescope live_grep<cr>"),
-      dashboard.button("SPC f m", "  Jump to bookmarks"),
+      -- dashboard.button("SPC f m", "  Jump to bookmarks"),
       dashboard.button("SPC s l", "󰘁 Open last session", "<cmd>SessionManager load_last_session<CR>"),
+      dashboard.button("SPC s s", "󱃐 Open sessions", "<cmd>SessionManager load_session<CR>"),
       dashboard.button( "q", "󰩈  Quit NVIM" , ":qa<CR>"),
     }
 

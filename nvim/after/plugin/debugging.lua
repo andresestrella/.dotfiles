@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-nvim-dap").setup({
-    ensure_installed = { "python", "firefox", "js", "codelldb" },
+    ensure_installed = { "python", "js", "codelldb" },
     -- automatic_setup = true,
     automatic_installation = true,
     handlers = {
@@ -32,6 +32,7 @@ require("mason-nvim-dap").setup({
                         -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
                         -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
                         -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+                        local PYTHON_DIR = require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/Scripts/python'
                         local cwd = vim.fn.getcwd()
                         if vim.fn.executable(cwd .. '/venv/Scripts/python') == 1 then
                             return cwd .. '/venv/Scripts/python'
@@ -60,10 +61,8 @@ vim.fn.sign_define("DapLogPoint", { text = "📝", texthl = "", linehl = "", num
 
 --these work on windows
 local CODELLDB_DIR = require('mason-registry').get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb'
-local PYTHON_DIR = require('mason-registry').get_package('debugpy'):get_install_path() .. '/venv/Scripts/python'
 local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
 local codelldb_port = "1300" --rust debugger port
-local dap = require('dap')
 
 require("dapui").setup()
 
@@ -231,45 +230,6 @@ dap.configurations.svelte = dap.configurations.javascript
 --     }
 -- }
 
---python manual setup
--- dap.adapters.python = {
---     type = 'executable',
---     command = 'python',
---     args = { '-m', 'debugpy.adapter' },
--- }
---
--- local dap = require('dap')
--- dap.configurations.python = {
---     {
---         -- The first three options are required by nvim-dap
---         type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
---         request = 'launch',
---         name = "Launch file",
---         -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
---
---         program = "${file}", -- This configuration will launch the current file if used.
---         pythonPath = function()
---             -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
---             -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
---             -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
---             local cwd = vim.fn.getcwd()
---             if vim.fn.executable(cwd .. '/venv/Scripts/python') == 1 then
---                 return cwd .. '/venv/Scripts/python'
---             elseif vim.fn.executable(cwd .. '/.venv/Scripts/python') == 1 then
---                 return cwd .. '/.venv/Scripts/python'
---             elseif vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
---                 return cwd .. '/venv/bin/python'
---             elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
---                 return cwd .. '/.venv/bin/python'
---             else
---                 return '/usr/bin/python'
---             end
---         end,
---     },
--- }
-
-
-
 --manual rust set up, tested
 dap.adapters.codelldb = {
     type = "server",
@@ -278,16 +238,8 @@ dap.adapters.codelldb = {
     executable = {
         --command = os.getenv("HOME"), "/.local/share/nvim/mason/bin/codelldb", -- installed with mason
         --command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
-        -- command = (function()
-        --         return os.getenv("HOME") ..
-        --             "/.vscode/extensions/vadimcn.vscode-lldb-1.8.1/adapter/codelldb" -- windows, vscode
-        --     end)(),
-        -- command = (function()
-        --         return os.getenv("HOME") ..
-        --             "/.vscode/extensions/vadimcn.vscode-lldb-1.8.1/lldb/bin/lldb" -- windows, vscode
-        --     end)(),
-        command = os.getenv("HOME") .. "/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
-        -- command = CODELLB_PATH, -- windows, installed with mason
+        -- command = os.getenv("HOME") .. "/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
+        command = CODELLDB_DIR, -- windows, installed with mason
         --command = "C:/User/User/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
         -- command = (function()
         --         return os.getenv("HOME") ..

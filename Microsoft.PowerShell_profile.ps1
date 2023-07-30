@@ -46,3 +46,30 @@ Set-PSReadLineKeyHandler -Chord "Ctrl+p" -Function HistorySearchBackward
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 # Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 # Set-PsFzfOption -TabExpansion
+
+# bashlike functions for powershell
+function unzip ($file){
+  echo("Extracting", $file, "to", $pwd)
+  $fullFile = Get-ChildItem -Path $pwd -Filter .\cove.zip | ForEach-Object{$_.FullName}
+  Expand-Archive -Path $fullFile -DestinationPath $pwd
+}
+
+function touch($file){
+  "" | Out-File $file
+}
+
+function pkill($name){
+  ps $name -ErrorAction SilentlyContinue | kill
+}
+
+function which ($name){
+  Get-Command $name | Select-Object -ExpandProperty Definition
+}
+
+function df {
+  get-volume
+}
+
+function export ($name, $value){
+  set-item -force -path "env:$name" - value:$value;
+}

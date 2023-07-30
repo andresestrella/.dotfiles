@@ -1,3 +1,4 @@
+# run oh-my-posh and set theme
 #oh-my-posh init pwsh | Invoke-Expression
 #oh-my-posh --init --shell pwsh --config ~/jandedobbeleer.omp.json | Invoke-Expression
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/multiverse-neon.omp.json" | Invoke-Expression
@@ -5,6 +6,9 @@
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/slim.omp.json" | Invoke-Expression
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/tiwahu.omp.json" | Invoke-Expression
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/di4am0nd.omp.json" | Invoke-Expression
+
+#path aliases
+$desk = "C:\Users\User\Desktop"
 
 #starship prompt configuration
 #$ENV:STARSHIP_CONFIG="D:\WorkSpaces\.dotfiles\starship.toml"
@@ -30,6 +34,15 @@ else
   Set-PSReadLineOption -PredictionSource History
 }
 
+# PSReadLine keybindings
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Key Tab -Function Complete
+Set-PSReadLineKeyHandler -Chord "Ctrl+n" -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Chord "Ctrl+p" -Function HistorySearchBackward
+
+# replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+# Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+# Set-PsFzfOption -TabExpansion

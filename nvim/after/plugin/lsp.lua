@@ -1,7 +1,7 @@
 local lsp = require("lsp-zero").preset({})
 
 lsp.on_attach(function(client, bufnr)
---comment this out to enable eslint
+	--comment this out to enable eslint
 	-- if client.name == "eslint" then
 	-- 	vim.cmd([[ LspStop eslint ]])
 	-- 	return
@@ -19,7 +19,7 @@ lsp.on_attach(function(client, bufnr)
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 
-	lsp.default_keymaps({buffer = bufnr})
+	lsp.default_keymaps({ buffer = bufnr })
 	local bufopts = { remap = false, noremap = true, silent = true, buffer = bufnr }
 	-- go to definition
 	vim.keymap.set("n", "gll", function()
@@ -44,6 +44,9 @@ lsp.on_attach(function(client, bufnr)
 	--maps leader f to format code
 	vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 end)
+
+--format on save
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- pylsp edit default config to ignore some annoying warnings
 lsp.configure("pylsp", {
@@ -71,10 +74,10 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
 	sources = {
-		{ name = "buffer" },
-		{ name = "path" },
 		{ name = "nvim_lsp" },
+		{ name = "path" },
 		{ name = "luasnip" },
+		{ name = "buffer",  keyword_length = 4 },
 	},
 	mapping = {
 		["C-n"] = cmp_action.luasnip_jump_forward(),
@@ -136,7 +139,7 @@ null_ls.setup({
 -- See mason-null-ls.nvim's documentation for more details:
 -- https://github.com/jay-babu/mason-null-ls.nvim#setup
 require("mason-null-ls").setup({
-	ensure_installed = {"prettier", "eslint"},
+	ensure_installed = { "prettier", "eslint" },
 	automatic_installation = true, -- You can still set this to `true`
 	automatic_setup = true,
 })
@@ -144,27 +147,11 @@ require("mason-null-ls").setup({
 
 -- specifying to use null-ls for formatting
 local lsp_formatting = function(bufnr)
-    vim.lsp.buf.format({
-        filter = function(client)
-            -- apply whatever logic you want (in this example, we'll only use null-ls)
-            return client.name == "null-ls"
-        end,
-        bufnr = bufnr,
-    })
-end
-
--- run formatting on save
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
--- add to your shared on_attach callback
-local on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                lsp_formatting(bufnr)
-            end,
-        })
-    end
+	vim.lsp.buf.format({
+		filter = function(client)
+			-- apply whatever logic you want (in this example, we'll only use null-ls)
+			return client.name == "null-ls"
+		end,
+		bufnr = bufnr,
+	})
 end

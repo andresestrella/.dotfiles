@@ -86,23 +86,44 @@ vim.api.nvim_set_keymap('n', '<F12>', [[:lua require"dap".step_out()<CR>]], { no
 vim.api.nvim_set_keymap('n', '<F5>', [[:lua require"dapui".toggle()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<F6>', [[:lua require"dapui".eval()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<F7>', [[:lua require"dap.ui.widgets".hover()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F7>', [[:lua require"dap.ui.variables".visual_hover()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', '<F8>', [[:lua require"dap".repl.toggle()<CR>]], { noremap = true }) --toggle breakpoint
 
 vim.api.nvim_set_keymap('n', '[s', [[:lua require"dap".up()<CR>]], { noremap = true })
 vim.api.nvim_set_keymap('n', ']s', [[:lua require"dap".down()<CR>]], { noremap = true })
+
+-- more keymaps
+vim.api.nvim_set_keymap('n', '<Leader>dr', [[:lua require"dap".repl.toggle()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dw', [[:lua require"dapui".float_element('watches', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>ds', [[:lua require"dapui".float_element('scopes', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dt', [[:lua require"dapui".float_element('stacks', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {position = "nil", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>dw', [[:lua require"dapui".float_element('watches', {position = "nil", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>ds', [[:lua require"dapui".float_element('scopes', {position = "nil", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>dt', [[:lua require"dapui".float_element('stacks', {position = "nil", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dc', [[:lua require"dap".continue()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dk', [[:lua require"dap".step_out()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dl', [[:lua require"dap".step_into()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dj', [[:lua require"dap".step_over()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>dh', [[:lua require'dapui'.eval()<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>dh', [[:lua require'dap.ui.widgets'.cursor_float(require'dap.ui.widgets'.expression, {height=50, width=50})<CR>]], { noremap = true })
+-- couldn't get this to work. don't know how to pass in the height and width correctly.
+-- vim.api.nvim_set_keymap('n', '<leader>ds', [[:lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>da', [[:lua require'dap'.attach()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>du', [[:lua require'dapui'.toggle()<CR>]], { noremap = true })
+
 
 --automatically open and close dapui
 local dap, dapui = require("dap"), require("dapui")
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
-end
+-- dap.listeners.before.event_terminated["dapui_config"] = function()
+--     dapui.close()
+-- end
+-- dap.listeners.before.event_exited["dapui_config"] = function()
+--     dapui.close()
+-- end
 
 dap.adapters.node2 = {
   type = 'executable',
@@ -136,11 +157,16 @@ dap.configurations.javascript = {
     sourceMaps = true,
     protocol = 'inspector',
     console = 'integratedTerminal',
+    -- runtimeArgs = { '--inspect-brk',  }
   },
   {
     -- For this to work you need to make sure the node process is started with the `--inspect` flag.
     name = 'Attach to process',
     type = 'node2',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    skipFiles = {'<node_internals>/**/*.js'},
     -- type = 'node',
     request = 'attach',
     processId = require'dap.utils'.pick_process,

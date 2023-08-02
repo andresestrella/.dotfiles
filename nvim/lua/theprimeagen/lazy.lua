@@ -196,6 +196,9 @@ local plugins = {
     end,
   },
 
+  --install adapter settings for vscode-js dap
+  "mxsdev/nvim-dap-vscode-js",
+
   "lewis6991/gitsigns.nvim", --git signs
 
   "akinsho/toggleterm.nvim", --terminal

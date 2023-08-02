@@ -61,7 +61,8 @@ vim.fn.sign_define("DapLogPoint", { text = "📝", texthl = "", linehl = "", num
 
 --these work on windows
 local CODELLDB_DIR = require('mason-registry').get_package('codelldb'):get_install_path() .. '/extension/adapter/codelldb'
-local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
+-- local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
+local VSCODE_JS_DIR = require('mason-registry').get_package('js-debug-adapter'):get_install_path() .. '/js-debug'
 local codelldb_port = "1300" --rust debugger port
 
 require("dapui").setup()
@@ -73,44 +74,6 @@ require("dapui").setup()
 --for linux:
 --require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
---toggle breakpoint
-vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint(vim.fn.input("Breakpoint condition: ")) end)
-
-vim.api.nvim_set_keymap('n', '<F9>', [[:lua require"dap".continue()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F10>', [[:lua require"dap".step_over()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F11>', [[:lua require"dap".step_into()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F12>', [[:lua require"dap".step_out()<CR>]], { noremap = true })
-
---open dapui
-vim.api.nvim_set_keymap('n', '<F5>', [[:lua require"dapui".toggle()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F6>', [[:lua require"dapui".eval()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F7>', [[:lua require"dap.ui.widgets".hover()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<F8>', [[:lua require"dap".repl.toggle()<CR>]], { noremap = true }) --toggle breakpoint
-
-vim.api.nvim_set_keymap('n', '[s', [[:lua require"dap".up()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', ']s', [[:lua require"dap".down()<CR>]], { noremap = true })
-
--- more keymaps
-vim.api.nvim_set_keymap('n', '<Leader>dr', [[:lua require"dap".repl.toggle()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>dw', [[:lua require"dapui".float_element('watches', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>ds', [[:lua require"dapui".float_element('scopes', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>dt', [[:lua require"dapui".float_element('stacks', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
--- vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {position = "nil", enter = true})<CR>]], { noremap = true })
--- vim.api.nvim_set_keymap('n', '<Leader>dw', [[:lua require"dapui".float_element('watches', {position = "nil", enter = true})<CR>]], { noremap = true })
--- vim.api.nvim_set_keymap('n', '<Leader>ds', [[:lua require"dapui".float_element('scopes', {position = "nil", enter = true})<CR>]], { noremap = true })
--- vim.api.nvim_set_keymap('n', '<Leader>dt', [[:lua require"dapui".float_element('stacks', {position = "nil", enter = true})<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>dc', [[:lua require"dap".continue()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>dk', [[:lua require"dap".step_out()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>dl', [[:lua require"dap".step_into()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>dj', [[:lua require"dap".step_over()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>dh', [[:lua require'dapui'.eval()<CR>]], { noremap = true })
--- vim.api.nvim_set_keymap('n', '<leader>dh', [[:lua require'dap.ui.widgets'.cursor_float(require'dap.ui.widgets'.expression, {height=50, width=50})<CR>]], { noremap = true })
--- couldn't get this to work. don't know how to pass in the height and width correctly.
--- vim.api.nvim_set_keymap('n', '<leader>ds', [[:lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>da', [[:lua require'dap'.attach()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap('n', '<Leader>du', [[:lua require'dapui'.toggle()<CR>]], { noremap = true })
 
 
 --automatically open and close dapui
@@ -125,136 +88,46 @@ end
 --     dapui.close()
 -- end
 
-dap.adapters.node2 = {
-  type = 'executable',
-  command = 'node',
-  -- args = {os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js'},
-  args = {NODE_DIR},
-}
+require("dap-vscode-js").setup({
+  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  debugger_path = VSCODE_JS_DIR, -- Path to vscode-js-debug installation.
+  -- debugger_cmd = { "extension" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { 'chrome', 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost', 'node', 'chrome' }, -- which adapters to register in nvim-dap
+  -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+  -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+  -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+})
 
-dap.adapters.firefox = {
-    type = 'executable',
-    command = 'node',
-    --args = { os.getenv('HOME') .. '/AppData/Local/nvim-data/mason/bin/firefox-debug-adapter.cmd' },
-    args = { os.getenv('HOME') .. '/AppData/Local/nvim-data/mason/packages/firefox-debug-adapter/dist/adapter.bundle.js' },
-    --args = { os.getenv('HOME') .. '/path/to/vscode-firefox-debug/dist/adapter.bundle.js' },
-}
+local js_based_languages = { "typescript", "javascript", "typescriptreact", "svelte" }
 
-dap.adapters.chrome = {
-    type = "executable",
-    command = "node",
-    args = {os.getenv("HOME") .. "/AppData/Local/nvim-data/mason/packages/chrome-debug-adapter/out/src/chromeDebug.js"} -- TODO adjust
-}
-
-dap.configurations.javascript = {
-  {
-    name = 'Launch',
-    type = 'node2',
-    -- type = 'node',
-    request = 'launch',
-    program = '${file}',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
-    -- runtimeArgs = { '--inspect-brk',  }
-  },
-  {
-    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-    name = 'Attach to process',
-    type = 'node2',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    skipFiles = {'<node_internals>/**/*.js'},
-    -- type = 'node',
-    request = 'attach',
-    processId = require'dap.utils'.pick_process,
-  },
-}
-dap.configurations.svelte = dap.configurations.javascript
--- dap.configurations.javascript, typescript, typescriptreact, javascriptreact, svelte
--- firefox attach
--- dap.configurations.typescript = {
---     {
---         name = 'Debug with Firefox - Attach',
---         type = 'firefox',
---         request = 'attach',
---         reAttach = true,
---         host = "127.0.0.1",
---         port = 3000,
---         url = 'http://localhost:3000',
---         webRoot = '${workspaceFolder}',
---         --firefoxExecutable = '/usr/bin/firefox'
---         --firefoxExecutable = 'C:/Program Files/Mozilla Firefox/firefox.exe'
---     }
--- }
--- dap.configurations.svelte = dap.configurations.typescript
-
---firefox launch
--- dap.configurations.svelte =
--- {
---     {
---         type = 'firefox',
---         request = 'launch',
---         name = 'Firefox launch',
---         reAttach = true,
---         --reloadOnAttach = true,
---         port = 3000,
---         url = 'http://localhost:3000',
---         webRoot = '${workspaceFolder}',
---         --firefoxExecutable = '/usr/bin/firefox'
---         --firefoxExecutable = 'C:/Program Files/Mozilla Firefox/firefox.exe'
---     }
--- }
+for _, language in ipairs(js_based_languages) do
+  require("dap").configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require 'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-chrome",
+      request = "launch",
+      name = "Start Chrome with \"localhost\"",
+      url = "http://localhost:3000",
+      webRoot = "${workspaceFolder}",
+      userDataDir = "${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir"
+    }
+  }
+end
 
 
---chrome attach
--- dap.configurations.svelte = { -- change this to javascript if needed
---     {
---         name = "Chrome attach",
---         type = "chrome",
---         request = "attach",
---         --trace = true,
---         program = "${file}",
---         cwd = vim.fn.getcwd(),
---         sourceMaps = true,
---         protocol = "inspector",
---         port = 3000,
---         webRoot = "${workspaceFolder}"
---     }
--- }
-
---chrome launch
--- dap.configurations.svelte = { -- change this to javascript if needed
---     {
---         name = "Chrome attach",
---         type = "chrome",
---         request = "launch",
---         chromeExecutable = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
---         args = {"--remote-debugging-port=9222"},
---         trace = true,
---         --program = "${file}",
---         --cwd = vim.fn.getcwd(),
---         sourceMaps = true,
---         --protocol = "inspector",
---         port = 9222,
---         webRoot = "${workspaceFolder}"
---     }
--- }
-
--- dap.configurations.typescriptreact = { -- change to typescript if needed
---     {
---         type = "chrome",
---         request = "attach",
---         program = "${file}",
---         cwd = vim.fn.getcwd(),
---         sourceMaps = true,
---         protocol = "inspector",
---         port = 9222,
---         webRoot = "${workspaceFolder}"
---     }
--- }
 
 --manual rust set up, tested
 dap.adapters.codelldb = {
@@ -308,45 +181,79 @@ dap.configurations.rust = {
 }
 
 
+-- keymaps
+vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end) --toggle breakpoint
+vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint(vim.fn.input("Breakpoint condition: ")) end)
 
---manual rust setup lldb-VSCO. DIFFERENT THAN CODELLDB
--- dap.adapters.lldb = {
---     type = "executable",
---     --command = "/usr/bin/lldb-vscode", -- adjust as needed -- change to Mason installed path of lldb
---     --command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/codelldb", -- UNIX, installed with mason
---     --command = os.getenv("HOME") .. "/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
---     --command = "C:/User/User/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
---     -- command = (function()
---     --         return os.getenv("HOME") ..
---     --             "/AppData/Local/nvim-data/mason/packages/codelldb/extension/lldb/bin/lldb"
---     --     end)(),
---
---     --windows, vsco intalled
---     command = (function()
---             return os.getenv("HOME") ..
---                 "/.vscode/extensions/vadimcn.vscode-lldb-1.8.1/adapter/codelldb"
---         end)(),
---     --windows, vsco intalled
---     -- command = (function()
---     --         return os.getenv("HOME") ..
---     --             "/.vscode/extensions/vadimcn.vscode-lldb-1.8.1/lldb/bin/lldb"
---     --     end)(),
---     name = "lldb",
--- }
---
--- local lldb = {
---     name = "Launch lldb",
---     type = "lldb",      -- matches the adapter
---     request = "launch", -- could also attach to a currently running process
---     program = function()
---         return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
---     end,
---     cwd = "${workspaceFolder}",
---     stopOnEntry = false,
---     args = {},
---     --runInTerminal = false,
--- }
+vim.api.nvim_set_keymap('n', '<F9>', [[:lua require"dap".continue()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<F10>', [[:lua require"dap".step_over()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<F11>', [[:lua require"dap".step_into()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<F12>', [[:lua require"dap".step_out()<CR>]], { noremap = true })
 
--- require('dap').configurations.rust = {
---     lldb -- different debuggers or more configurations can be used here
+--open dapui
+vim.api.nvim_set_keymap('n', '<F5>', [[:lua require"dapui".toggle()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<F6>', [[:lua require"dapui".eval()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<F7>', [[:lua require"dap.ui.widgets".hover()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<F8>', [[:lua require"dap".repl.toggle()<CR>]], { noremap = true }) --toggle breakpoint
+
+vim.api.nvim_set_keymap('n', '[s', [[:lua require"dap".up()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', ']s', [[:lua require"dap".down()<CR>]], { noremap = true })
+
+-- more keymaps
+vim.api.nvim_set_keymap('n', '<Leader>dr', [[:lua require"dap".repl.toggle()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dw', [[:lua require"dapui".float_element('watches', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>ds', [[:lua require"dapui".float_element('scopes', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dt', [[:lua require"dapui".float_element('stacks', {width = 130, height = 40, position = "center", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {position = "nil", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>dw', [[:lua require"dapui".float_element('watches', {position = "nil", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>ds', [[:lua require"dapui".float_element('scopes', {position = "nil", enter = true})<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>dt', [[:lua require"dapui".float_element('stacks', {position = "nil", enter = true})<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dc', [[:lua require"dap".continue()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dk', [[:lua require"dap".step_out()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dl', [[:lua require"dap".step_into()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>dj', [[:lua require"dap".step_over()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>dh', [[:lua require'dapui'.eval()<CR>]], { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>dh', [[:lua require'dap.ui.widgets'.cursor_float(require'dap.ui.widgets'.expression, {height=50, width=50})<CR>]], { noremap = true })
+-- couldn't get this to work. don't know how to pass in the height and width correctly.
+-- vim.api.nvim_set_keymap('n', '<leader>ds', [[:lua require'dap.ui.widgets'.centered_float(require'dap.ui.widgets'.scopes)<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>da', [[:lua require'dap'.attach()<CR>]], { noremap = true })
+vim.api.nvim_set_keymap('n', '<Leader>du', [[:lua require'dapui'.toggle()<CR>]], { noremap = true })
+
+
+----------------------------------
+-- dap.adapters.node2 = {
+--   type = 'executable',
+--   command = 'node',
+--   -- args = {os.getenv('HOME') .. '/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js'},
+--   args = {NODE_DIR},
 -- }
+--
+-- dap.configurations.javascript = {
+--   {
+--     name = 'Launch',
+--     type = 'node2',
+--     -- type = 'node',
+--     request = 'launch',
+--     program = '${file}',
+--     cwd = vim.fn.getcwd(),
+--     sourceMaps = true,
+--     protocol = 'inspector',
+--     console = 'integratedTerminal',
+--     -- runtimeArgs = { '--inspect',  }
+--   },
+--   {
+--     -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+--     name = 'Attach to process',
+--     type = 'node2',
+--     cwd = vim.fn.getcwd(),
+--     sourceMaps = true,
+--     protocol = 'inspector',
+--     skipFiles = {'<node_internals>/**/*.js'},
+--     -- type = 'node',
+--     request = 'attach',
+--     processId = require'dap.utils'.pick_process,
+--   },
+-- }
+-- dap.configurations.svelte = dap.configurations.javascript
+-- dap.configurations.javascript, typescript, typescriptreact, javascriptreact, svelte

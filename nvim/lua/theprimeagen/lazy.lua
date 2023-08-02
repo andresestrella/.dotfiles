@@ -108,7 +108,7 @@ local plugins = {
   --"pangloss/vim-javascript",
   --"othree/html5.vim",
   --"evanleck/vim-svelte",--requires the 2 above this
-  "leafOfTree/vim-svelte-plugin",
+  -- "leafOfTree/vim-svelte-plugin",
   --use("github/copilot.vim")        --AI completion
   "zbirenbaum/copilot.lua",
 
@@ -204,7 +204,6 @@ local plugins = {
   "akinsho/toggleterm.nvim", --terminal
   "nanozuki/tabby.nvim",     --prettier tabs
   "karb94/neoscroll.nvim",   --smooth scrolling"
-
 }
 
 require("lazy").setup(plugins, opts)

@@ -46,7 +46,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 --format on save
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- pylsp edit default config to ignore some annoying warnings
 lsp.configure("pylsp", {
@@ -122,36 +122,37 @@ vim.diagnostic.config({
 	virtual_text = true,
 })
 
+-- See mason-null-ls.nvim's documentation for more details:
+-- https://github.com/jay-babu/mason-null-ls.nvim#setup
+require("mason").setup()
+require("mason-null-ls").setup({
+	ensure_installed = { "prettier", "eslint" },
+	automatic_installation = true, -- You can still set this to `true`
+	automatic_setup = true,
+	handlers = {},
+})
+
 local null_ls = require("null-ls")
-local null_opts = lsp.build_options("null-ls", {})
 null_ls.setup({
-	on_attach = function(client, bufnr)
-		null_opts.on_attach(client, bufnr)
-	end,
 	sources = {
-		-- null_ls.builtins.formatting.prettier,
 		-- null_ls.builtins.diagnostics.eslint,
+		-- null_ls.builtins.formatting.eslint,
+		-- null_ls.builtins.diagnostics.eslint_d,
+		-- null_ls.builtins.formatting.eslint_d,
+		-- null_ls.builtins.formatting.prettier,
+		-- null_ls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", } }),
 		-- null_ls.builtins.formatting.stylua,
 		-- You can add tools not supported by mason.nvim
 	},
 })
 
--- See mason-null-ls.nvim's documentation for more details:
--- https://github.com/jay-babu/mason-null-ls.nvim#setup
-require("mason-null-ls").setup({
-	ensure_installed = { "prettier", "eslint" },
-	automatic_installation = true, -- You can still set this to `true`
-	automatic_setup = true,
-})
-
-
 -- specifying to use null-ls for formatting
-local lsp_formatting = function(bufnr)
-	vim.lsp.buf.format({
-		filter = function(client)
-			-- apply whatever logic you want (in this example, we'll only use null-ls)
-			return client.name == "null-ls"
-		end,
-		bufnr = bufnr,
-	})
-end
+-- local lsp_formatting = function(bufnr)
+-- 	vim.lsp.buf.format({
+-- 		filter = function(client)
+-- 			-- apply whatever logic you want (in this example, we'll only use null-ls)
+-- 			return client.name == "null-ls"
+-- 		end,
+-- 		bufnr = bufnr,
+-- 	})
+-- end

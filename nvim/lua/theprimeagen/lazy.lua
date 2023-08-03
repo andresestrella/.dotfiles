@@ -33,17 +33,16 @@ local plugins = {
 	},
 
 	{
-		"stevearc/dressing.nvim",
+		"stevearc/dressing.nvim", -- replaces default vim UI elements with telescope
 		event = "VeryLazy",
 		opts = {},
 	},
 
-	--themes, colors
-	-- {
+	-- { --theme
 	--   "catppuccin/nvim", name = "catppuccin"
 	-- },
 
-	{
+	{-- theme
 		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 1000,
@@ -66,24 +65,16 @@ local plugins = {
 		end,
 	},
 
-	--parse tree
+	--parse tree, syntax highlighting, folds, and more
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		lazy = false,
 	},
-	--use("nvim-treesitter/playground")
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		lazy = false,
 	},
-	"theprimeagen/harpoon", --quick file access
-	"theprimeagen/refactoring.nvim",
-	--undo history
-	"mbbill/undotree",
-	--git
-	"tpope/vim-fugitive",
-	"theprimeagen/git-worktree.nvim",
 
 	--lsp all in one
 	{
@@ -108,12 +99,8 @@ local plugins = {
 			{ "rafamadriz/friendly-snippets" },
 		},
 	},
-	"jose-elias-alvarez/null-ls.nvim",
-	"jay-babu/mason-null-ls.nvim",
-	--"pangloss/vim-javascript",
-	--"othree/html5.vim",
-	--"evanleck/vim-svelte",--requires the 2 above this
-	-- "leafOfTree/vim-svelte-plugin",
+	"jose-elias-alvarez/null-ls.nvim", --lsp for non lsp
+	"jay-babu/mason-null-ls.nvim", -- auto install on Mason and auto configure for null-ls
 	--use("github/copilot.vim")        --AI completion
 	"zbirenbaum/copilot.lua",
 
@@ -123,10 +110,8 @@ local plugins = {
 		keys = { { "gcc" }, { "gbc" }, { "gc", mode = "v" }, { "gb", mode = "v" } },
 		config = true,
 	},
-	"nvim-lualine/lualine.nvim", --status line
-	{ "nvim-tree/nvim-web-devicons", lazy = true }, -- not strictly required, but recommended
 
-	-- file tree
+	-- file tree UI
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
@@ -172,10 +157,6 @@ local plugins = {
 		end,
 	},
 
-	"chentoast/marks.nvim", --marks visualizer
-	"tpope/vim-sleuth", --auto detect indent
-	"tpope/vim-surround", --surrounding
-	"jiangmiao/auto-pairs", --auto pairs
 
 	--debugging
 	{
@@ -186,6 +167,7 @@ local plugins = {
 			--dap setup
 			"mfussenegger/nvim-dap-python",
 			"jay-babu/mason-nvim-dap.nvim",
+			"mxsdev/nvim-dap-vscode-js", -- vscode's js dbugger
 		},
 		keys = { "<leader>b", "F9", "F5" },
 		config = function()
@@ -202,14 +184,21 @@ local plugins = {
 		end,
 	},
 
-	--install adapter settings for vscode-js dap
-	"mxsdev/nvim-dap-vscode-js",
-
 	"lewis6991/gitsigns.nvim", --git signs
-
 	"akinsho/toggleterm.nvim", --terminal
 	"nanozuki/tabby.nvim", --prettier tabs
 	"karb94/neoscroll.nvim", --smooth scrolling"
+	"chentoast/marks.nvim", --marks visualizer
+	"tpope/vim-sleuth", --auto detect indent
+	"tpope/vim-surround", --surrounding text
+	"jiangmiao/auto-pairs", --auto pairs
+	"theprimeagen/harpoon", --quick file access
+	"theprimeagen/refactoring.nvim",
+	"mbbill/undotree", --undo history tree
+	"tpope/vim-fugitive",	--git
+	"theprimeagen/git-worktree.nvim",
+	"nvim-lualine/lualine.nvim", --status line
+	{ "nvim-tree/nvim-web-devicons", lazy = true }, -- devicons, not strictly required, but recommended
 }
 
 require("lazy").setup(plugins, opts)

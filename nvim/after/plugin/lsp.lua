@@ -66,7 +66,8 @@ require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 require("lspconfig").svelte.setup({
 	on_attach = lsp.on_attach,
 	cmd = { "svelteserver", "--stdio" },
-	filetypes = { "svelte", "html", "javascript", "typescript", "css" },
+	-- uncomment this if I want the svelte LSP to run on .js and .ts files as well
+	-- filetypes = { "svelte", "html", "javascript", "typescript", "css" },
 	settings = {
 		svelte = {
 			plugin = {
@@ -144,6 +145,7 @@ vim.diagnostic.config({
 require("mason").setup()
 require("mason-null-ls").setup({
 	ensure_installed = { "prettier", "eslint" },
+	-- ensure_installed = { "prettier" },
 	automatic_installation = true, -- You can still set this to `true`
 	automatic_setup = true,
 	handlers = {},
@@ -154,7 +156,7 @@ null_ls.setup({
 	sources = {
 		-- null_ls.builtins.diagnostics.eslint,
 		-- null_ls.builtins.formatting.eslint,
-		-- null_ls.builtins.diagnostics.eslint_d,
+		null_ls.builtins.diagnostics.eslint_d.with({ filetypes = { "svelte" } }), -- looks like this works how I inteded... instead of extra_filetypes...
 		-- null_ls.builtins.formatting.eslint_d.with({ extre_filetypes = { "svelte" } }),
 		-- null_ls.builtins.code_actions.eslint_d,
 		-- null_ls.builtins.formatting.prettier,

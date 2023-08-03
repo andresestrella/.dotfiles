@@ -46,7 +46,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 --format on save
--- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- pylsp edit default config to ignore some annoying warnings
 lsp.configure("pylsp", {
@@ -62,7 +62,24 @@ lsp.configure("pylsp", {
 		},
 	},
 })
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+require("lspconfig").svelte.setup({
+	on_attach = lsp.on_attach,
+	cmd = { "svelteserver", "--stdio" },
+	filetypes = { "svelte", "html", "javascript", "typescript", "css" },
+	settings = {
+		svelte = {
+			plugin = {
+				html = {
+					completions = {
+						enable = true,
+						emmet = true,
+					},
+				},
+			},
+		},
+	},
+})
 
 lsp.setup()
 
@@ -138,7 +155,8 @@ null_ls.setup({
 		-- null_ls.builtins.diagnostics.eslint,
 		-- null_ls.builtins.formatting.eslint,
 		-- null_ls.builtins.diagnostics.eslint_d,
-		-- null_ls.builtins.formatting.eslint_d,
+		-- null_ls.builtins.formatting.eslint_d.with({ extre_filetypes = { "svelte" } }),
+		-- null_ls.builtins.code_actions.eslint_d,
 		-- null_ls.builtins.formatting.prettier,
 		-- null_ls.builtins.formatting.prettierd.with({ filetypes = { "css", "scss", "less", "html", "json", "yaml", "markdown", "graphql", } }),
 		-- null_ls.builtins.formatting.stylua,
@@ -156,3 +174,14 @@ null_ls.setup({
 -- 		bufnr = bufnr,
 -- 	})
 -- end
+--
+-- if I use eslint-lsp, I can use this
+-- require("lspconfig").eslint.setup({
+-- 	-...
+-- 	on_attach = function(client, bufnr)
+-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+-- 			buffer = bufnr,
+-- 			command = "EslintFixAll",
+-- 		})
+-- 	end,
+-- })

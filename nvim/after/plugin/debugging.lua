@@ -43,7 +43,7 @@ require("mason-nvim-dap").setup({
                         elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
                             return cwd .. '/.venv/bin/python'
                         else
-                            return PYTHON_DIR
+                            return PYTHON_DIR -- if no virtualenv is found fall back to the python installed by MASON
                         end
                     end,
                 },

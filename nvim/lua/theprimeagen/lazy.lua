@@ -42,7 +42,7 @@ local plugins = {
 	--   "catppuccin/nvim", name = "catppuccin"
 	-- },
 
-	{-- theme
+	{ -- theme
 		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 1000,
@@ -157,7 +157,6 @@ local plugins = {
 		end,
 	},
 
-
 	--debugging
 	{
 		"mfussenegger/nvim-dap",
@@ -184,6 +183,17 @@ local plugins = {
 		end,
 	},
 
+	--testing
+	"vim-test/vim-test", --testing'
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-neotest/neotest-python",
+			"nvim-neotest/neotest-jest",
+		},
+	},
+
 	"lewis6991/gitsigns.nvim", --git signs
 	"akinsho/toggleterm.nvim", --terminal
 	"nanozuki/tabby.nvim", --prettier tabs
@@ -195,7 +205,7 @@ local plugins = {
 	"theprimeagen/harpoon", --quick file access
 	"theprimeagen/refactoring.nvim",
 	"mbbill/undotree", --undo history tree
-	"tpope/vim-fugitive",	--git
+	"tpope/vim-fugitive", --git
 	"theprimeagen/git-worktree.nvim",
 	"nvim-lualine/lualine.nvim", --status line
 	{ "nvim-tree/nvim-web-devicons", lazy = true }, -- devicons, not strictly required, but recommended

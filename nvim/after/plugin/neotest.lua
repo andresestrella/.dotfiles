@@ -20,18 +20,29 @@ require("neotest").setup({
 				justMyCode = false,
 			},
 		}),
+
+		-- project installed jest
+		-- require("neotest-jest")({
+		-- 	jestCommand = "npx jest --watch ",
+		-- 	-- jestCommand = "npm test --",
+		-- }),
+
+		-- global installed jest
 		require("neotest-jest")({
 			jestCommand = "jest --watch ",
+			-- jestCommand = "npm test --",
 		}),
 
-        -- require('neotest-jest')({
-        --   jestCommand = "npm test --",
-        --   jestConfigFile = "custom.jest.config.ts",
-        --   env = { CI = true },
-        --   cwd = function(path)
-        --     return vim.fn.getcwd()
-        --   end,
-        -- }),
+		-- global installed jest
+		-- require("neotest-jest")({
+		-- 	jestCommand = "npm test --",
+		-- 	jestCommand = "jest",
+		-- 	jestConfigFile = "custom.jest.config.ts",
+		-- 	env = { CI = true },
+		-- 	cwd = function(path)
+		-- 		return vim.fn.getcwd()
+		-- 	end,
+		-- }),
 	},
 })
 -- keymaps
@@ -55,4 +66,9 @@ vim.api.nvim_set_keymap(
 	{ noremap = true }
 )
 vim.api.nvim_set_keymap("n", "<leader>dS", [[:lua require"neotest".summary.toggle()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tw", "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>", {})
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>tw",
+	"<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>",
+	{}
+)

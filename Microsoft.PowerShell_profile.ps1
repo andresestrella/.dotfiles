@@ -6,6 +6,8 @@
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/slim.omp.json" | Invoke-Expression
 #oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/tiwahu.omp.json" | Invoke-Expression
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/di4am0nd.omp.json" | Invoke-Expression
+Import-Module -Name Terminal-Icons
+
 
 #path aliases
 # $desk = "C:\Users\User\Desktop"

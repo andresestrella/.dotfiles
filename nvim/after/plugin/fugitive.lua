@@ -1,5 +1,6 @@
 vim.keymap.set("n", "<leader>g", vim.cmd.Git)
-
+vim.keymap.set("n", "gj", "<cmd>diffget //2<cr>")
+vim.keymap.set("n", "gf", "<cmd>diffget //3<cr>")
 local ThePrimeagen_Fugitive = vim.api.nvim_create_augroup("ThePrimeagen_Fugitive", {})
 
 local autocmd = vim.api.nvim_create_autocmd

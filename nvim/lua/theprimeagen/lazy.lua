@@ -194,6 +194,20 @@ local plugins = {
 		},
 	},
 
+	{
+		"Wansmer/treesj",
+		keys = {
+			"<leader>m",
+			"<CMD>TSJToggle<CR>",
+			desc = "Toggle Treesitter Join",
+		},
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("treesj").setup({ --[[ your config ]]
+			})
+		end,
+	},
+
 	"lewis6991/gitsigns.nvim", --git signs
 	"akinsho/toggleterm.nvim", --terminal
 	"nanozuki/tabby.nvim", --prettier tabs

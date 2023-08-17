@@ -100,8 +100,8 @@ cmp.setup({
 	mapping = {
 		["C-n"] = cmp_action.luasnip_jump_forward(),
 		["C-p"] = cmp_action.luasnip_jump_backward(),
-		["<Tab>"] = cmp_action.luasnip_supertab(),
-		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+		-- ["<Tab>"] = cmp_action.luasnip_supertab(),
+		-- ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
 		-- ['<C-Space>'] = cmp.mapping.complete(), -- need to disable autocompletion for this to work
 		--disable autocompletion for tab and shift-tab
 		-- ["<Tab>"] = nil,

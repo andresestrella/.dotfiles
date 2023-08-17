@@ -211,11 +211,17 @@ local plugins = {
 	"lewis6991/gitsigns.nvim", --git signs
 	"akinsho/toggleterm.nvim", --terminal
 	"nanozuki/tabby.nvim", --prettier tabs
-	"karb94/neoscroll.nvim", --smooth scrolling"
+	"karb94/neoscroll.nvim", --smooth scrolling
 	"chentoast/marks.nvim", --marks visualizer
 	"tpope/vim-sleuth", --auto detect indent
 	"tpope/vim-surround", --surrounding text
 	"jiangmiao/auto-pairs", --auto pairs
+	{--auto close html tags
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
 	"theprimeagen/harpoon", --quick file access
 	"theprimeagen/refactoring.nvim",
 	"mbbill/undotree", --undo history tree

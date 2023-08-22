@@ -99,6 +99,7 @@ local plugins = {
 			{ "rafamadriz/friendly-snippets" },
 		},
 	},
+	"onsails/lspkind-nvim", -- lsp icons"
 	"jose-elias-alvarez/null-ls.nvim", --lsp for non lsp
 	"jay-babu/mason-null-ls.nvim", -- auto install on Mason and auto configure for null-ls
 	--use("github/copilot.vim")        --AI completion

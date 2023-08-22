@@ -86,6 +86,7 @@ lsp.setup()
 
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
+local lspkind = require("lspkind")
 require("luasnip.loaders.from_vscode").lazy_load()
 -- load snippets from path/of/your/nvim/config/my-cool-snippets
 -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my-cool-snippets" } })
@@ -111,6 +112,9 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+	formatting = {
+		format = lspkind.cmp_format({ mode = 'symbol_text', maxwidth = 50 }),
+	}
 })
 
 -- remaps to jump around snippet placeholders

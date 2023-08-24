@@ -8,8 +8,8 @@ lsp.on_attach(function(client, bufnr)
 	-- end
 
 	local signs = {
-		Error = " ",
-		Warn = " ",
+		Error = " ",
+		Warn = "",
 		Hint = "󰋗 ",
 		Info = " ",
 	}

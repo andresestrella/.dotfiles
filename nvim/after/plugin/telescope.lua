@@ -23,7 +23,7 @@ require('telescope').load_extension('neoclip')
 --enable macroscope
 require('telescope').load_extension('macroscope')
 
---keybind that maps <leader>pt to execute ':Telescope' command
+--keybinds
 vim.keymap.set('n', '<leader>ft', ":Telescope<CR>")
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.git_files, {})

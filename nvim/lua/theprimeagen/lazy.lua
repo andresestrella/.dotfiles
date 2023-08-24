@@ -18,7 +18,7 @@ local plugins = {
 		version = "0.1.2",
 		-- or                              , branch = '0.1.1',
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {},
+		cmd = "Telescope",
 	},
 
 	--neoclip
@@ -82,21 +82,27 @@ local plugins = {
 		branch = "v2.x",
 		dependencies = {
 			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
+			{
+				"neovim/nvim-lspconfig",
+				after = "LuaSnip",
+			},
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
 
 			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/nvim-cmp", event = "InsertEnter", after = "nvim-lspconfig" },
 			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 
 			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
+			{
+				"L3MON4D3/LuaSnip",
+				event = "CursorMoved",
+			},
+			{ "rafamadriz/friendly-snippets", after = "nvim-cmp" },
 		},
 	},
 	"onsails/lspkind-nvim", -- lsp icons"
@@ -170,6 +176,7 @@ local plugins = {
 			"mxsdev/nvim-dap-vscode-js", -- vscode's js dbugger
 		},
 		keys = { "<leader>b", "F9", "F5" },
+		event = "VeryLazy",
 		config = function()
 			local ok_cmp, cmp = pcall(require, "cmp")
 			if ok_cmp then
@@ -193,6 +200,7 @@ local plugins = {
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-jest",
 		},
+		lazy = true,
 	},
 
 	{
@@ -211,13 +219,12 @@ local plugins = {
 
 	"lewis6991/gitsigns.nvim", --git signs
 	"akinsho/toggleterm.nvim", --terminal
-	"nanozuki/tabby.nvim", --prettier tabs
 	"karb94/neoscroll.nvim", --smooth scrolling
 	"chentoast/marks.nvim", --marks visualizer
 	"tpope/vim-sleuth", --auto detect indent
 	"tpope/vim-surround", --surrounding text
 	"jiangmiao/auto-pairs", --auto pairs
-	{--auto close html tags
+	{ --auto close html tags
 		"windwp/nvim-ts-autotag",
 		config = function()
 			require("nvim-ts-autotag").setup()
@@ -229,6 +236,8 @@ local plugins = {
 	"tpope/vim-fugitive", --git
 	"theprimeagen/git-worktree.nvim",
 	"nvim-lualine/lualine.nvim", --status line
+	"nanozuki/tabby.nvim", --prettier tabs
+	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "nvim-tree/nvim-web-devicons", lazy = true }, -- devicons, not strictly required, but recommended
 }
 

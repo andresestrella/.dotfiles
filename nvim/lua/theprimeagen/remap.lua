@@ -81,6 +81,12 @@ vim.keymap.set("n", "<A-s>", ":split<CR>");
 vim.keymap.set("n", "<C-s>", ":vsplit<CR>");
 vim.keymap.set("n", "<C-w>s", ":vsplit<CR>");
 vim.keymap.set("n", "<C-w>S", ":split<CR>");
+--close window
+vim.keymap.set("n", "<C-c>", ":close<CR>",
+  {silent = true, noremap = true}
+);
+--close buffer
+-- vim.keymap.set("n", "<C-c>", ":bd<CR>");
 
 --better indenting
 vim.keymap.set("v", "<", "<gv");

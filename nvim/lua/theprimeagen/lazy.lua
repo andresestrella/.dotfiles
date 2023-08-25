@@ -38,9 +38,10 @@ local plugins = {
 		opts = {},
 	},
 
-	-- { --theme
-	--   "catppuccin/nvim", name = "catppuccin"
-	-- },
+	{ --theme
+		"catppuccin/nvim",
+		name = "catppuccin",
+	},
 
 	{ -- theme
 		"sainnhe/gruvbox-material",
@@ -57,7 +58,12 @@ local plugins = {
 		"folke/trouble.nvim",
 		config = function()
 			require("trouble").setup({
-				icons = false,
+				-- icons = false,
+				action_keys = {
+					close = { "q", "<c-x>", "<c-c>" },
+					open_vsplit = "<c-s>",
+					open_split = "<a-s>",
+				},
 				-- your configuration comes here
 				-- or leave it empty to use the default settings
 				-- refer to the configuration section below

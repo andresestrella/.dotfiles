@@ -1,9 +1,14 @@
 --open neo tree
-vim.keymap.set('n', '<leader>e', ':Neotree filesystem toggle left<cr>')
-vim.keymap.set('n', '<leader>eb', ':Neotree buffers toggle left<cr>')
+vim.keymap.set('n', '<leader>e', ':Neotree filesystem toggle right<cr>')
+vim.keymap.set('n', '<leader>eb', ':Neotree buffers toggle right<cr>')
+vim.keymap.set('n', '<leader>eg', ':Neotree git_status toggle right<cr>')
 require('neo-tree').setup {
   window = {
     mappings = {
+      ["<c-s>"] = "open_vsplit",
+      ["<a-s>"] = "open_split",
+      ["<c-x>"] = "close_window",
+      ["<c-c>"] = "close_window",
       ['Y'] = function(state)
         -- NeoTree is based on [NuiTree](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree)
         -- The node is based on [NuiNode](https://github.com/MunifTanjim/nui.nvim/tree/main/lua/nui/tree#nuitreenode)

@@ -1,0 +1,21 @@
+[core]
+	editor = \"C:\\Users\\User\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Andrés Estrella
+	email = andresmauricioestrella@gmail.com
+[http]
+	sslcainfo = C:\\Lenguages_OS\\Git\\usr\\ssl\\certs\\ca-bundle.crt
+[safe]
+	directory = D:/WorkSpaces/PUCMM/Temas Especiales/Proyecto-Temas-Especiales
+	directory = D:/WorkSpaces/Git repos/CSTI-1810-4838
+	directory = D:/WorkSpaces/Work/Arcvale/draw-drill-fe
+	directory = C:/Users/User/AppData/Local/nvim
+	directory = D:/WorkSpaces/Shared_repos/Dealer_x_FRONT
+	directory = D:/WorkSpaces/Shared_repos/proyectofinal
+	directory = D:/WorkSpaces/Personal/Learning/api-territorio-rd
+	directory = D:/WorkSpaces/Git-repos/provincias_dominicanas

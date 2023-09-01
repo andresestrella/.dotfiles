@@ -148,7 +148,7 @@ vim.diagnostic.config({
 -- https://github.com/jay-babu/mason-null-ls.nvim#setup
 require("mason").setup()
 require("mason-null-ls").setup({
-	ensure_installed = { "prettier", "eslint" },
+	ensure_installed = { "prettier", "eslint_d" },
 	-- ensure_installed = { "prettier" },
 	automatic_installation = true, -- You can still set this to `true`
 	automatic_setup = true,

@@ -1,5 +1,6 @@
 -- set html files to filetype htmldjango
 -- vim.cmd [[autocmd BufNewFile,BufRead *.html set filetype=htmldjango]]
+require 'nvim-treesitter.install'.compilers = { "clang", "gcc" }
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "javascript", "typescript", "c", "lua", "rust" },

@@ -46,7 +46,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 --format on save
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 -- pylsp edit default config to ignore some annoying warnings
 lsp.configure("pylsp", {

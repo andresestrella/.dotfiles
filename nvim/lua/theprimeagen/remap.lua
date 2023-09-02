@@ -60,6 +60,11 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 --find all occurences of word under cursor and replace all of them with the same word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
+--find all occurrences of selected text and replace all of them with the same text
+vim.keymap.set("v", "<leader>s", [["hy:%s/<C-r>h//gc<left><left><left>]])
+
+vim.api.nvim_set_keymap('x', '<C-s>', [[<Cmd>let @h = @"<CR>:%s/\%V\%V<C-R>=escape(@h, '/\')<CR>//gc<left><left><left>]], { noremap = true, silent = true })
+
 --tabs
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>");
 vim.keymap.set("n", "<leader>tx", ":tabclose<CR>");

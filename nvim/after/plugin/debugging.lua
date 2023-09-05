@@ -10,47 +10,47 @@ require("mason-nvim-dap").setup({
 			-- Keep original functionality of `automatic_setup = true`
 			require("mason-nvim-dap").default_setup(config)
 		end,
-		python = function(config)
-			config.adapters = {
-				type = "executable",
-				command = "python",
-				-- command = PYTHON_DIR,
-				--command = "/usr.local/bin/python3",
-				--command = "python3",
-				args = { "-m", "debugpy.adapter" },
-			}
-			config.configurations = {
-				{
-					-- The first three options are required by nvim-dap
-					type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
-					request = "launch",
-					name = "Launch file",
-					-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-
-					program = "${file}", -- This configuration will launch the current file if used.
-					pythonPath = function()
-						-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-						-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-						-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-						local PYTHON_DIR = require("mason-registry").get_package("debugpy"):get_install_path()
-							.. "/venv/Scripts/python"
-						local cwd = vim.fn.getcwd()
-						if vim.fn.executable(cwd .. "/venv/Scripts/python") == 1 then
-							return cwd .. "/venv/Scripts/python"
-						elseif vim.fn.executable(cwd .. "/.venv/Scripts/python") == 1 then
-							return cwd .. "/.venv/Scripts/python"
-						elseif vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-							return cwd .. "/venv/bin/python"
-						elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-							return cwd .. "/.venv/bin/python"
-						else
-							return PYTHON_DIR -- if no virtualenv is found fall back to the python installed by MASON
-						end
-					end,
-				},
-			}
-			require("mason-nvim-dap").default_setup(config)
-		end,
+		-- python = function(config)
+		-- 	config.adapters = {
+		-- 		type = "executable",
+		-- 		command = "python",
+		-- 		-- command = PYTHON_DIR,
+		-- 		--command = "/usr.local/bin/python3",
+		-- 		--command = "python3",
+		-- 		args = { "-m", "debugpy.adapter" },
+		-- 	}
+		-- 	config.configurations = {
+		-- 		{
+		-- 			-- The first three options are required by nvim-dap
+		-- 			type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
+		-- 			request = "launch",
+		-- 			name = "Launch file",
+		-- 			-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+		--
+		-- 			program = "${file}", -- This configuration will launch the current file if used.
+		-- 			pythonPath = function()
+		-- 				-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+		-- 				-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+		-- 				-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+		-- 				local PYTHON_DIR = require("mason-registry").get_package("debugpy"):get_install_path()
+		-- 					.. "/venv/Scripts/python"
+		-- 				local cwd = vim.fn.getcwd()
+		-- 				if vim.fn.executable(cwd .. "/venv/Scripts/python") == 1 then
+		-- 					return cwd .. "/venv/Scripts/python"
+		-- 				elseif vim.fn.executable(cwd .. "/.venv/Scripts/python") == 1 then
+		-- 					return cwd .. "/.venv/Scripts/python"
+		-- 				elseif vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+		-- 					return cwd .. "/venv/bin/python"
+		-- 				elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+		-- 					return cwd .. "/.venv/bin/python"
+		-- 				else
+		-- 					return PYTHON_DIR -- if no virtualenv is found fall back to the python installed by MASON
+		-- 				end
+		-- 			end,
+		-- 		},
+		-- 	}
+		-- 	require("mason-nvim-dap").default_setup(config)
+		-- end,
 	},
 })
 --require 'mason-nvim-dap'.setup_handlers {}
@@ -63,16 +63,18 @@ vim.fn.sign_define("DapLogPoint", { text = "📝", texthl = "", linehl = "", num
 --these work on windows
 local CODELLDB_DIR = require("mason-registry").get_package("codelldb"):get_install_path()
 	.. "/extension/adapter/codelldb"
+-- local VSCODE_JS_DIR = "~/AppData/Local/nvim-data/lazy/vscode-js-debug"
+local VSCODE_JS_DIR = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
 -- local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
-local VSCODE_JS_DIR = require("mason-registry").get_package("js-debug-adapter"):get_install_path() .. "/js-debug"
+-- local VSCODE_JS_DIR = require("mason-registry").get_package("js-debug-adapter"):get_install_path() .. "/js-debug"
 local codelldb_port = "1300" --rust debugger port
 
 require("dapui").setup()
 
 --dap python setup
---require('dap-python').setup('~/.virtualenvs/debugpy/Scripts/python') --directly pass path to a python venv that has debugpy installed
+-- require('dap-python').setup('~/.virtualenvs/debugpy/Scripts/python') --directly pass path to a python venv that has debugpy installed
 --windows, installed by mason
---~/AppData/Local/nvim-data/mason/packages/debugpy/venv/Scripts/python
+require('dap-python').setup('~/AppData/Local/nvim-data/mason/packages/debugpy/venv/Scripts/python') --directly pass path to a python venv that has debugpy installed
 --for linux:
 --require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
@@ -92,16 +94,8 @@ require("dap-vscode-js").setup({
 	-- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
 	debugger_path = VSCODE_JS_DIR, -- Path to vscode-js-debug installation.
 	-- debugger_cmd = { "extension" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-	adapters = {
-		"chrome",
-		"pwa-node",
-		"pwa-chrome",
-		"pwa-msedge",
-		"node-terminal",
-		"pwa-extensionHost",
-		"node",
-		"chrome",
-	}, -- which adapters to register in nvim-dap
+	adapters = { "chrome", "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost", "node",
+		"chrome", }, -- which adapters to register in nvim-dap
 	-- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
 	-- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
 	-- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
@@ -284,5 +278,5 @@ vim.api.nvim_set_keymap("n", "<Leader>du", [[:lua require'dapui'.toggle()<CR>]],
 --     processId = require'dap.utils'.pick_process,
 --   },
 -- }
--- dap.configurations.svelte = dap.configurations.javascript
--- dap.configurations.javascript, typescript, typescriptreact, javascriptreact, svelte
+-- -- dap.configurations.svelte = dap.configurations.javascript
+-- -- dap.configurations.javascript, typescript, typescriptreact, javascriptreact, svelte

@@ -96,11 +96,11 @@ local plugins = {
 			{ "williamboman/mason-lspconfig.nvim" },
 
 			-- Autocompletion
-			{ "hrsh7th/nvim-cmp", event = "InsertEnter", after = "nvim-lspconfig" },
+			{ "hrsh7th/nvim-cmp",                 event = "InsertEnter", after = "nvim-lspconfig" },
 			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+			{ "saadparwaiz1/cmp_luasnip",         after = "nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp",             after = "nvim-cmp" },
+			{ "hrsh7th/cmp-buffer",               after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 
 			-- Snippets
@@ -111,9 +111,9 @@ local plugins = {
 			{ "rafamadriz/friendly-snippets", after = "nvim-cmp" },
 		},
 	},
-	"onsails/lspkind-nvim", -- lsp icons"
+	"onsails/lspkind-nvim",         -- lsp icons"
 	"jose-elias-alvarez/null-ls.nvim", --lsp for non lsp
-	"jay-babu/mason-null-ls.nvim", -- auto install on Mason and auto configure for null-ls
+	"jay-babu/mason-null-ls.nvim",  -- auto install on Mason and auto configure for null-ls
 	--use("github/copilot.vim")        --AI completion
 	"zbirenbaum/copilot.lua",
 
@@ -179,7 +179,7 @@ local plugins = {
 			--dap setup
 			"mfussenegger/nvim-dap-python",
 			"jay-babu/mason-nvim-dap.nvim",
-			"mxsdev/nvim-dap-vscode-js", -- vscode's js dbugger
+			"mxsdev/nvim-dap-vscode-js",
 		},
 		keys = { "<leader>b", "F9", "F5" },
 		event = "VeryLazy",
@@ -197,6 +197,13 @@ local plugins = {
 		end,
 	},
 
+	{-- vscode's js dbug adapter
+		"microsoft/vscode-js-debug",
+		lazy = true,
+		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && move dist out"
+		--linux
+		-- build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+	},
 	--testing
 	"vim-test/vim-test", --testing'
 	{
@@ -227,24 +234,24 @@ local plugins = {
 	"akinsho/toggleterm.nvim", --terminal
 	"karb94/neoscroll.nvim", --smooth scrolling
 	"chentoast/marks.nvim", --marks visualizer
-	"tpope/vim-sleuth", --auto detect indent
-	"tpope/vim-surround", --surrounding text
+	"tpope/vim-sleuth",     --auto detect indent
+	"tpope/vim-surround",   --surrounding text
 	"jiangmiao/auto-pairs", --auto pairs
-	{ --auto close html tags
+	{                       --auto close html tags
 		"windwp/nvim-ts-autotag",
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
 	},
-	"theprimeagen/harpoon", --quick file access
+	"theprimeagen/harpoon",                             --quick file access
 	"theprimeagen/refactoring.nvim",
-	"mbbill/undotree", --undo history tree
-	"tpope/vim-fugitive", --git
+	"mbbill/undotree",                                  --undo history tree
+	"tpope/vim-fugitive",                               --git
 	"theprimeagen/git-worktree.nvim",
-	"nvim-lualine/lualine.nvim", --status line
-	"nanozuki/tabby.nvim", --prettier tabs
+	"nvim-lualine/lualine.nvim",                        --status line
+	"nanozuki/tabby.nvim",                              --prettier tabs
 	{ "lukas-reineke/indent-blankline.nvim" },
-	{ "nvim-tree/nvim-web-devicons", lazy = true }, -- devicons, not strictly required, but recommended
+	{ "nvim-tree/nvim-web-devicons",        lazy = true }, -- devicons, not strictly required, but recommended
 }
 
 require("lazy").setup(plugins, opts)

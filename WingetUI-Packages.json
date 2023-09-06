@@ -1,0 +1,99 @@
+{
+    "winget": {
+        "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+        "CreationDate": "2023-09-05 18:16:48.067288",
+        "Sources": [
+            {
+                "Packages": [
+                    {
+                        "PackageIdentifier": "SomePythonThings.WingetUIStore"
+                    },
+                    {
+                        "PackageIdentifier": "Neovim.Neovim"
+                    },
+                    {
+                        "PackageIdentifier": "Microsoft.WindowsTerminal"
+                    },
+                    {
+                        "PackageIdentifier": "VideoLAN.VLC"
+                    },
+                    {
+                        "PackageIdentifier": "BurntSushi.ripgrep.MSVC"
+                    },
+                    {
+                        "PackageIdentifier": "Python.Python.3.9"
+                    },
+                    {
+                        "PackageIdentifier": "Obsidian.Obsidian"
+                    },
+                    {
+                        "PackageIdentifier": "OpenJS.NodeJS"
+                    },
+                    {
+                        "PackageIdentifier": "Mozilla.Firefox"
+                    },
+                    {
+                        "PackageIdentifier": "Microsoft.VisualStudioCode"
+                    },
+                    {
+                        "PackageIdentifier": "Microsoft.VCRedist.2015+.x64"
+                    },
+                    {
+                        "PackageIdentifier": "Microsoft.OneDrive"
+                    },
+                    {
+                        "PackageIdentifier": "DEVCOM.JetBrainsMonoNerdFont"
+                    },
+                    {
+                        "PackageIdentifier": "Google.GoogleDrive"
+                    },
+                    {
+                        "PackageIdentifier": "Google.Chrome"
+                    },
+                    {
+                        "PackageIdentifier": "GitHub.GitHubDesktop"
+                    },
+                    {
+                        "PackageIdentifier": "Git.Git"
+                    },
+                    {
+                        "PackageIdentifier": "junegunn.fzf"
+                    },
+                    {
+                        "PackageIdentifier": "Discord.Discord"
+                    }
+                ],
+                "SourceDetails": {
+                    "Argument": "https://cdn.winget.microsoft.com/cache",
+                    "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+                    "Name": "winget",
+                    "Type": "Microsoft.PreIndexed.Package"
+                }
+            }
+        ],
+        "WinGetVersion": "1.4"
+    },
+    "scoop": {
+        "apps": []
+    },
+    "chocolatey": {
+        "apps": [
+            {
+                "Name": "mingw"
+            },
+            {
+                "Name": "Chocolatey"
+            }
+        ]
+    },
+    "pip": {
+        "apps": []
+    },
+    "npm": {
+        "apps": [
+            {
+                "Name": "neovim"
+            }
+        ]
+    }
+}

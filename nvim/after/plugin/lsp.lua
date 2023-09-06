@@ -97,6 +97,7 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "luasnip" },
 		{ name = "buffer",  keyword_length = 4 },
+		{ name = "crates" },
 	},
 	mapping = {
 		["C-n"] = cmp_action.luasnip_jump_forward(),

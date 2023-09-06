@@ -223,6 +223,20 @@ local plugins = {
 		end,
 	},
 
+	{
+		"saecki/crates.nvim",
+		tag = "v0.3.0",
+		ft = { "rust", "toml" },
+		config = function()
+			require("crates").setup({
+				null_ls = {
+					enabled = true,
+					name = "crates.nvim",
+				}
+			})
+		end,
+	},
+
 	"lewis6991/gitsigns.nvim", --git signs
 	"akinsho/toggleterm.nvim", --terminal
 	"karb94/neoscroll.nvim", --smooth scrolling

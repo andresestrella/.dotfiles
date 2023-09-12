@@ -64,6 +64,9 @@
                     },
                     {
                         "PackageIdentifier": "Discord.Discord"
+                    },
+                    {
+                        "PackageIdentifier": "voidtools.Everything"
                     }
                 ],
                 "SourceDetails": {

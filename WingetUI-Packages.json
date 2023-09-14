@@ -12,6 +12,9 @@
                         "PackageIdentifier": "Neovim.Neovim"
                     },
                     {
+                        "PackageIdentifier": "lars-berger.GlazeWM"
+                    },
+                    {
                         "PackageIdentifier": "AntibodySoftware.WizTree"
                     },
                     {

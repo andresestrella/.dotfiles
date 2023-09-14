@@ -17,8 +17,8 @@ require('copilot').setup({
     enabled = true,
     auto_refresh = false,
     keymap = {
-      --jump_prev = "[[",
-      --jump_next = "]]",
+      jump_prev = "[[",
+      jump_next = "]]",
       accept = "<CR>",
       refresh = "gr",
       open = "<M-a>"
@@ -35,7 +35,7 @@ require('copilot').setup({
     keymap = {
       accept = "<M-y>",
       accept_word = false,
-      accept_line = "<M-l",
+      accept_line = "<M-o",
       next = "<M-n>",
       prev = "<M-p>",
       dismiss = "<M-e>",

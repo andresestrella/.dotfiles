@@ -122,7 +122,7 @@ local iconsOpts = {
 return {
 	{ --prettier tabs
 		"nanozuki/tabby.nvim",
-		event = "BufWinEnter",
+		event = "TabNew",
 		opts = {
 			theme = {
 				fill = "TabLineFill",

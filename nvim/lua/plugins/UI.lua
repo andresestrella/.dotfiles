@@ -1,3 +1,48 @@
+-- Function to retrieve console output.
+local function capture(cmd)
+	local handle = assert(io.popen(cmd, "r"))
+	local output = assert(handle:read("*a"))
+	handle:close()
+	return output
+end
+
+local function pick_color()
+	local colors = { "String", "Identifier", "Keyword", "Number" }
+	return colors[math.random(#colors)]
+end
+
+local function split(s)
+	local t = {}
+	local max_line_length = vim.api.nvim_get_option("columns")
+	local longest = 0 -- Value of longest string is 0 by default
+	for far in s:gmatch("[^\r\n]+") do
+		-- Break the line if it's actually bigger than terminal columns
+		local line
+		far:gsub("(%s*)(%S+)", function(spc, word)
+			if not line or #line + #spc + #word > max_line_length then
+				table.insert(t, line)
+				line = word
+			else
+				line = line .. spc .. word
+				longest = max_line_length
+			end
+		end)
+		-- Get the string that is the longest
+		if #line > longest then
+			longest = #line
+		end
+		table.insert(t, line)
+	end
+	-- Center all strings by the longest
+	for i = 1, #t do
+		local space = longest - #t[i]
+		local left = math.floor(space / 2)
+		local right = space - left
+		t[i] = string.rep(" ", left) .. t[i] .. string.rep(" ", right)
+	end
+	return t
+end
+
 local marksOpts = {
 	-- whether to map keybinds or not. default true
 	default_mappings = true,
@@ -90,7 +135,6 @@ return {
 		},
 		config = function(_, opts)
 			local theme = opts.theme
-			local icons = {}
 			require("tabby.tabline").set(function(line)
 				return {
 					{
@@ -164,8 +208,17 @@ return {
 			})
 		end,
 	},
-	{ -- greet screen
+	{ --marks visualizer
+		"chentoast/marks.nvim",
+		opts = marksOpts,
+		-- config = function()
+		-- 	require("marks").setup({})
+		-- end,
+	},
+	{ -- reet screen
 		"goolord/alpha-nvim",
+		event = "VimEnter",
+		dependencies = { "Shatur/neovim-session-manager", "stevearc/dressing.nvim" },
 		config = function()
 			local is_status_ok, alpha = pcall(require, "alpha")
 
@@ -175,6 +228,8 @@ return {
 			end
 
 			local dashboard = require("alpha.themes.dashboard")
+			--for random header
+			math.randomseed(os.time())
 
 			dashboard.section.buttons.val = {
 				dashboard.button("SPC s l", "󰘁 Open last session", "<cmd>SessionManager load_last_session<CR>"),
@@ -187,15 +242,121 @@ return {
 				-- dashboard.button("SPC f m", "  Jump to bookmarks"),
 				dashboard.button("q", "󰩈  Quit NVIM", ":qa<CR>"),
 			}
+			Headers = {
 
+				{
+					[[                                                                     ]],
+					[[       ███████████           █████      ██                     ]],
+					[[      ███████████             █████                             ]],
+					[[      ████████████████ ███████████ ███   ███████     ]],
+					[[     ████████████████ ████████████ █████ ██████████████   ]],
+					[[    █████████████████████████████ █████ █████ ████ █████   ]],
+					[[  ██████████████████████████████████ █████ █████ ████ █████  ]],
+					[[ ██████  ███ █████████████████ ████ █████ █████ ████ ██████ ]],
+					[[ ██████   ██  ███████████████   ██ █████████████████ ]],
+					[[ ██████   ██  ███████████████   ██ █████████████████ ]],
+				},
+				{
+					[[  ／|_       ]],
+					[[ (o o /      ]],
+					[[  |.   ~.    ]],
+					[[  じしf_,)ノ ]],
+				},
+
+				{
+					"          ▀████▀▄▄              ▄█ ",
+					"            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ",
+					"    ▄        █          ▀▀▀▀▄  ▄▀  ",
+					"   ▄▀ ▀▄      ▀▄              ▀▄▀  ",
+					"  ▄▀    █     █▀   ▄█▀▄      ▄█    ",
+					"  ▀▄     ▀▄  █     ▀██▀     ██▄█   ",
+					"   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ",
+					"    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ",
+					"   █   █  █      ▄▄           ▄▀   ",
+				},
+
+				{
+					"                                                     ",
+					"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+					"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+					"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+					"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+					"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+					"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+					"                                                     ",
+				},
+
+				{
+					[[ ██▒   █▓  ██████     ▄████▄   ▒█████  ▓█████▄ ▓█████ ]],
+					[[▓██░   █▒▒██    ▒   ▒██▀  ▀█  ▒██▒  ██▒▒██▀ ██▌▓█   ▀ ]],
+					[[ ▓██  █▒░░ ▓██▄▄▄   ▒▓█▄      ▒██░  ██▒░██   █▌▒███   ]],
+					[[  ▒██ █░░  ▒   ██▒   ▒▓▓▄ ▄██▒▒██   ██░░▓█▄   ▌▒▓█  ▄ ]],
+					[[   ▒▀█░  ▒██████▒▒   ▒ ▓███▀ ░░ ████▓▒░░▒████▓ ░▒████▒]],
+					[[   ░ ▐░  ▒ ▒▓▒ ▒ ░   ░ ░▒ ▒  ░░ ▒░▒░▒░  ▒▒▓  ▒ ░░ ▒░ ░]],
+					[[   ░ ░░  ░ ░▒  ░ ░     ░  ▒     ░ ▒ ▒░  ░ ▒  ▒  ░ ░  ░]],
+					[[     ░░  ░  ░  ░     ░        ░ ░ ░ ▒   ░ ░  ░    ░   ]],
+					[[      ░        ░     ░ ░          ░ ░     ░       ░  ░]],
+					[[     ░               ░                  ░            ]],
+				},
+
+				{
+					"                                                     ",
+					"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+					"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+					"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+					"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+					"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+					"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+					"                                                     ",
+				},
+				{
+					[[                               __                ]],
+					[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+					[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+					[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+					[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+					[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+				},
+				{
+					[[ ██╗   ██╗███████╗    ██████╗ ██████╗ ██████╗ ███████╗ ]],
+					[[ ██║   ██║██╔════╝   ██╔════╝██╔═══██╗██╔══██╗██╔════╝ ]],
+					[[ ██║   ██║███████╗   ██║     ██║   ██║██║  ██║█████╗   ]],
+					[[ ╚██╗ ██╔╝╚════██║   ██║     ██║   ██║██║  ██║██╔══╝   ]],
+					[[  ╚████╔╝ ███████║   ╚██████╗╚██████╔╝██████╔╝███████╗ ]],
+					[[   ╚═══╝  ╚══════╝    ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ]],
+					[[														 ]],
+				},
+			}
+
+			dashboard.section.header.val = Headers[math.random(#Headers)]
+
+			-- local Quotes = {
+			-- 	{},
+			-- }
+			-- local footer = {
+			-- 	type = "text",
+			-- 	-- Change 'rdn' to any program that gives you a random quote.
+			-- 	-- https://github.com/BeyondMagic/scripts/blob/master/quotes/rdn
+			-- 	-- Which returns one to three lines, being each divided by a line break.
+			-- 	-- Or just an array: { "I see you:", "Above you." }
+			-- 	val = split(capture("quote")),
+			-- 	opts = {
+			-- 		position = "center",
+			-- 		hl = "Number",
+			-- 	},
+			-- }
+			local total_plugins = require("lazy").stats().count
+			local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
+			local version = vim.version()
+			local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+			local footer = datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
+			--
+			dashboard.section.footer.val = footer
+			-- dashboard.section.footer.val = split(capture("quote"))
+			-- dashboard.section.footer.val = Quotes[math.random(#Quotes)]
+			dashboard.section.footer.opts.hl = "Constant"
 			alpha.setup(dashboard.config)
+			vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
 		end,
-	},
-	{ --marks visualizer
-		"chentoast/marks.nvim",
-		opts = marksOpts,
-		-- config = function()
-		-- 	require("marks").setup({})
-		-- end,
 	},
 }

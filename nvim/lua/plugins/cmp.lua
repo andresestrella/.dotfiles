@@ -29,7 +29,6 @@ local config = function()
 			{ name = "buffer", keyword_length = 4 },
 			{ name = "crates" },
 		},
-		enabled = true,
 		preselect = cmp.PreselectMode.Item,
 		-- keyword_length = 2,
 		snippet = {

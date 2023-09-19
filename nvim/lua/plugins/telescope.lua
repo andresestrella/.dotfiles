@@ -10,7 +10,6 @@ local config = function()
 			selection_caret = " ",
 			path_display = { truncate = 2 },
 			dynamic_preview_title = true,
-			initial_mode = "insert",
 			selection_strategy = "closest",
 			sorting_strategy = "descending",
 			file_ignore_patterns = { "node_modules", ".git" },

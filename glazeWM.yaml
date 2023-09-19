@@ -164,6 +164,9 @@ keybindings:
   - command: "exec cmd"
     binding: "Alt+Enter"
 
+  - command: "exec firefox"
+    binding: "Alt+B"
+
   # Focus the workspace that last had focus.
   - command: "focus workspace recent"
     binding: "Alt+W"

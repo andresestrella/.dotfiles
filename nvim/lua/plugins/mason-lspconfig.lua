@@ -15,6 +15,7 @@ local opts = {
 		"tailwindcss",
 		"tsserver",
 		"yamlls",
+        -- "jdtls",
 	},
 	automatic_installation = true,
 }

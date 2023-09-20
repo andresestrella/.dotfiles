@@ -127,6 +127,9 @@ return {
 		event = { "BufRead Cargo.toml" },
 		opts = cratesOpts,
 	},
+    {
+        "mfussenegger/nvim-jdtls",
+    },
 	{ --lsp all in one
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
@@ -168,7 +171,6 @@ return {
 				-- 	vim.cmd([[ LspStop eslint ]])
 				-- 	return
 				-- end
-
 				local signs = {
 					Error = " ",
 					Warn = "",

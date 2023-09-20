@@ -161,7 +161,7 @@ keybindings:
 
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
-  - command: "exec cmd"
+  - command: "exec wt"
     binding: "Alt+Enter"
 
   - command: "exec firefox"

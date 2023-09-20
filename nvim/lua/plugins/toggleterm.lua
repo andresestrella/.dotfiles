@@ -2,34 +2,7 @@
 -- if not status_ok then
 -- 	return
 -- end
-local opts = {
-	auto_scroll = true,
-	size = 20,
-	open_mapping = [[<A-t>]],
-	hide_numbers = true,
-	shade_filetypes = {},
-	shade_terminals = true,
-	start_in_insert = true,
-	insert_mappings = true,
-	persist_size = true,
-	direction = "float",
-	close_on_exit = true,
-	shell = vim.o.shell,
-	float_opts = {
-		border = "curved",
-		winblend = 0,
-		highlights = {
-			border = "Normal",
-			background = "Normal",
-		},
-	},
-	on_open = function(term)
-		-- cmd.startinsert()
-		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", [[<cmd>close<cr>]], { noremap = true, silent = true })
-	end,
-	on_close = function() end,
-	buffer = 0,
-}
+local opts = {}
 
 function _G.set_terminal_keymaps()
 	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
@@ -50,7 +23,10 @@ return {
 		event = "VeryLazy",
 		version = "*",
 		branch = "main",
-		config = function()
+		keys = {
+			{ "<A-t>" },
+		},
+		config = function(_, opts)
 			-- if you only want these mappings for toggle term use term://*toggleterm#* instead
 			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 			local Terminal = require("toggleterm.terminal").Terminal
@@ -63,7 +39,40 @@ return {
 			function _lazygit_toggle()
 				lazygit:toggle()
 			end
-			require("toggleterm").setup({})
+			require("toggleterm").setup({
+				auto_scroll = true,
+				size = 20,
+				open_mapping = [[<A-t>]],
+				hide_numbers = true,
+				shade_filetypes = {},
+				shade_terminals = true,
+				start_in_insert = true,
+				insert_mappings = true,
+				persist_size = true,
+				direction = "float",
+				close_on_exit = true,
+				shell = vim.o.shell,
+				float_opts = {
+					border = "curved",
+					winblend = 0,
+					highlights = {
+						border = "Normal",
+						background = "Normal",
+					},
+				},
+				on_open = function(term)
+					-- cmd.startinsert()
+					vim.api.nvim_buf_set_keymap(
+						term.bufnr,
+						"n",
+						"q",
+						[[<cmd>close<cr>]],
+						{ noremap = true, silent = true }
+					)
+				end,
+				on_close = function() end,
+				buffer = 0,
+			})
 		end,
 	},
 }

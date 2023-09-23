@@ -69,6 +69,7 @@ local cratesOpts = {
 		name = "crates.nvim",
 	},
 }
+
 local nullConfig = function()
 	local null_ls = require("null-ls")
 	local ca = null_ls.builtins.code_actions
@@ -127,9 +128,6 @@ return {
 		event = { "BufRead Cargo.toml" },
 		opts = cratesOpts,
 	},
-    {
-        "mfussenegger/nvim-jdtls",
-    },
 	{ --lsp all in one
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v2.x",
@@ -165,49 +163,23 @@ return {
 		config = function()
 			local lsp = require("lsp-zero").preset({})
 
-			lsp.on_attach(function(client, bufnr)
-				--comment this out to enable eslint
-				-- if client.name == "eslint" then
-				-- 	vim.cmd([[ LspStop eslint ]])
-				-- 	return
-				-- end
-				local signs = {
-					Error = " ",
-					Warn = "",
-					Hint = "󰋗 ",
-					Info = " ",
-				}
+			lsp.omnifunc.setup({
+				trigger = "<C-Space>",
+				use_fallback = true,
+				update_on_delete = true,
+			})
 
-				for type, icon in pairs(signs) do
-					local hl = "DiagnosticSign" .. type
-					vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-				end
+			local signs = {
+				Error = " ",
+				Warn = "",
+				Hint = "󰋗 ",
+				Info = " ",
+			}
 
-				lsp.default_keymaps({ buffer = bufnr })
-				local bufopts = { remap = false, noremap = true, silent = true, buffer = bufnr }
-				-- go to definition
-				vim.keymap.set("n", "gll", function()
-					vim.lsp.diagnostic.show_line_diagnostics()
-				end, bufopts)
-				vim.keymap.set("n", "<leader>vws", function()
-					vim.lsp.buf.workspace_symbol()
-				end, bufopts)
-				vim.keymap.set("n", "<leader>a", function()
-					vim.lsp.buf.code_action()
-				end, bufopts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-				--rename all occurrences
-				vim.keymap.set("n", "<leader>r", function()
-					vim.lsp.buf.rename()
-				end, bufopts)
-				--show signature help
-				vim.keymap.set("i", "<A-h>", function()
-					vim.lsp.buf.signature_help()
-				end, bufopts)
-
-				--maps leader f to format code
-				vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-			end)
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
 
 			--format on save
 			-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
@@ -227,26 +199,13 @@ return {
 				},
 			})
 			require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
-			require("lspconfig").svelte.setup({
-				on_attach = lsp.on_attach,
-				cmd = { "svelteserver", "--stdio" },
-				-- uncomment this if I want the svelte LSP to run on .js and .ts files as well
-				-- filetypes = { "svelte", "html", "javascript", "typescript", "css" },
-				settings = {
-					svelte = {
-						plugin = {
-							html = {
-								completions = {
-									enable = true,
-									emmet = true,
-								},
-							},
-						},
-					},
-				},
-			})
-
-			lsp.setup()
+			-- require("lspconfig").svelte.setup({
+			-- 	on_attach = lsp.on_attach,
+			-- 	cmd = { "svelteserver", "--stdio" },
+			-- 	-- uncomment this if I want the svelte LSP to run on .js and .ts files as well
+			-- 	-- filetypes = { "svelte", "html", "javascript", "typescript", "css" },
+			-- 	settings = { svelte = { plugin = { html = { completions = { enable = true, emmet = true } } } } },
+			-- })
 
 			-- load snippets from path/of/your/nvim/config/my-cool-snippets
 			-- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./my-cool-snippets" } })
@@ -259,8 +218,42 @@ return {
 				virtual_text = true,
 			})
 
-			-- See mason-null-ls.nvim's documentation for more details:
-			-- https://github.com/jay-babu/mason-null-ls.nvim#setup
+			lsp.on_attach(function(client, bufnr)
+				--comment this out to enable eslint
+				-- if client.name == "eslint" then
+				-- 	vim.cmd([[ LspStop eslint ]])
+				-- 	return
+				-- end
+
+				lsp.default_keymaps({ buffer = bufnr })
+				local bufopts = { remap = false, noremap = true, silent = true, buffer = bufnr }
+				-- go to definition
+				vim.keymap.set("n", "gll", function()
+					vim.lsp.diagnostic.show_line_diagnostics()
+				end, bufopts)
+				vim.keymap.set("n", "<leader>vws", function()
+					vim.lsp.buf.workspace_symbol()
+				end, bufopts)
+				vim.keymap.set("n", "<leader>a", function()
+					vim.lsp.buf.code_action()
+				end, bufopts)
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+				--rename all occurrences
+				vim.keymap.set("n", "<leader>r", function()
+					vim.lsp.buf.rename()
+				end, bufopts)
+				--show signature help
+				vim.keymap.set("i", "<C-h>", function()
+					vim.lsp.buf.signature_help()
+				end, bufopts)
+
+				--maps leader f to format code
+				vim.keymap.set("n", "<leader>f", function()
+					vim.lsp.buf.format()
+				end, bufopts)
+			end)
+
+			lsp.setup()
 		end,
 	},
 }

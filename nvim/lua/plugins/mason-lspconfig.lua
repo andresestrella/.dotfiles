@@ -2,7 +2,7 @@ local opts = {
 	ensure_installed = {
 		"cssls",
 		"cssmodules_ls",
-		"diagnosticls",
+		-- "diagnosticls",
 		"docker_compose_language_service",
 		"dockerls",
 		"html",
@@ -15,7 +15,9 @@ local opts = {
 		"tailwindcss",
 		"tsserver",
 		"yamlls",
-        -- "jdtls",
+		"svelte",
+		-- "java_language_server",
+		"jdtls",
 	},
 	automatic_installation = true,
 }

@@ -49,8 +49,14 @@ local refactorOpts = {
 }
 
 return {
-	"tpope/vim-sleuth", --auto detect indent
-	"tpope/vim-surround", --surrounding text
+    {--auto detect indent
+        "tpope/vim-sleuth",
+        event = "BufReadPre",
+    },
+    {--surrounding text
+        "tpope/vim-surround",
+        event = "BufReadPre",
+    },
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ --auto close html tags
 		"windwp/nvim-ts-autotag",
@@ -89,6 +95,5 @@ return {
 		"numToStr/Comment.nvim",
 		keys = { { "gcc" }, { "gbc" }, { "gc", mode = "v" }, { "gb", mode = "v" } },
 		opts = commentOpts,
-		event = "BufReadPre",
 	},
 }

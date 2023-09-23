@@ -126,6 +126,7 @@ return { --debugging
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
+		ft = { "javascript", "typescript", "typescriptreact", "svelte", "javascriptreact" },
 		config = function()
 			require("dap-vscode-js").setup({
 				-- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
@@ -149,6 +150,7 @@ return { --debugging
 	},
 	{
 		"mfussenegger/nvim-dap-python",
+		ft = "python",
 		config = function()
 			--dap python setup
 			-- require('dap-python').setup('~/.virtualenvs/debugpy/Scripts/python') --directly pass path to a python venv that has debugpy installed

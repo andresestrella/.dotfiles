@@ -26,6 +26,8 @@ local config = function()
 			{ name = "nvim_lsp" },
 			{ name = "path" },
 			{ name = "luasnip" },
+			{ name = "vsnip" },
+			{ name = "nvim_lsp_signature_help" },
 			{ name = "buffer", keyword_length = 4 },
 			{ name = "crates" },
 		},
@@ -207,7 +209,9 @@ return {
 				lazy = true,
 				config = function()
 					require("luasnip.loaders.from_vscode").lazy_load()
-					require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/nvim/snippets/" } })
+					require("luasnip.loaders.from_vscode").load({
+						paths = { "~/.config/nvim/snippets/" },
+					})
 				end,
 				after = "nvim-cmp",
 			},
@@ -217,6 +221,8 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 			"ray-x/cmp-treesitter",
 			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-vsnip",
+			"hrsh7th/vim-vsnip",
 			-- "hrsh7th/cmp-emoji",
 			-- "chrisgrieser/cmp-nerdfont",
 			-- {
@@ -224,7 +230,6 @@ return {
 			-- dependencies = "nvim-lua/plenary.nvim",
 			-- },
 			-- "jcdickinson/codeium.nvim",
-			dependencies = {},
 		},
 	},
 }

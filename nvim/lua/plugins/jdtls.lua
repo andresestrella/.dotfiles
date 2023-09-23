@@ -1,0 +1,229 @@
+--java lsp config
+-- local spring_boot_run = "mvn spring-boot:run -Dspring-boot.run.profiles=local"
+-- local command = ':lua require("toggleterm").exec("' .. spring_boot_run .. '")<CR>'
+-- vim.keymap.set("n", "<leader>sr", command, { noremap = true, silent = true })
+
+-- return {
+-- 	{
+-- 		"mfussenegger/nvim-jdtls",
+-- 		ft = { "java" },
+-- 		config = function(_, opts)
+-- 			local jdtls = require("jdtls")
+-- 			local java_installs_dir = "C:/Lenguages_OS/Java"
+-- 			local java17_dir = java_installs_dir .. "/Java17/jdk-17.0.8.1+1"
+-- 			local java11_dir = java_installs_dir .. "/Java11/"
+-- 			local java8_dir = java_installs_dir .. "/Java8/jdk1.8.0_382"
+-- 			local jdtls_path = require("mason-registry").get_package("jdtls"):get_install_path()
+-- 			-- local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+-- 			local path_to_lsp_server = jdtls_path .. "/config_win"
+-- 			local path_to_plugins = jdtls_path .. "/plugins/"
+-- 			-- local path_to_jar = path_to_plugins .. "org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+-- 			local path_to_jar = path_to_plugins .. "org.eclipse.equinox.launcher_*.jar"
+-- 			-- local lombok_path = path_to_plugins .. "lombok.jar"
+-- 			local lombok_path = jdtls_path .. "/lombok.jar"
+-- 			-- File types that signify a Java project's root directory. This will be
+-- 			-- used by eclipse to determine what constitutes a workspace
+-- 			local root_markers = { "gradlew", "mvnw", ".git", "pom.xml", "build.gradle" }
+-- 			local root_dir = require("jdtls.setup").find_root(root_markers)
+-- 			if root_dir == "" then
+-- 				return
+-- 			end
+-- 			local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+-- 			local workspace_dir = vim.fn.stdpath("data") .. "/site/java/workspace-root/" .. project_name
+-- 			os.execute("mkdir " .. workspace_dir)
+-- 			-- Helper function for creating keymaps
+-- 			function nnoremap(rhs, lhs, bufopts, desc)
+-- 				bufopts.desc = desc
+-- 				vim.keymap.set("n", rhs, lhs, bufopts)
+-- 			end
+
+-- 			local on_attach = function(client, bufnr)
+-- 				local bufopts = { noremap = true, silent = true, buffer = bufnr }
+-- 				nnoremap("<C-k>", vim.lsp.buf.signature_help, bufopts, "Show signature")
+-- 				nnoremap("<space>wa", vim.lsp.buf.add_workspace_folder, bufopts, "Add workspace folder")
+-- 				nnoremap("<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts, "Remove workspace folder")
+-- 				nnoremap("<space>wl", function()
+-- 					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+-- 				end, bufopts, "List workspace folders")
+-- 				nnoremap("<space>D", vim.lsp.buf.type_definition, bufopts, "Go to type definition")
+-- 				vim.keymap.set(
+-- 					"v",
+-- 					"<space>ca",
+-- 					"<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>",
+-- 					{ noremap = true, silent = true, buffer = bufnr, desc = "Code actions" }
+-- 				)
+-- 				nnoremap("<space>f", function()
+-- 					vim.lsp.buf.format({ async = true })
+-- 				end, bufopts, "Format file")
+
+-- 				-- Java extensions provided by jdtls
+-- 				nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
+-- 				nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
+-- 				nnoremap("<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
+-- 				vim.keymap.set(
+-- 					"v",
+-- 					"<space>em",
+-- 					[[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
+-- 					{ noremap = true, silent = true, buffer = bufnr, desc = "Extract method" }
+-- 				)
+-- 			end
+
+-- 			local config = {
+-- 				on_attach = on_attach, -- We pass our on_attach keybindings to the configuration map
+-- 				root_dir = root_dir, -- Set the root directory to our found root_marker
+-- 				flags = {
+-- 					allow_incremental_sync = true,
+-- 					debounce_text_changes = 80,
+-- 				},
+-- 				init_options = {
+-- 					bundles = {},
+-- 				},
+-- 				settings = {
+-- 					java = {
+-- 						home = java17_dir,
+-- 						eclipse = { downloadSources = true },
+-- 						maven = {
+-- 							downloadSources = true,
+-- 						},
+-- 						implementationsCodeLens = {
+-- 							enabled = true,
+-- 						},
+-- 						referencesCodeLens = {
+-- 							enabled = true,
+-- 						},
+-- 						references = {
+-- 							includeDecompiledSources = true,
+-- 						},
+-- 						format = {
+-- 							enabled = true,
+-- 							settings = {
+-- 								url = jdtls_path .. "/intellij-java-google-style.xml",
+-- 								-- url = jdtls_home .. "/eclipse/eclipse-java-google-style.xml",
+-- 								profile = "GoogleStyle",
+-- 							},
+-- 						},
+-- 						signatureHelp = { enabled = true },
+-- 						contentProvider = { preferred = "fernflower" }, -- Use fernflower to decompile library code
+-- 						-- Specify any completion options
+-- 						completion = {
+-- 							favoriteStaticMembers = {
+-- 								"org.hamcrest.MatcherAssert.assertThat",
+-- 								"org.hamcrest.Matchers.*",
+-- 								"org.hamcrest.CoreMatchers.*",
+-- 								"org.junit.jupiter.api.Assertions.*",
+-- 								"java.util.Objects.requireNonNull",
+-- 								"java.util.Objects.requireNonNullElse",
+-- 								"org.mockito.Mockito.*",
+-- 							},
+-- 							filteredTypes = {
+-- 								"com.sun.*",
+-- 								"io.micrometer.shaded.*",
+-- 								"java.awt.*",
+-- 								"jdk.*",
+-- 								"sun.*",
+-- 							},
+-- 							importOrder = {
+-- 								"java",
+-- 								"javax",
+-- 								"com",
+-- 								"org",
+-- 							},
+-- 						},
+-- 						-- extendedClientCapabilities = extendedClientCapabilities,
+-- 						extendedClientCapabilities = {
+-- 							classFileContentsSupport = true,
+-- 						},
+-- 						sources = {
+-- 							organizeImports = {
+-- 								starThreshold = 9999,
+-- 								staticStarThreshold = 9999,
+-- 							},
+-- 						},
+-- 						-- How code generation should act
+-- 						codeGeneration = {
+-- 							toString = {
+-- 								template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
+-- 							},
+-- 							hashCodeEquals = {
+-- 								useJava7Objects = true,
+-- 							},
+-- 							useBlocks = true,
+-- 						},
+-- 						-- If you are developing in projects with different Java versions, you need
+-- 						-- to tell eclipse.jdt.ls to use the location of the JDK for your Java version
+-- 						-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+-- 						-- And search for `interface RuntimeOption`
+-- 						-- The `name` is NOT arbitrary, but must match one of the elements from `enum ExecutionEnvironment` in the link above
+-- 						configuration = {
+-- 							updateBuildConfiguration = "interactive",
+-- 							runtimes = {
+-- 								{
+-- 									name = "JavaSE-17",
+-- 									path = java17_dir,
+-- 								},
+-- 								{
+-- 									name = "JavaSE-11",
+-- 									path = java11_dir,
+-- 								},
+-- 								{
+-- 									name = "JavaSE-1.8",
+-- 									path = java8_dir,
+-- 									-- path = home .. "/.asdf/installs/java/corretto-8.352.08.1",
+-- 								},
+-- 							},
+-- 						},
+-- 					},
+-- 				},
+-- 				cmd = {
+-- 					-- home .. "/.asdf/installs/java/corretto-17.0.4.9.1/bin/java",
+-- 					-- java20_install_dir .. "/bin/java",
+-- 					-- java17_dir .. "/bin/java",
+-- 					"java",
+-- 					"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+-- 					"-Dosgi.bundles.defaultStartLevel=4",
+-- 					"-Declipse.product=org.eclipse.jdt.ls.core.product",
+-- 					"-Dlog.protocol=true",
+-- 					"-Dlog.level=ALL",
+-- 					-- If you use lombok, download the lombok jar and place it in ~/.local/share/eclipse
+-- 					"-javaagent:" .. lombok_path,
+-- 					-- .. "/.local/share/eclipse/lombok.jar",
+-- 					"-Xmx4g",
+-- 					-- "-Xms1g",
+-- 					"--add-modules=ALL-SYSTEM",
+-- 					"--add-opens",
+-- 					"java.base/java.util=ALL-UNNAMED",
+-- 					"--add-opens",
+-- 					"java.base/java.lang=ALL-UNNAMED",
+-- 					-- The jar file is located where jdtls was installed. This will need to be updated
+-- 					-- to the location where you installed jdtls
+-- 					"-jar", path_to_jar,
+-- 					-- vim.fn.glob(jdtls_home .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+-- 					-- vim.fn.glob("/opt/homebrew/Cellar/jdtls/1.18.0/libexec/plugins/org.eclipse.equinox.launcher_*.jar"),
+
+-- 					-- The configuration for jdtls is also placed where jdtls was installed. This will
+-- 					-- need to be updated depending on your environment
+-- 					"-configuration", path_to_lsp_server, -- jdtls_home .. "/config_win",
+-- 					-- "/opt/homebrew/Cellar/jdtls/1.18.0/libexec/config_mac",
+
+-- 					-- Use the workspace_folder defined above to store data for this project
+-- 					"-data", workspace_dir,
+-- 				},
+-- 			}
+-- 			-- config["on_attach"] = function(client, bufnr)
+-- 			-- 	require("keymaps").map_java_keys(bufnr)
+-- 			-- 	require("lsp_signature").on_attach({
+-- 			-- 		bind = true, -- This is mandatory, otherwise border config won't get registered.
+-- 			-- 		floating_window_above_cur_line = false,
+-- 			-- 		padding = "",
+-- 			-- 		handler_opts = {
+-- 			-- 			border = "rounded",
+-- 			-- 		},
+-- 			-- 	}, bufnr)
+-- 			-- end
+-- 			-- Finally, start jdtls. This will run the language server using the configuration we specified,
+-- 			-- setup the keymappings, and attach the LSP client to the current buffer
+-- 			jdtls.start_or_attach(config)
+-- 		end,
+-- 	},
+-- }
+return {}

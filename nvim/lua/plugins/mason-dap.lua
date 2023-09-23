@@ -1,10 +1,12 @@
 local masonDapOpts = {
 	ensure_installed = {
-		"bash",
+		-- "bash",
 		-- "chrome",
 		"python",
 		"codelldb",
-		"cppdbg",
+		-- "cppdbg",
+		-- "javadbg",
+		-- "javatest",
 		"js",
 	},
 	automatic_installation = true,

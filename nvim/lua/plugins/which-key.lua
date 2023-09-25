@@ -163,9 +163,18 @@ return {
 			"<leader>",
 			"`",
 		},
-		-- triggers_nowait = {
-		-- 	"o",
-		-- },
+		triggers_nowait = {
+			-- marks
+			"`",
+			"'",
+			"g`",
+			"g'",
+			-- registers
+			'"',
+			"<c-r>",
+			-- spelling
+			"z=",
+		},
 		triggers_blacklist = {
 			i = { "j", "k" },
 			v = { "j", "k" },

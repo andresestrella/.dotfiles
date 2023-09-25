@@ -25,31 +25,6 @@ local kindConfig = function()
 		mode = "symbol_text",
 		preset = "default",
 		symbol_map = {
-			-- Text = "",
-			-- Method = "",
-			-- Function = "",
-			-- Constructor = "",
-			-- Field = "ﰠ",
-			-- Variable = "",
-			-- Class = "ﴯ",
-			-- Interface = "",
-			-- Module = "",
-			-- Property = "ﰠ",
-			-- Unit = "塞",
-			-- Value = "",
-			-- Enum = "",
-			-- Keyword = "",
-			-- Snippet = "",
-			-- Color = "",
-			-- File = "",
-			-- Reference = "",
-			-- Folder = "",
-			-- EnumMember = "",
-			-- Constant = "",
-			-- Struct = "פּ",
-			-- Event = "",
-			-- Operator = "",
-			-- TypeParameter = "",
 			Copilot = "",
 			Codeium = "",
 		},
@@ -226,30 +201,35 @@ return {
 				-- end
 
 				lsp.default_keymaps({ buffer = bufnr })
+
 				local bufopts = { remap = false, noremap = true, silent = true, buffer = bufnr }
-				-- go to definition
-				vim.keymap.set("n", "gll", function()
-					vim.lsp.diagnostic.show_line_diagnostics()
-				end, bufopts)
-				vim.keymap.set("n", "<leader>vws", function()
+				vim.keymap.set("n", "<leader>ws", function()
 					vim.lsp.buf.workspace_symbol()
 				end, bufopts)
 				vim.keymap.set("n", "<leader>a", function()
 					vim.lsp.buf.code_action()
 				end, bufopts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+				vim.keymap.set("v", "<leader>a", function()
+					vim.lsp.buf.code_action()
+				end, bufopts)
+				-- vim.keymap.set("v,n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 				--rename all occurrences
 				vim.keymap.set("n", "<leader>r", function()
 					vim.lsp.buf.rename()
 				end, bufopts)
 				--show signature help
-				vim.keymap.set("i", "<C-h>", function()
+				vim.keymap.set("i", "<C-k>", function()
 					vim.lsp.buf.signature_help()
 				end, bufopts)
-
-				--maps leader f to format code
+				-- vim.keymap.set("n,i", "<C-k>", function() vim.lsp.buf.signature_help() end, bufopts)
 				vim.keymap.set("n", "<leader>f", function()
 					vim.lsp.buf.format()
+				end, bufopts) --maps leader f to format code
+				vim.keymap.set("n", "<leader>wa", function()
+					vim.lsp.buf.add_workspace_folder()
+				end, bufopts)
+				vim.keymap.set("n", "<leader>wr", function()
+					vim.lsp.buf.remove_workspace_folder()
 				end, bufopts)
 			end)
 

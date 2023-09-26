@@ -30,7 +30,7 @@ return {
 			u = { "UndoTreeToggle<CR> ", "Undo tree" },
 			e = { ":Neotree toggle right<CR>", "File Tree toggle" },
 			b = { ":DapToggleBreakpoint <CR>", "Breakpoint Toggle" },
-			m = { "<CMD>TSJToggle<CR>", "collapse/join toggle" },
+			m = { "<CMD>:TSJToggle<CR>", "collapse/join toggle" },
 			-- r = { ":lua vim.lsp.buf.rename()<CR>", "Rename" },
 			-- f = { ":lua vim.lsp.buf.format()<CR>", "Format" },
 			T = { name = "Treesitter", i = { ":TSConfigInfo<cr>", "Info" } },
@@ -110,8 +110,8 @@ return {
 				G = { "<Cmd>lua require'jdtls.tests'.generate()<CR>", "generate test class" },
 			},
 			g = {
-				name = "Goto / Git",
-				r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
+				name = "Git",
+				-- r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 
 				-- g = { "<cmd>lua require 'lvim.core.terminal'.lazygit_toggle()<cr>", "Lazygit" },
 				j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },

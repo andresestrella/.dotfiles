@@ -218,7 +218,7 @@ return {
 					vim.lsp.buf.rename()
 				end, bufopts)
 				--show signature help
-				vim.keymap.set("i", "<C-k>", function()
+				vim.keymap.set("i", "<C-h>", function()
 					vim.lsp.buf.signature_help()
 				end, bufopts)
 				-- vim.keymap.set("n,i", "<C-k>", function() vim.lsp.buf.signature_help() end, bufopts)

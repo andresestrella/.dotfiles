@@ -96,7 +96,7 @@ return {
 	},
 	{
 		"s1n7ax/nvim-window-picker",
-		config = true,
+		config = false, --true
 		-- config = function()
 		-- 	require("window-picker").setup()
 		-- end,

@@ -173,7 +173,8 @@ return {
 					},
 				},
 			})
-			require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
+
+			-- require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 			-- require("lspconfig").svelte.setup({
 			-- 	on_attach = lsp.on_attach,
 			-- 	cmd = { "svelteserver", "--stdio" },
@@ -199,7 +200,9 @@ return {
 				-- 	vim.cmd([[ LspStop eslint ]])
 				-- 	return
 				-- end
+				-- if client.name ==
 
+				--keymaps
 				lsp.default_keymaps({ buffer = bufnr })
 
 				local bufopts = { remap = false, noremap = true, silent = true, buffer = bufnr }

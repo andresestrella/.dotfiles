@@ -1,3 +1,11 @@
+-- local config = {
+-- 	name, -- adapter name
+
+-- 	-- All the items below are looked up by the adapter name.
+-- 	adapters, -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/adapters.lua
+-- 	configurations, -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/configurations.lua
+-- 	filetypes -- https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/filetypes.lua
+-- }
 local masonDapOpts = {
 	ensure_installed = {
 		-- "bash",
@@ -10,7 +18,21 @@ local masonDapOpts = {
 		"js",
 	},
 	automatic_installation = true,
-	automatic_setup = true,
+	automatic_setup = true, --deprecated, can comment out
+	handlers = {},
+	-- handlers = {
+	-- 	function (config)
+	-- 		require("mason-nvim-dap").default_setup(config)
+	-- 	end,
+	-- 	python = function (config)
+	-- 		config.adapters = {
+	-- 			type = "executable",
+	-- 			command = "/usr/bin/python3",
+	-- 			args = { "-m", "debugpy.adapter" },
+	-- 		}
+	-- 		require("mason-nvim-dap").default_setup(config)
+	-- 	end,
+	-- },
 }
 
 -- all sources with no handler get passed here
@@ -71,16 +93,6 @@ local handlers = function()
 			showDisassembly = "never",
 		},
 	}
-	-- dap.configurations.cpp = {
-	-- 	{
-	-- 		name = "Launch file (cppdbg)",
-	-- 		type = "cppdbg",
-	-- 		request = "launch",
-	-- 		program = function()
-	-- 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-	-- 		end,
-	-- 		cwd = "${workspaceFolder}",
-	-- 		stopAtEntry = false,
 	-- 	},
 	-- 	{
 	-- 		name = "Launch file (codelldb)",
@@ -94,9 +106,6 @@ local handlers = function()
 	-- 	},
 	-- }
 	-- dap.configurations.c = dap.configurations.cpp
-	-- Keep original functionality of `automatic_setup = true`
-	-- require("mason-nvim-dap").default_setup(config)
-	-- require("mason-nvim-dap").default_setup()
 end
 
 local listeners = function()

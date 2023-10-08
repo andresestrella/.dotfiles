@@ -12,24 +12,42 @@ local masonDapOpts = {
 		-- "chrome",
 		"python",
 		"codelldb",
+		"coreclr",
 		-- "cppdbg",
 		-- "javadbg",
 		-- "javatest",
 		"js",
 	},
 	automatic_installation = true,
-	automatic_setup = true, --deprecated, can comment out
 	handlers = {},
 	-- handlers = {
-	-- 	function (config)
+	-- 	function(config)
 	-- 		require("mason-nvim-dap").default_setup(config)
 	-- 	end,
-	-- 	python = function (config)
+	-- 	python = function(config)
 	-- 		config.adapters = {
 	-- 			type = "executable",
 	-- 			command = "/usr/bin/python3",
 	-- 			args = { "-m", "debugpy.adapter" },
 	-- 		}
+	-- 		require("mason-nvim-dap").default_setup(config)
+	-- 	end,
+	-- 	coreclr = function(config)
+	-- 		config.adapters = {
+	-- 			type = "executable",
+	-- 			command = require("mason-registry").get_package("netcoredbg"):get_install_path() .. "/netcoredbg/netcoredbg",
+	-- 			args = { "--interpreter=vscode" },
+	-- 		}
+	-- 		config.configurations = {
+	-- 			type = "coreclr",
+	-- 			name = "launch netcoredbg",
+	-- 			request = "launch",
+	-- 			program = function()
+	-- 				-- return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/", "file")
+	-- 				return vim.fn.input("Path to dll", vim.fn.getcwd() .. "/bin/Debug/", "file")
+	-- 			end,
+	-- 		}
+	-- 		config.filetypes = { "cs", "fsharp" }
 	-- 		require("mason-nvim-dap").default_setup(config)
 	-- 	end,
 	-- },
@@ -131,7 +149,7 @@ return {
 		},
 		config = function()
 			require("mason-nvim-dap").setup(masonDapOpts)
-			handlers()
+			-- handlers()
 			listeners()
 			-- require("mason-nvim-dap").setup({})
 		end,

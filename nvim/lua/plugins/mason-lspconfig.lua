@@ -5,7 +5,7 @@ local handlers = {
 	end,
 
 	-- Next, you can provide targeted overrides for specific servers.
-	jdtls = function() end,
+	[ "jdtls" ] = function() end,
 	-- tsserver = function() end,
 	-- rust_analyzer = function() end,
 	-- gopls = function() end,
@@ -15,8 +15,11 @@ return {
 	"williamboman/mason-lspconfig.nvim",
 	-- opts = opts,
 	event = "BufReadPre",
-	dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+	dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "VonHeikemen/lsp-zero.nvim" },
+	after = "williamboman/mason.nvim",
 	config = function()
+		local lsp_zero = require("lsp-zero")
+		-- require('mason').setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"tsserver",
@@ -38,8 +41,11 @@ return {
 				"svelte",
 				"jdtls",
 			},
-			automatic_installation = false,
-			handlers = handlers,
+			-- handlers = handlers,
+			handlers = {
+				lsp_zero.default_setup,
+				jdtls = lsp_zero.noop,
+			},
 		})
 		-- require("mason-lspconfig").setup_handlers(handlers)
 	end,

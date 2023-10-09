@@ -11,8 +11,8 @@ return {
 			mode = "n",
 			prefix = "<leader>",
 			buffer = nil,
-			silent = true,
-			noremap = true,
+			silent = false,
+			noremap = false,
 			nowait = false,
 		}
 		local vopts = {
@@ -21,7 +21,7 @@ return {
 			buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
 			silent = true, -- use `silent` when creating keymaps
 			noremap = true, -- use `noremap` when creating keymaps
-			nowait = true, -- use `nowait` when creating keymaps
+			nowait = false, -- use `nowait` when creating keymaps
 		}
 		local mappings = {
 			-- ["<leader>"] = { "<cmd>WhichKey <leader><CR>", "WhichKey" },
@@ -31,22 +31,37 @@ return {
 			e = { ":Neotree toggle right<CR>", "File Tree toggle" },
 			b = { ":DapToggleBreakpoint <CR>", "Breakpoint Toggle" },
 			m = { "<CMD>:TSJToggle<CR>", "collapse/join toggle" },
+			-- leap mapping
+			h = { "<Plug>(leap-forward-till)", "Leap forward" },
+			H = { "<Plug>(leap-backward-till)", "Leap backward" },
 			-- r = { ":lua vim.lsp.buf.rename()<CR>", "Rename" },
 			-- f = { ":lua vim.lsp.buf.format()<CR>", "Format" },
 			T = { name = "Treesitter", i = { ":TSConfigInfo<cr>", "Info" } },
 			t = {
-				name = "tabs",
+				name = "Tabs / Testing",
 				x = { "<cmd>tabclose<cr>", "Close Tab" },
 				n = { "<cmd>tabn<cr>", "Next tab" },
 				p = { "<cmd>tabp<cr>", "Previous tab" },
+				m = { "<cmd>lua require('neotest').run.run()<cr>", "Run" },
+				M = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Run with DAP" },
+				f = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>", "Run File" },
+				F = {
+					"<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>",
+					"Run File with DAP",
+				},
+				s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
+				w = { "<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>", "Watch" },
 			},
 			r = {
 				name = "Refactoring",
 				r = { "<cmd>lua require('refactoring').refactor('Rename')<cr>", "Rename" },
-				v = { "<cmd>lua require('refactoring').refactor('Extract Variable')<cr>", "Extract Variable" },
-				s = { "<cmd>lua require('refactoring').refactor('Extract Selection')<cr>", "Extract Selection" },
-				f = { "<cmd>lua require('refactoring').refactor('Extract Function')<cr>", "Extract Table" },
-				b = { "<cmd>lua require('refactoring').refactor('Extract Block')<cr>", "Extract Table" },
+				e = { "<cmd>Refactor extract<cr>", "Extract" },
+				f = { "<cmd>Refactor extract_to_file<cr>", "Extract to file" },
+				v = { "<cmd>Refactor extract_var<cr>", "Extract Variable" },
+				i = { "<cmd>Refactor inline_var<cr>", "Extract inline var" },
+				l = { "<cmd>Refactor inline_func<cr>", "Extract inline function" },
+				b = { "<cmd>Refactor extract_block<cr>", "Extract Block" },
+				bf = { "<cmd>Refactor extract_block_to_file<cr>", "Extract Block to file" },
 			},
 			w = {
 				name = "Workspace LSP",
@@ -218,6 +233,24 @@ return {
 				d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document" },
 				q = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix" },
 				l = { "<cmd>TroubleToggle loclist<cr>", "Location List" },
+			},
+			c = {
+				name = "Crates Rust",
+				r = { "<cmd>lua require('crates').reload()<cmd>", "Reload" },
+				t = { "<cmd>lua require('crates').toggle()<cmd>", "Toggle" },
+				v = { "<cmd>lua require('crates').show_versions_popup()<cmd>", "Versions" },
+				f = { "<cmd>lua require('crates').show_features_popup()<cmd>", "Features" },
+				d = { "<cmd>lua require('crates').show_dependencies_popup()<cmd>", "Dependencies" },
+				u = { "<cmd>lua require('crates').update_crate()<cmd>", "Update Crate" },
+				U = { "<cmd>lua require('crates').update_all_crates()<cmd>", "Update All Crates" },
+				a = { "<cmd>lua require('crates').upgrade_crate()<cmd>", "Upgrade Crate" },
+				A = { "<cmd>lua require('crates').upgrade_all_crates()<cmd>", "Upgrade All Crates" },
+				e = { "<cmd>lua require('crates').expand_plain_crate_to_inline_table()<cmd>", "Expand Crate" },
+				E = { "<cmd>lua require('crates').extract_crate_into_table()<cmd>", "Extract Crate" },
+				H = { "<cmd>lua require('crates').open_homepage()<cmd>", "Open Homepage" },
+				R = { "<cmd>lua require('crates').open_repository()<cmd>", "Open Repository" },
+				D = { "<cmd>lua require('crates').open_documentation()<cmd>", "Open Documentation" },
+				C = { "<cmd>lua require('crates').open_crates_io()<cmd>", "Open Crates.io" },
 			},
 		}
 		local vmappings = {

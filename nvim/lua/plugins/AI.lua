@@ -58,10 +58,20 @@ local opts = {
 return {
 	--use("github/copilot.vim")        --AI completion
 	{
-  	"zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    enabled = true,
-    opts = opts,
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		enabled = true,
+		opts = opts,
 	},
+	-- {
+	-- 	"Exafunction/codeium.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"hrsh7th/nvim-cmp",
+	-- 	},
+	-- 	config = function()
+	-- 		require("codeium").setup({})
+	-- 	end,
+	-- },
 }

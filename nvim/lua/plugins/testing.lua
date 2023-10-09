@@ -1,29 +1,18 @@
 -- keymaps
 vim.api.nvim_set_keymap("n", "<leader>dm", [[:lua require"neotest".run.run()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>dM",
-	[[:lua require"neotest".run.run({strategy = "dap"})<CR>]],
+vim.api.nvim_set_keymap( "n", "<leader>dM", [[:lua require"neotest".run.run({strategy = "dap"})<CR>]],
 	{ noremap = true }
 )
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>df",
-	[[:lua require"neotest".run.run({vim.fn.expand("%")})<CR>]],
+vim.api.nvim_set_keymap( "n", "<leader>df", [[:lua require"neotest".run.run({vim.fn.expand("%")})<CR>]],
 	{ noremap = true }
 )
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>dF",
-	[[:lua require"neotest".run.run({vim.fn.expand("%"), strategy = "dap"})<CR>]],
+vim.api.nvim_set_keymap( "n", "<leader>dF", [[:lua require"neotest".run.run({vim.fn.expand("%"), strategy = "dap"})<CR>]],
 	{ noremap = true }
 )
 vim.api.nvim_set_keymap("n", "<leader>dS", [[:lua require"neotest".summary.toggle()<CR>]], { noremap = true })
-vim.api.nvim_set_keymap(
-	"n",
+vim.api.nvim_set_keymap( "n",
 	"<leader>tw",
-	"<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>",
-	{}
+	"<cmd>lua require('neotest').run.run({ jestCommand = 'jest --watch ' })<cr>", {}
 )
 
 return { --testing

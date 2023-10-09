@@ -24,6 +24,7 @@ local config = function()
 	cmp.setup({
 		sources = {
 			{ name = "nvim_lsp" },
+			-- { name = "codeium" },
 			{ name = "path" },
 			{ name = "luasnip" },
 			{ name = "vsnip" },

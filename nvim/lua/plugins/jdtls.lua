@@ -1,20 +1,12 @@
--- local java_cmds = vim.api.nvim_create_augroup("java_cmds", { clear = true })
-
--- vim.api.nvim_create_autocmd("FileType", {
--- 	group = java_cmds,
--- 	pattern = { "java" },
--- 	desc = "Setup jdtls",
--- 	callback = jdtls_setup,
--- })
-
 return {
 	{
 		"mfussenegger/nvim-jdtls",
 		-- dependencies = { "williamboman/mason-lspconfig.nvim" },
 		ft = { "java" },
 		event = "BufEnter *.java",
-		lazy = true,
+		lazy = false,
 		config = function()
+			local java_cmds = vim.api.nvim_create_augroup("java_cmds", { clear = true })
 			local cache_vars = {}
 			local root_files = {
 				".git",
@@ -214,13 +206,16 @@ return {
 					"java.base/java.lang=ALL-UNNAMED",
 
 					-- 💀
-					"-jar", path.launcher_jar,
+					"-jar",
+					path.launcher_jar,
 
 					-- 💀
-					"-configuration", path.platform_config,
+					"-configuration",
+					path.platform_config,
 
 					-- 💀
-					"-data", data_dir,
+					"-data",
+					data_dir,
 				}
 
 				local lsp_settings = {
@@ -306,7 +301,13 @@ return {
 					},
 				})
 			end
-			jdtls_setup()
+			-- jdtls_setup()
+			vim.api.nvim_create_autocmd("FileType", {
+				group = java_cmds,
+				pattern = { "java" },
+				desc = "Setup jdtls",
+				callback = jdtls_setup,
+			})
 		end,
 	},
 }

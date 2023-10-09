@@ -49,18 +49,18 @@ local refactorOpts = {
 }
 
 return {
-    {--auto detect indent
-        "tpope/vim-sleuth",
-        event = "BufReadPre",
-    },
-    {--surrounding text
-        "tpope/vim-surround",
-        event = "BufReadPre",
-    },
+	{ --auto detect indent
+		"tpope/vim-sleuth",
+		event = "BufReadPre",
+	},
+	{ --surrounding text
+		"tpope/vim-surround",
+		event = "BufReadPre",
+	},
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ --auto close html tags
 		"windwp/nvim-ts-autotag",
-		event = { "InsertEnter", "BufRead"},
+		event = { "InsertEnter", "BufRead" },
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
@@ -72,10 +72,17 @@ return {
 		config = function()
 			require("refactoring").setup()
 			local map = vim.api.nvim_set_keymap
-			local map_opts = { noremap = true, silent = true, expr = false }
-			map("v", "<leader>rr", ":lua require('refactoring').select_refactor()<CR>", map_opts)
-			map("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], map_opts)
-			map("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], map_opts)
+			vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+			vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
+
+			vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
+
+			vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+
+			vim.keymap.set("n", "<leader>rI", ":Refactor inline_func")
+
+			vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+			vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 		end,
 	},
 	{

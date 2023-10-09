@@ -31,42 +31,6 @@ autocmd("BufWinEnter", {
 })
 
 return {
-	{
-		"theprimeagen/git-worktree.nvim",
-		keys = {
-			{
-				"<leader>gt",
-				function()
-					require("telescope").extensions.git_worktree.git_worktrees()
-				end,
-			},
-			{
-				"<leader>gn",
-				function()
-					require("telescope").extensions.git_worktree.create_git_worktree()
-				end,
-			},
-		},
-		config = function()
-			require("git-worktree").setup({
-				change_directory_command = "cd", -- This is the default
-				update_on_change = true,
-				update_on_change_command = "e .",
-				clearjumps_on_change = true,
-				autopush = false,
-			})
-			require("telescope").load_extension("git_worktree")
-			local worktree = require("git-worktree")
-			local utils = require("utils")
-			worktree.on_tree_change(function(op, metadata)
-				if op == worktree.Operations.Switch then
-					utils.log("Switched from " .. metadata.prev_path .. " to " .. metadata.path, "Git Worktree")
-					utils.closeOtherBuffers()
-					vim.cmd("e")
-				end
-			end)
-		end,
-	},
 	{ --git
 		"tpope/vim-fugitive",
 		cmd = { "G", "Git" },

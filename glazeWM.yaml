@@ -20,7 +20,7 @@ bar:
   border_width: "2px"
   border_color: "gray"
   component_separator:
-      label: "   "
+    label: "   "
 
   padding: "4px 6px 4px 6px"
 
@@ -37,9 +37,12 @@ bar:
       margin: "1px 4px"
       padding: "1px 8px"
 
+    - type: "system tray"
+      label_expand_text: "<"
+      label_collapse_text: ">"
 
   components_center:
-# margin: "0 9px 0 10px"
+    # margin: "0 9px 0 10px"
     # - type: "window title"
 
     - type: "clock"
@@ -53,7 +56,6 @@ bar:
       time_formatting: "h:mm tt "
       padding: "0 8px"
   components_right:
-
     - type: "cpu"
       label: "CPU: {percent_usage}%"
       # How often this counter is refreshed.
@@ -189,7 +191,7 @@ keybindings:
 
   # Close focused window.
   - command: "close"
-    binding: "Alt+Shift+Q"
+    binding: "Alt+Q"
 
   # Kill GlazeWM process safely.
   - command: "exit wm"

@@ -148,12 +148,6 @@ return {
 					"Checkout commit(for current file)",
 				},
 				d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Git Diff" },
-
-				t = { "<cmd>lua require'telescope'.extensions.git_worktree.git_worktrees()<cr>", "Git Worktree" },
-				n = {
-					"<cmd>lua require'telescope'.extensions.git_worktree.create_git_worktrees()<cr>",
-					"Create Git Worktree",
-				},
 			},
 			l = {
 				name = "LSP",
@@ -205,7 +199,7 @@ return {
 					"Colorscheme with Preview",
 				},
 			},
-			l = {
+			[","] = {
 				name = "+logs",
 				d = {
 					"<cmd>lua require('lvim.core.terminal').toggle_log_view(require('lvim.core.log').get_path())<cr>",

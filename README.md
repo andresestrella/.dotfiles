@@ -1,10 +1,36 @@
 # .dotfiles
-*THIS README IS UNFINISHED*  
+*THIS README IS UNFINISHED AND MESSY*  
 WINDOWS 10X DEV WORKFLOW CONFIG FILES 
 
 
+If you plan on being a software developer for a long time, chances are you will spend a lot of your life using a computer. So why not learn to use a computer as efficiently as possible and hopefully get more done in less time.  
+
+On most tasks, using a mouse is slower than if you were to use a keyboard shortcut. First you have to move your hand off the keyboard onto your mouse, move around and click the UI to complete your task.  
+
+By going mouseless, you subscribe to the idea that the effort of learning a bunch of shortcuts and configuring your system (which could take a lot of time depending on how deep you get into it) is worth it for the small amount of time you save everytime you use a keyboard shortcut and that this small amount of time saved turns into a significant amount in the span of years. In my non scientific personal experience I would say pressing a shortcut saves me about ~2 seconds on average.  
+
+Going mouseless makes writing code more fun. At first, it makes coding feel like a puzzle game where you are trying to find the quickest way to write and edit your code and once the shortcuts are in your muscle memory you'll be using your computer at speeds never imagined before and you'll feel like a [wizard](https://www.youtube.com/shorts/cOgw1qFuJAA). Which leads to the last reason and truly the end goal: 
+
+makes you superior to others.
+[![r/vim - WHAT GIVES PEOPLE FEELINGS OF POWER MONEY STATUS USING VIM](https://preview.redd.it/sqipd5d2jc461.png?width=960&crop=smart&auto=webp&s=bb4c0d55da5f62003c589aed724d4cc70f491a33)](https://i.redd.it/sqipd5d2jc461.png)
+
+Why Windows?  
+If you start getting deep into developer experience, you would know that the best place to be is Linux, so why do I stay over at Windows? 
+The reason for me is native support for productive software (mainly Ableton) and games (although I don't play as much nowdays). I know I could dual boot operating systems or run compatability layers like Wine. But I haven't gone through the trouble of researching how to set everything up and I have a good enough computer to not care about all the resources Windows hogs up. 
+
 # Setting everything up
-First we need to install all the packages and programming languages. For this I use [WingetUI]() an amazing GUI for finding and managing packages from all sorts of windows package managers.
+First we need to install all the packages and programming languages. For this I use [WingetUI]() an amazing GUI for finding and managing packages from all sorts of windows package managers.  
+
+why use package managers? 
+specially on Windows the usual steps for installing anything is something like: looking up what you want to install > hope you find the official site and not some malicious source > navigate the site to find the download link > unzip what you downloaded or run an installer > Most installers let you select a directory to install to > done
+
+Uninstalling goes like this: 
+go to Apps and Features > browse and uninstall program
+Sometimes programs don't get listed here and you are left to remembering where the program was installed or maybe you have a shortcut in your Start Menu that can lead you to the install folder. In this folder you may or may not find an uninstall executable, if not, you just delete the entire folder and hope there aren't any dangling temp or logs folders left somewhere in your system.
+
+Package managers take all this headache away, installing and uninstalling programs is as simple as opening a terminal and running a single command.
+
+
 Edit `WingetUI-Packages.json` as you see fit, import it into WingetUI and install all the packages.
 
 Second, `powershell_installs.ps1` script that install a couple of powershell modules that enhance the experience of using the command line. Here I install:

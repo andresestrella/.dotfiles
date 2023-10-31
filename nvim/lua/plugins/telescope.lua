@@ -46,6 +46,10 @@ local config = function()
 		},
 		pickers = {
 			buffers = {
+				ignore_current_buffer = true,
+				sort_mru = true,
+				sort_lastused = true,
+				-- previewer = false,
 				mappings = {
 					i = {
 						["<c-d>"] = actions.delete_buffer + actions.move_to_top,
@@ -126,6 +130,18 @@ return {
 				-- uncomment if I want to use persistent history
 				-- enable_persistant_history = true,
 			})
+		end,
+	},
+	{ -- automatically close buffers that aren't used
+		"axkirillov/hbac.nvim",
+		dependencies = {
+			-- these are optional, add them, if you want the telescope module
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("hbac").setup()
 		end,
 	},
 }

@@ -1,4 +1,4 @@
-require('dressing').setup({
+local opts = {
   input = {
     -- Set to false to disable the vim.ui.input implementation
     enabled = true,
@@ -161,4 +161,10 @@ require('dressing').setup({
     -- see :help dressing_get_config
     get_config = nil,
   },
-})
+}
+
+return {
+		"stevearc/dressing.nvim", -- replaces default vim UI elements with telescope
+		event = "BufReadPre",
+		opts = opts,
+}

@@ -1,5 +1,6 @@
 [core]
 	editor = \"C:\\Users\\User\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe\" --wait
+	excludesFile = C:\\Users\\User\\.gitignore
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -19,3 +20,5 @@
 	directory = D:/WorkSpaces/Shared_repos/proyectofinal
 	directory = D:/WorkSpaces/Personal/Learning/api-territorio-rd
 	directory = D:/WorkSpaces/Git-repos/provincias_dominicanas
+	directory = D:/WorkSpaces/Work/Minnek/minnek-test
+	directory = D:/WorkSpaces/Work/Interviews/Noble/rps

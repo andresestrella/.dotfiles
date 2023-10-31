@@ -3,35 +3,20 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions":
     [
-	{
-	    "command": "scrollUp",
-	    "keys": "ctrl+alt+up"
-	},
-	{
-	    "command": "scrollDown",
-	    "keys": "ctrl+alt+down"
-	},
         {
             "command":
             {
-                "action": "copy",
-                "singleLine": false
-            }
+                "action": "scrollUp"
+            },
+            "keys": "ctrl+alt+u"
         },
         {
             "command":
             {
                 "action": "resizePane",
-                "direction": "up"
+                "direction": "down"
             },
-            "keys": "ctrl+shift+up"
-        },
-        {
-            "command": "paste"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
+            "keys": "ctrl+shift+down"
         },
         {
             "command":
@@ -42,12 +27,33 @@
             "keys": "ctrl+shift+left"
         },
         {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command":
+            {
+                "action": "scrollDown"
+            },
+            "keys": "ctrl+alt+d"
+        },
+        {
+            "command":
+            {
+                "action": "copy",
+                "singleLine": false
+            }
+        },
+        {
+            "command": "paste"
+        },
+        {
             "command":
             {
                 "action": "resizePane",
-                "direction": "down"
+                "direction": "up"
             },
-            "keys": "ctrl+shift+down"
+            "keys": "ctrl+shift+up"
         },
         {
             "command": "unbound",
@@ -110,13 +116,45 @@
             "keys": "alt+up"
         },
         {
+            "command": "unbound",
+            "keys": "ctrl+alt+down"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+alt+up"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+minus"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+plus"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+\\"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+d"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+w"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+t"
+        },
+        {
             "command":
             {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
             },
-            "keys": "ctrl+shift+\\"
+            "keys": "ctrl+alt+\\"
         },
         {
             "command":
@@ -140,7 +178,7 @@
                 "action": "splitPane",
                 "split": "down"
             },
-            "keys": "ctrl+shift+minus"
+            "keys": "ctrl+alt+x"
         },
         {
             "command":
@@ -156,7 +194,7 @@
                 "action": "splitPane",
                 "split": "right"
             },
-            "keys": "ctrl+shift+plus"
+            "keys": "ctrl+alt+s"
         },
         {
             "command":
@@ -175,14 +213,30 @@
             "keys": "ctrl+alt+l"
         },
         {
+            "command": "duplicateTab",
+            "keys": "ctrl+alt+shift+\\"
+        },
+        {
             "command":
             {
                 "action": "moveFocus",
                 "direction": "up"
             },
             "keys": "ctrl+alt+k"
+        },
+        {
+            "command": "closePane",
+            "keys": "ctrl+alt+w"
+        },
+        {
+            "command":
+            {
+                "action": "newTab"
+            },
+            "keys": "ctrl+alt+t"
         }
     ],
+    "alwaysShowTabs": true,
     "autoHideWindow": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
@@ -202,7 +256,7 @@
             "backgroundImageAlignment": "center",
             "backgroundImageOpacity": 0.15,
             "backgroundImageStretchMode": "uniformToFill",
-            "elevate": true,
+            "elevate": false,
             "font":
             {
                 "face": "JetBrainsMono Nerd Font"
@@ -459,7 +513,9 @@
         }
     ],
     "showTabsInTitlebar": true,
+    "showTerminalTitleInTitlebar": true,
     "startOnUserLogin": true,
+    "tabWidthMode": "equal",
     "themes":
     [
         {
@@ -504,5 +560,6 @@
                 "useMica": false
             }
         }
-    ]
+    ],
+    "useAcrylicInTabRow": false
 }

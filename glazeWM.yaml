@@ -109,6 +109,15 @@ window_rules:
   - command: "ignore"
     match_process_name: "Taskmgr"
 
+  - command: "ignore"
+    match_process_name: "SnippingTool"
+
+  # fix for screen snipping/snip and sketch/win+s screenshot key
+  - command: "ignore"
+    match_title: "Screen Snipping" # above fix
+  - command: "ignore"
+    match_process_name: "/ScreenSketch|ScreenClippingHost/" # my addition
+
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
     match_class_name: "#32770"

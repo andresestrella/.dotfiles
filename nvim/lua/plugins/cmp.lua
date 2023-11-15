@@ -33,7 +33,7 @@ local config = function()
 			{ name = "crates" },
 		},
 		preselect = cmp.PreselectMode.Item,
-		-- keyword_length = 2,
+		keyword_length = 2,
 		snippet = {
 			expand = function(args)
 				luasnip.lsp_expand(args.body)

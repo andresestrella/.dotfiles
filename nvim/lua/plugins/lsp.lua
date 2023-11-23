@@ -194,19 +194,19 @@ return {
 			-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 			-- pylsp edit default config to ignore some annoying warnings
-			lsp.configure("pylsp", {
-				settings = {
-					pylsp = {
-						plugins = {
-							pycodestyle = {
-								ignore = { "W391" },
-								maxLineLength = 150,
-								max_line_length = 160,
-							},
-						},
-					},
-				},
-			})
+			-- lsp.configure("pylsp", {
+			-- 	settings = {
+			-- 		pylsp = {
+			-- 			plugins = {
+			-- 				pycodestyle = {
+			-- 					ignore = { "W391" },
+			-- 					maxLineLength = 150,
+			-- 					max_line_length = 160,
+			-- 				},
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
 
 			-- require("lspconfig").lua_ls.setup(lsp.nvim_lua_ls())
 			-- require("lspconfig").svelte.setup({

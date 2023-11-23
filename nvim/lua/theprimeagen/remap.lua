@@ -2,6 +2,9 @@
 --exit insert mode with jk
 vim.keymap.set("i", "jk", "<ESC>")
 
+-- go to end of line with =
+vim.keymap.set("n", "=", "$")
+
 --clear search highlighting with <leader>nh
 vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
 

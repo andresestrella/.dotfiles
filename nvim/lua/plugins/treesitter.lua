@@ -5,6 +5,8 @@ return { --parse tree, syntax highlighting, folds, and more
 	event = "BufRead",
 	build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })
+		-- require("nvim-treesitter.install").compilers = { "zig" }
+		require("nvim-treesitter.install").prefer_git = false
 	end or ":TSUpdate",
 	dependencies = {
 		{
@@ -13,6 +15,8 @@ return { --parse tree, syntax highlighting, folds, and more
 		},
 	},
 	config = function()
+		-- require("nvim-treesitter.install").compilers = { "zig" }
+		require("nvim-treesitter.install").prefer_git = false
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all"
 			ensure_installed = { "javascript", "typescript", "c", "lua", "rust" },

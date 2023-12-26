@@ -85,18 +85,13 @@ return {
 			vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 		end,
 	},
-	{
-		"Wansmer/treesj",
-		keys = {
-			"<leader>m",
-			"<CMD>TSJToggle<CR>",
-			desc = "Toggle Treesitter Join",
-		},
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("treesj").setup({ --[[ your config ]]
-			})
-		end,
+	 {
+	  'Wansmer/treesj',
+	  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+	  config = function()
+		require('treesj').setup({--[[ your config ]]})
+		vim.keymap.set("n", "<leader>m", ":lua require('treesj').toggle()<cr>")
+	  end,
 	},
 	{ --commenting
 		"numToStr/Comment.nvim",

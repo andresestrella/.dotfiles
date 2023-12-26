@@ -4,6 +4,7 @@ vim.keymap.set("i", "jk", "<ESC>")
 
 -- go to end of line with =
 vim.keymap.set("n", "=", "$")
+vim.keymap.set("v", "=", "$")
 
 --clear search highlighting with <leader>nh
 vim.keymap.set("n", "<leader>nh", ":nohl<CR>")

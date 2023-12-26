@@ -30,7 +30,7 @@ return {
 			u = { "UndoTreeToggle<CR> ", "Undo tree" },
 			e = { ":Neotree toggle right<CR>", "File Tree toggle" },
 			b = { ":DapToggleBreakpoint <CR>", "Breakpoint Toggle" },
-			m = { "<CMD>:TSJToggle<CR>", "collapse/join toggle" },
+			m = { "<cmd>lua require('treesj').toggle()<CR>", "collapse/join toggle" },
 			-- leap mapping
 			h = { "<Plug>(leap-forward-till)", "Leap forward" },
 			H = { "<Plug>(leap-backward-till)", "Leap backward" },

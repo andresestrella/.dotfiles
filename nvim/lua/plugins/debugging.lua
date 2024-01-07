@@ -157,7 +157,7 @@ return { --debugging
 			--windows, installed by mason
 			require("dap-python").setup("~/AppData/Local/nvim-data/mason/packages/debugpy/venv/Scripts/python") --directly pass path to a python venv that has debugpy installed
 			--for linux:
-			--require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+			-- require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
 		end,
 		dependencies = {
 			"mfussenegger/nvim-dap",
@@ -168,8 +168,6 @@ return { --debugging
 		"microsoft/vscode-js-debug",
 		lazy = true,
 		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && move dist out",
-		--linux
-		-- build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
 	},
 }
 

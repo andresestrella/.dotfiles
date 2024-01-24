@@ -42,16 +42,7 @@
                         "PackageIdentifier": "Microsoft.VisualStudioCode"
                     },
                     {
-                        "PackageIdentifier": "Microsoft.VCRedist.2015+.x64"
-                    },
-                    {
-                        "PackageIdentifier": "Microsoft.OneDrive"
-                    },
-                    {
                         "PackageIdentifier": "DEVCOM.JetBrainsMonoNerdFont"
-                    },
-                    {
-                        "PackageIdentifier": "Google.GoogleDrive"
                     },
                     {
                         "PackageIdentifier": "Google.Chrome"

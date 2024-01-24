@@ -12,9 +12,9 @@ local opts = {
 	popup_border_style = "rounded",
 	filesystem = {
 		filtered_items = {
-			visible = true,
+			visible = false,
 			hide_dotfiles = false,
-			hide_gitignored = false,
+			hide_gitignored = true,
 			hide_by_name = {
 				"node_modules",
 			},
@@ -72,6 +72,12 @@ local opts = {
 				end
 			end,
 		},
+		fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+			["<down>"] = "move_cursor_down",
+			["<C-n>"] = "move_cursor_down",
+			["<up>"] = "move_cursor_up",
+			["<C-p>"] = "move_cursor_up",
+		},
 	},
 }
 
@@ -92,7 +98,7 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		keys = {
-			{ "<leader>e", ":Neotree filesystem toggle right<cr>" },
+			{ "<leader>e",  ":Neotree filesystem toggle right<cr>" },
 			{ "<leader>eb", ":Neotree buffers toggle right<cr>" },
 			{ "<leader>eg", ":Neotree git_status toggle right<cr>" },
 		},

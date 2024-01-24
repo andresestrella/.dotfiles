@@ -105,7 +105,7 @@ vim.keymap.set("v", ">", ">gv");
 vim.keymap.set("n", "<Tab>", "gt");
 vim.keymap.set("n", "<S-Tab>", "gT");
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>");
---vim.keymap.set("n", "<C-W>", ":tabclose<CR>");
+vim.keymap.set("n", "<C-w>t", ":bufdo tab split<CR>");
 vim.keymap.set("n", "<A-Left>", ":tabmove -<CR>");
 vim.keymap.set("n", "<A-Right>", ":tabmove +<CR>");
 

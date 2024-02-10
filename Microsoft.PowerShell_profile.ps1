@@ -42,7 +42,10 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory
 # Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 # Set-PsFzfOption -TabExpansion
 
-# bashlike functions for powershell
+
+
+
+############################################################################## bashlike commands for powershell
 function unzip ($file){
   echo("Extracting", $file, "to", $pwd)
   $fullFile = Get-ChildItem -Path $pwd -Filter .\cove.zip | ForEach-Object{$_.FullName}
@@ -68,3 +71,9 @@ function df {
 function export ($name, $value){
   set-item -force -path "env:$name" - value:$value;
 }
+
+
+############## this part requires WSL installed
+# The commands to import.
+# The commands to import.
+Import-WslCommand "awk", "emacs", "grep", "head", "less", "ls", "man", "sed", "seq", "ssh", "tail", "vim"

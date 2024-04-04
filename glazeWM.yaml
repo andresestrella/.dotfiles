@@ -87,10 +87,6 @@ bar:
       label_high: "🔊{volume_level}%"
       label_mute: "🔊{volume_level}%"
 
-    - type: "battery"
-      label_draining: "{battery_level}% remaining"
-      label_power_saver: "{battery_level}% (power saver)"
-      label_charging: "{battery_level}% (charging)"
 
 workspaces:
   - name: "1"

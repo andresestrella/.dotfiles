@@ -165,6 +165,6 @@ local opts = {
 
 return {
 		"stevearc/dressing.nvim", -- replaces default vim UI elements with telescope
-		event = "BufReadPre",
+		event = "BufReadPost",
 		opts = opts,
 }

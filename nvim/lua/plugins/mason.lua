@@ -13,7 +13,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		cmd = "Mason",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		opts = masonOpts,
 	},
 }

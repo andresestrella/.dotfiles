@@ -14,7 +14,7 @@ local handlers = {
 return {
 	"williamboman/mason-lspconfig.nvim",
 	-- opts = opts,
-	event = "BufReadPre",
+	event = "BufReadPost",
 	dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "VonHeikemen/lsp-zero.nvim" },
 	after = "williamboman/mason.nvim",
 	config = function()

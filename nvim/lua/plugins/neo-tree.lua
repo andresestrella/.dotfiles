@@ -4,7 +4,7 @@
 local opts = {
 	sources = { "filesystem" },
 	add_blank_line_at_top = false,
-	-- close_if_last_window = true,
+	close_if_last_window = true,
 	enable_git_status = true,
 	enable_diagnostics = true,
 	hide_root_node = false,
@@ -96,6 +96,7 @@ return {
 			"MunifTanjim/nui.nvim",
 			"s1n7ax/nvim-window-picker",
 			"nvim-tree/nvim-web-devicons",
+			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 		keys = {
 			{ "<leader>e",  ":Neotree filesystem toggle right<cr>" },

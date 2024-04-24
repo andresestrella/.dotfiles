@@ -51,11 +51,11 @@ local refactorOpts = {
 return {
 	{ --auto detect indent
 		"tpope/vim-sleuth",
-		event = "BufReadPre",
+		event = "BufReadPost",
 	},
 	{ --surrounding text
 		"tpope/vim-surround",
-		event = "BufReadPre",
+		event = "BufReadPost",
 	},
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ --auto close html tags
@@ -67,7 +67,7 @@ return {
 	},
 	{
 		"theprimeagen/refactoring.nvim",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		opts = refactorOpts,
 		config = function()
 			require("refactoring").setup()

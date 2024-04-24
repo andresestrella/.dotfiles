@@ -86,13 +86,13 @@ return {
 	},
 	{ --lsp for non lsp
 		"jose-elias-alvarez/null-ls.nvim",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		config = nullConfig,
 	},
 	{
 		"jay-babu/mason-null-ls.nvim",
 		opts = masonNullOpts,
-		event = "BufReadPre",
+		event = "BufReadPost",
 		dependencies = "williamboman/mason.nvim",
 	},
 	{

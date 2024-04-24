@@ -142,7 +142,7 @@ end
 return {
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",

@@ -12,7 +12,7 @@ local VSCODE_JS_DIR = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
 return { --debugging
 	{
 		"mfussenegger/nvim-dap",
-		event = "BufReadPre",
+		event = "BufRead",
 		dependencies = {
 			{ "jay-babu/mason-nvim-dap.nvim" },
 			--dap setup
@@ -67,13 +67,14 @@ return { --debugging
 			"mfussenegger/nvim-dap",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		event = "BufReadPre",
+		event = "BufRead",
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		-- config = true,
 		dependencies = {
 			"mfussenegger/nvim-dap",
+			"nvim-neotest/nvim-nio"
 		},
 		keys = {
 			{ "<leader>b", [[:DapToggleBreakpoint <CR>]] },

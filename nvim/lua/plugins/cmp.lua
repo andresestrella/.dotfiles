@@ -200,7 +200,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		config = config,
-		event = { "InsertEnter", "BufReadPre" },
+		event = { "InsertEnter", "BufReadPost" },
 		dependencies = {
 			-- "jiangmiao/auto-pairs", --auto pairs
 			"hrsh7th/cmp-nvim-lsp",

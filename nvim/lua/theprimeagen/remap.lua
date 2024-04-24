@@ -94,6 +94,9 @@ vim.keymap.set("n", "<C-w>S", ":split<CR>");
 vim.keymap.set("n", "<C-c>", ":close<CR>",
   {silent = true, noremap = true}
 );
+vim.keymap.set("n", "<C-q>", ":bd<CR>",
+  {silent = true, noremap = true}
+);
 --close buffer
 -- vim.keymap.set("n", "<C-c>", ":bd<CR>");
 

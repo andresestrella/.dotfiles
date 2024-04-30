@@ -214,16 +214,9 @@ return {
 			})
 		end,
 	},
-	{ -- automatically close buffers that aren't used
-		"axkirillov/hbac.nvim",
-		dependencies = {
-			-- these are optional, add them, if you want the telescope module
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("hbac").setup()
-		end,
-	},
+	{
+	  'axkirillov/hbac.nvim',
+	  config = true,
+	  event = 'VeryLazy',
+	}
 }

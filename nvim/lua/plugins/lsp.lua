@@ -54,6 +54,7 @@ local nullConfig = function()
 	local sources = {
 		-- d.eslint,
 		-- f.eslint,
+		-- f.clang_format,
 		d.eslint_d.with({ filetypes = { "svelte" } }), -- looks like this works how I inteded... instead of extra_filetypes...
 		-- f.eslint_d.with({ extre_filetypes = { "svelte" } }),
 		-- a.eslint_d,
@@ -164,11 +165,6 @@ return {
 			-- },
 			-- { "rafamadriz/friendly-snippets", after = "nvim-cmp" },
 		},
-		-- dependencies = {
-		-- 	-- LSP Support
-		-- 	"neovim/nvim-lspconfig",
-		-- 	"williamboman/mason.nvim",
-		-- },
 		config = function()
 			local lsp = require("lsp-zero").preset({})
 
@@ -190,7 +186,7 @@ return {
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 			end
 
-			--format on save
+			--auto format on save
 			-- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
 
 			-- pylsp edit default config to ignore some annoying warnings

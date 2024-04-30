@@ -53,11 +53,20 @@ return {
 		"tpope/vim-sleuth",
 		event = "BufReadPost",
 	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+		event = "BufReadPost",
+		config = function()
+			require("ibl").setup()
+		end,
+
+	},
 	{ --surrounding text
 		"tpope/vim-surround",
 		event = "BufReadPost",
 	},
-	{ "lukas-reineke/indent-blankline.nvim" },
 	{ --auto close html tags
 		"windwp/nvim-ts-autotag",
 		event = { "InsertEnter", "BufRead" },

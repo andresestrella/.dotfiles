@@ -24,7 +24,6 @@ return {
 			nowait = false, -- use `nowait` when creating keymaps
 		}
 		local mappings = {
-			-- ["<leader>"] = { "<cmd>WhichKey <leader><CR>", "WhichKey" },
 			-- [";"] = { "<cmd><cmd>"," Dashboard"},
 			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 			u = { "UndoTreeToggle<CR> ", "Undo tree" },

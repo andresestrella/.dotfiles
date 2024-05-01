@@ -51,7 +51,7 @@ local refactorOpts = {
 return {
 	{ --auto detect indent
 		"tpope/vim-sleuth",
-		event = "BufReadPost",
+		event = "BufReadPre",
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",

@@ -16,7 +16,6 @@ return {
 	-- opts = opts,
 	event = "BufReadPost",
 	dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "VonHeikemen/lsp-zero.nvim" },
-	after = "williamboman/mason.nvim",
 	config = function()
 		local lsp_zero = require("lsp-zero")
 		-- require('mason').setup({})

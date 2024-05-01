@@ -216,7 +216,6 @@ return {
 						paths = { "~/.config/nvim/snippets/" },
 					})
 				end,
-				after = "nvim-cmp",
 			},
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",

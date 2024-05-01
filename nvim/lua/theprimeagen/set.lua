@@ -12,14 +12,14 @@ vim.opt.relativenumber = true
 -- set timeoutlen to 200 ms
 vim.opt.timeoutlen = 300
 
---tabs
-vim.opt.showtabline = 4 -- always show tabs
-vim.opt.tabstop = 4 -- insert 4 spaces for a tab
-vim.opt.softtabstop = 4 -- change number of space characters inserted for indentation
-vim.opt.shiftwidth = 4 -- change the number of space characters inserted for indentation
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.smarttab = true -- makes tabbing smarter will realize you have 4 vs 4
-vim.opt.smartindent = true
+--tabs I installed vim sleuth for this!
+-- vim.opt.showtabline = 4 -- always show tabs
+-- vim.opt.tabstop = 4 -- insert 4 spaces for a tab
+-- vim.opt.softtabstop = 4 -- change number of space characters inserted for indentation
+-- vim.opt.shiftwidth = 4 -- change the number of space characters inserted for indentation
+-- vim.opt.expandtab = true -- convert tabs to spaces
+-- vim.opt.smarttab = true -- makes tabbing smarter will realize you have 4 vs 4
+-- vim.opt.smartindent = true
 
 vim.opt.wrap = false
 
@@ -50,8 +50,14 @@ vim.g.netrw_winsize = 25
 local opt = vim.opt
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
--- opt.foldlevel = 99
+
+-- vim.opt.foldmethod = "indent"
+
+-- opt.foldmethod = "syntax"
+-- opt.foldnestmax = 1
+
 opt.foldenable = false
+opt.foldlevel = 99
 --open all fold on startup
 -- autocmd("BufReadPost", {
 --   pattern = "*.*",
@@ -59,3 +65,6 @@ opt.foldenable = false
 --     vim.cmd("normal! zR")
 --   end,
 -- })
+
+vim.opt.fillchars = { fold = " " }
+vim.g.markdown_folding = 1 -- enable markdown folding

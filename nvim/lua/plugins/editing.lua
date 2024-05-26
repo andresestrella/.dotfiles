@@ -61,7 +61,6 @@ return {
 		config = function()
 			require("ibl").setup()
 		end,
-
 	},
 	{ --surrounding text
 		"tpope/vim-surround",
@@ -73,6 +72,20 @@ return {
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,
+	},
+	{
+		"jiangmiao/auto-pairs", --auto pairs
+		-- "windwp/nvim-autopairs",
+		-- opts = opts,
+		event = "InsertEnter",
+		config = function()
+			vim.cmd([[ let g:AutoPairsShortcutToggle = '' ]])
+		end,
+		-- config = function()
+		-- 	require("nvim-autopairs").setup({
+		-- 		vim.cmd([[ let g:AutoPairsShortcutToggle = '' ]]),
+		-- 	})
+		-- end,
 	},
 	{
 		"theprimeagen/refactoring.nvim",
@@ -94,13 +107,14 @@ return {
 			vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
 		end,
 	},
-	 {
-	  'Wansmer/treesj',
-	  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-	  config = function()
-		require('treesj').setup({--[[ your config ]]})
-		vim.keymap.set("n", "<leader>m", ":lua require('treesj').toggle()<cr>")
-	  end,
+	{
+		"Wansmer/treesj",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		config = function()
+			require("treesj").setup({--[[ your config ]]
+			})
+			vim.keymap.set("n", "<leader>m", ":lua require('treesj').toggle()<cr>")
+		end,
 	},
 	{ --commenting
 		"numToStr/Comment.nvim",

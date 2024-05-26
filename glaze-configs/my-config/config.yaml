@@ -1,0 +1,412 @@
+# Colors
+define: &COLOR_MAIN '#8a80ee'
+define: &COLOR_MAIN_DARK '#615aa7'
+define: &COLOR_INACTIVE '#9f9dba'
+define: &WHITE '#fefefe'
+define: &BAR_BACKGROUND '#131313D9'
+
+# Font & Sizes
+define: &FONT_FAMILY 'Cascadia Code'
+define: &WORKSPACE_FONT_SIZE '12px'
+define: &GAP_SIZE '10px'
+define: &FLOATING_WINDOW_AMOUNT '100%'
+define: &RESIZE_WINDOW_AMOUNT '12.5%'
+
+# Bar Configuration
+define: &BAR_HEIGHT '26px'
+define: &BAR_OPACITY '1.0'
+define: &BAR_FONT_SIZE '12px'
+define: &BAR_PADDING '0 12px'
+define: &DATE_FORMAT 'd MMMM HH:mm:ss'
+
+# Network & System Usage Labels
+define: &LOCAL_IP_TEXT '192.168.178.64'
+define: &USAGE_TEXT '{percent_usage}%'
+define: &VOLUME_NO_ICON '{volume_level}%'
+define: &SONG_LABEL '{song_title} - {artist_name}  |  '
+define: &SEPERATOR_TEXT  '  |  '
+define: &COMPONENT_REFRESH_INTERVAL '1000'
+
+# Images
+define: &IMG_1 'C:\\Users\\andre\\.glaze-wm\\images\\1.png'
+define: &IMG_2 'C:\\Users\\andre\\.glaze-wm\\images\\2.png'
+define: &IMG_3 'C:\\Users\\andre\\.glaze-wm\\images\\3.png'
+define: &IMG_4 'C:\\Users\\andre\\.glaze-wm\\images\\4.png'
+define: &IMAGE_MARGIN '6px 3px 0 0'
+
+# Window Management Rules
+define: &MV_WorkSpace_1 '(BlackDesert64|BlackDesertPatcher32.pae)'
+define: &MV_WorkSpace_2 '(Notion)'
+define: &MV_WorkSpace_3 '(steamwebhelper|EADesktop|glaalt)'
+define: &MV_WorkSpace_4 '(Spotify)'
+define: &MV_WorkSpace_8 '(DiscordPTB)'
+define: &MV_WorkSpace_9 '(librewolf)'
+
+define: &RS_GAP '(steamwebhelper|EADesktop|LauncherPatcher|Photoshop|alacritty)'
+define: &SET_TILE '(SonsOfTheForest|GenshinImpact|bf4|osu!|ForzaHorizon5|GTA5)'
+define: &SET_FLOAT '(KeePassXC|Higurashi_When_They_Cry-Hashiru|Taskmgr)'
+define: &SET_FLOAT_UWP '(Rechner)' # For Universal Windows Apps. You may have to change this, since these are the german titles.
+define: &SET_MIN '(unlockfps|glaalt)'
+
+# general settings
+gaps:
+  inner_gap: *GAP_SIZE
+  outer_gap: *GAP_SIZE
+
+general:
+  focus_follows_cursor: false
+  cursor_follows_focus: true
+  center_new_floating_windows: false
+  show_floating_on_top: false
+  # show_floating_on_top: true
+  floating_window_move_amount: *FLOATING_WINDOW_AMOUNT
+  toggle_workspace_on_refocus: true
+  window_animations: false
+
+# Bar Settings
+bar:
+  height: *BAR_HEIGHT
+  position: 'top'
+  opacity: *BAR_OPACITY
+  background: *BAR_BACKGROUND
+  foreground: *WHITE
+  font_family: *FONT_FAMILY
+  font_size: *BAR_FONT_SIZE
+  font_weight: '400'
+  padding: *BAR_PADDING
+  offset_x: *GAP_SIZE
+  offset_y: *GAP_SIZE
+
+  # Not using this, because of colored Text inside bar.
+  # component_separator:
+  #   label: " | "
+
+  components_left:
+    - type: 'image'
+      source: *IMG_1
+      margin: *IMAGE_MARGIN
+    - type: 'image'
+      source: *IMG_2
+      margin: *IMAGE_MARGIN
+    - type: 'image'
+      source: *IMG_3
+      margin: *IMAGE_MARGIN
+    - type: 'image'
+      source: *IMG_4
+      margin: *IMAGE_MARGIN
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'workspaces'
+      focused_workspace_background: *COLOR_MAIN_DARK
+      focused_workspace_foreground: *WHITE
+      displayed_workspace_background: 'transparent'
+      displayed_workspace_foreground: *WHITE
+      default_workspace_background: 'transparent'
+      default_workspace_foreground: *WHITE
+      font_family: *FONT_FAMILY
+      font_size: *WORKSPACE_FONT_SIZE
+      padding: '0px'
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+    - type: 'music'
+      label_not_playing: ''
+      label_paused: ''
+      label_playing: *SONG_LABEL
+      max_title_length: 20
+      max_artist_length: 20
+    - type: 'window title'
+
+
+  components_right:
+    - type: 'system tray'
+      label_expand_text: ''
+      label_collapse_text: ''
+      padding: '8px 0px'
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'text'
+      text: 'VOL '
+      foreground: *COLOR_MAIN
+    - type: 'volume'
+      label_low: *VOLUME_NO_ICON
+      label_medium: *VOLUME_NO_ICON
+      label_high: *VOLUME_NO_ICON
+      label_mute: *VOLUME_NO_ICON
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'text'
+      text: 'CPU '
+      foreground: *COLOR_MAIN
+    - type: 'cpu'
+      label: *USAGE_TEXT
+      refresh_interval_ms: *COMPONENT_REFRESH_INTERVAL
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'text'
+      text: 'GPU '
+      foreground: *COLOR_MAIN
+    - type: 'gpu'
+      label: *USAGE_TEXT
+      refresh_interval_ms: *COMPONENT_REFRESH_INTERVAL
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'text'
+      text: 'RAM '
+      foreground: *COLOR_MAIN
+    - type: 'memory'
+      label: *USAGE_TEXT
+      refresh_interval_ms: *COMPONENT_REFRESH_INTERVAL
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'text'
+      text: 'eth0 '
+      foreground: *COLOR_MAIN
+    - type: 'text'
+      text: *LOCAL_IP_TEXT
+
+    - type: 'text'
+      text: *SEPERATOR_TEXT
+
+    - type: 'clock'
+      time_formatting: *DATE_FORMAT
+
+
+workspaces:
+  - name: "1"
+    bind_to_monitor: 1
+    keep_alive: true
+  - name: "2"
+    bind_to_monitor: 1
+    keep_alive: true
+  - name: "3"
+  - name: "4"
+  - name: "5"
+  - name: "6"
+  - name: "7"
+  - name: "8"
+  - name: "9"
+
+window_rules:
+    # Fixing gaps when titlebar padding was removed
+  - command: 'resize borders 0px -6px -6px -6px'
+    match_process_name: '.*'
+
+  - command: 'resize borders 0px -7px -7px -7px'
+    match_process_name: *RS_GAP
+
+  # Task Manager requires admin privileges to manage and should be ignored unless running
+  # the WM as admin.
+  - command: "ignore"
+    match_process_name: "/Taskmgr|ScreenClippingHost/"
+
+  # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
+  - command: "set floating"
+    match_class_name: "#32770"
+
+  # Set the file explorer to float upon startup
+  - command: "set floating"
+    match_process_name: "explorer"
+
+  - command: "ignore"
+    match_process_name: "Flow.Launcher"
+
+  # ignore picture in picture in chromium/chrome(not test) browsers such as operagx
+  - command: "ignore"
+    match_title: "[Pp]icture.in.[Pp]icture"
+    match_class_name: "Chrome_WidgetWin_1"
+
+  #claculator
+  - command: "set floating"
+    match_class_name: "ApplicationFrameWindow"
+
+  # Some applications (eg. Steam) have borders that extend past the normal border size.
+  - command: "resize borders 0px -7px -7px -7px"
+    match_process_name: "steam"
+
+  # AVG
+  - command: "set floating"
+    match_class_name: "AvastCefWindow"
+
+  # Bluestacks
+  - command: "ignore"
+    match_class_name: "Qt5154QWindowOwnDCIcon"
+
+binding_modes:
+  - name: "resize"
+    keybindings:
+      # Resize focused window by a percentage or pixel amount.
+      - command: "resize width -4%"
+        bindings: ["H", "Left"]
+      - command: "resize width +4%"
+        bindings: ["L", "Right"]
+      - command: "resize height +4%"
+        bindings: ["K", "Up"]
+      - command: "resize height -4%"
+        bindings: ["J", "Down"]
+      # Press enter/escape to return to default keybindings.
+      - command: "binding mode none"
+        bindings: ["Escape", "Enter"]
+
+keybindings:
+  # Shift focus in a given direction.
+  - command: "focus left"
+    bindings: ["Alt+H", "Alt+Left"]
+  - command: "focus right"
+    bindings: ["Alt+L", "Alt+Right"]
+  - command: "focus up"
+    bindings: ["Alt+K", "Alt+Up"]
+  - command: "focus down"
+    bindings: ["Alt+J", "Alt+Down"]
+
+  # Move focused window in a given direction.
+  - command: "move left"
+    bindings: ["Alt+Shift+H", "Alt+Shift+Left"]
+  - command: "move right"
+    bindings: ["Alt+Shift+L", "Alt+Shift+Right"]
+  - command: "move up"
+    bindings: ["Alt+Shift+K", "Alt+Shift+Up"]
+  - command: "move down"
+    bindings: ["Alt+Shift+J", "Alt+Shift+Down"]
+
+  # Resize focused window by a percentage or pixel amount.
+  - command: "resize width -4%"
+    binding: "Alt+OemMinus"
+  - command: "resize width +4%"
+    binding: "Alt+Oemplus"
+  - command: "resize height +4%"
+    binding: "Alt+Shift+Oemplus"
+  - command: "resize height -4%"
+    binding: "Alt+Shift+OemMinus"
+
+  # As an alternative to the resize keybindings above, resize mode enables resizing via
+  # HJKL or arrow keys. The binding mode is defined above with the name "resize".
+  # - command: "binding mode resize"
+  #   binding: "Alt+R"
+
+  # Change tiling direction. This determines where new tiling windows will be inserted.
+  - command: "tiling direction toggle"
+    binding: "Alt+V"
+
+  # Change focus between floating / tiling windows.
+  - command: "focus mode toggle"
+    binding: "Alt+F"
+
+  # Change the focused window to be floating / tiling.
+  - command: "toggle floating"
+    binding: "Alt+Shift+F"
+
+  # Change the focused window to be maximized / unmaximized.
+  - command: "toggle maximized"
+    binding: "Alt+X"
+
+  # Minimize focused window.
+  - command: "set minimized"
+    binding: "Alt+M"
+
+  # Close focused window.
+  - command: "close"
+    binding: "Alt+Q"
+
+  # Kill GlazeWM process safely.
+  - command: "exit wm"
+    binding: "Alt+Shift+E"
+
+  # Re-evaluate configuration file.
+  - command: "reload config"
+    binding: "Alt+Shift+R"
+
+  # Kill GlazeWM process safely.
+  - command: "exit wm"
+    binding: "Alt+Shift+E"
+
+  # Kill GlazeWM process safely.
+  - command: "exit wm"
+    binding: "Alt+Shift+E"
+
+  # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
+  # to start Windows Terminal and Git Bash respectively.
+  - command: "exec wt"
+    binding: "Alt+Enter"
+
+  - command: "exec firefox"
+    binding: "Alt+B"
+
+  # Focus the workspace that last had focus.
+  # - command: "focus workspace recent"
+  #   binding: "Alt+Y"
+
+  # Focus the next/previous workspace defined in `workspaces` config.
+  - command: "focus workspace next"
+    binding: "Alt+N"
+  - command: "focus workspace prev"
+    binding: "Alt+P"
+
+  # Change focus to a workspace defined in `workspaces` config.
+  - command: "focus workspace 1"
+    binding: "Alt+1"
+  - command: "focus workspace 2"
+    binding: "Alt+2"
+  - command: "focus workspace 3"
+    binding: "Alt+3"
+  - command: "focus workspace 4"
+    binding: "Alt+4"
+  - command: "focus workspace 5"
+    binding: "Alt+5"
+  - command: "focus workspace 6"
+    binding: "Alt+6"
+  - command: "focus workspace 7"
+    binding: "Alt+7"
+  - command: "focus workspace 8"
+    binding: "Alt+8"
+  - command: "focus workspace 9"
+    binding: "Alt+9"
+
+  # Move focused workspace to a monitor in a given direction.
+  - command: "move workspace left"
+    binding: "Alt+Shift+A"
+  - command: "move workspace right"
+    binding: "Alt+Shift+F"
+  - command: "move workspace up"
+    binding: "Alt+Shift+D"
+  - command: "move workspace down"
+    binding: "Alt+Shift+S"
+
+  # Move focused window to a workspace defined in `workspaces` config.
+  - commands: ["move to workspace 1", "focus workspace 1"]
+    binding: "Alt+Shift+1"
+  - commands: ["move to workspace 2", "focus workspace 2"]
+    binding: "Alt+Shift+2"
+  - commands: ["move to workspace 3", "focus workspace 3"]
+    binding: "Alt+Shift+3"
+  - commands: ["move to workspace 4", "focus workspace 4"]
+    binding: "Alt+Shift+4"
+  - commands: ["move to workspace 5", "focus workspace 5"]
+    binding: "Alt+Shift+5"
+  - commands: ["move to workspace 6", "focus workspace 6"]
+    binding: "Alt+Shift+6"
+  - commands: ["move to workspace 7", "focus workspace 7"]
+    binding: "Alt+Shift+7"
+  - commands: ["move to workspace 8", "focus workspace 8"]
+    binding: "Alt+Shift+8"
+  - commands: ["move to workspace 9", "focus workspace 9"]
+    bindings: ["Alt+Shift+9"]
+
+  # Launch Taskmanager
+  - command: 'exec Taskmgr'
+    binding: 'Alt+Escape'
+
+  # Launch RunDeleteTitlebar.lnk to hide cmd
+  - command: 'exec C:\Users\andre\.glaze-wm\scripts\RunDeleteTitlebar'
+    binding: 'Alt+Ctrl+Space'

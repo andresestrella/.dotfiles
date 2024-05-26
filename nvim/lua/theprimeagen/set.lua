@@ -1,16 +1,13 @@
 -- set encoding to UTF-8
 vim.opt.encoding = "UTF-8"
---set the terminal's encoding
-vim.opt.termencoding = "UTF-8"
---set the character encoding for files
-vim.opt.fileencoding = "UTF-8"
+vim.opt.termencoding = "UTF-8" --set the terminal's encoding
+vim.opt.fileencoding = "UTF-8" --set the character encoding for files
 vim.opt.fileencodings = "UTF-8"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
--- set timeoutlen to 200 ms
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 300 -- 200
 
 --tabs I installed vim sleuth for this!
 -- vim.opt.showtabline = 4 -- always show tabs

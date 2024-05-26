@@ -214,7 +214,7 @@ return {
 			})
 		end,
 	},
-	{
+	{ -- auto close buffers https://github.com/axkirillov/hbac.nvim
 	  'axkirillov/hbac.nvim',
 	  config = true,
 	  event = 'VeryLazy',

@@ -96,6 +96,17 @@ return {
 		event = "BufReadPost",
 		dependencies = "williamboman/mason.nvim",
 	},
+	{ -- lsp file operations, like rename, move, etc
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-neo-tree/neo-tree.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+		lazy = false,
+		config = function()
+			require("lsp-file-operations").setup()
+		end,
+	},
 	{
 		"saecki/crates.nvim",
 		tag = "v0.4.0",

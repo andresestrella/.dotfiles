@@ -1,6 +1,6 @@
 -- set encoding to UTF-8
 vim.opt.encoding = "UTF-8"
-vim.opt.termencoding = "UTF-8" --set the terminal's encoding
+--vim.opt.termencoding = "UTF-8" --set the terminal's encoding
 vim.opt.fileencoding = "UTF-8" --set the character encoding for files
 vim.opt.fileencodings = "UTF-8"
 

@@ -5,7 +5,7 @@
 --vim.g.gruvbox_material_background = "medium" -- hard, medium, soft, none
 --vim.cmd.colorscheme("gruvbox-material")
 return {
-	{ -- theme
+	{
 		"sainnhe/gruvbox-material",
 		lazy = false,
 		priority = 1000,
@@ -15,17 +15,17 @@ return {
 			vim.cmd.colorscheme("gruvbox-material")
 		end,
 	},
-	{ --theme
-		"catppuccin/nvim",
-		name = "catppuccin",
-	},
-	{
-		"rebelot/kanagawa.nvim",
-		-- lazy= false,
-		config = function()
-			vim.cmd("colorscheme kanagawa")
-			-- vim.cmd("colorscheme kanagawa-dragon")
-			-- vim.cmd("colorscheme kanagawa-wave")
-		end
-	}
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- },
+	-- {
+	-- 	"rebelot/kanagawa.nvim",
+	-- 	-- lazy= false,
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme kanagawa")
+	-- 		-- vim.cmd("colorscheme kanagawa-dragon")
+	-- 		-- vim.cmd("colorscheme kanagawa-wave")
+	-- 	end
+	-- }
 }

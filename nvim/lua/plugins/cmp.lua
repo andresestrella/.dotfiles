@@ -11,9 +11,9 @@
 local config = function()
 	local cmp = require("cmp")
 	local cmp_action = require("lsp-zero").cmp_action()
-	local lspkind = require("lspkind")
+	-- local lspkind = require("lspkind")
 	local luasnip = require("luasnip")
-	local cmp_tailwind = require("tailwindcss-colorizer-cmp")
+	-- local cmp_tailwind = require("tailwindcss-colorizer-cmp")
 	-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 	-- local cmp_is_enabled = require("util.cmp").cmp_is_enabled
 	-- local cmp_ai = require("cmp_ai.config")
@@ -30,7 +30,7 @@ local config = function()
 			{ name = "vsnip" },
 			{ name = "nvim_lsp_signature_help" },
 			{ name = "buffer", keyword_length = 4 },
-			{ name = "crates" },
+			-- { name = "crates" },
 		},
 		preselect = cmp.PreselectMode.Item,
 		keyword_length = 2,
@@ -66,78 +66,17 @@ local config = function()
 				{ "i" }
 			),
 		}),
-		-- sources = cmp.config.sources({
-		-- 	{
-		-- 		name = "luasnip",
-		-- 		group_index = 1,
-		-- 		option = { use_show_condition = true },
-		-- 		entry_filter = function()
-		-- 			local context = require("cmp.config.context")
-		-- 			return not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
-		-- 		end,
-		-- 	},
-		-- 	{
-		-- 		name = "nvim_lsp",
-		-- 		group_index = 2,
-		-- 	},
-		-- 	{
-		-- 		name = "codeium",
-		-- 		group_index = 2,
-		-- 	},
-		-- 	{
-		-- 		name = "nvim_lua",
-		-- 		group_index = 3,
-		-- 	},
-		-- 	{
-		-- 		name = "crates",
-		-- 		group_index = 3,
-		-- 	},
-		-- 	{
-		-- 		name = "treesitter",
-		-- 		keyword_length = 4,
-		-- 		group_index = 4,
-		-- 	},
-		-- 	{
-		-- 		name = "path",
-		-- 		keyword_length = 4,
-		-- 		group_index = 4,
-		-- 	},
-		-- 	{
-		-- 		name = "buffer",
-		-- 		keyword_length = 3,
-		-- 		group_index = 5,
-		-- 		option = {
-		-- 			get_bufnrs = function()
-		-- 				local bufs = {}
-		-- 				for _, win in ipairs(vim.api.nvim_list_wins()) do
-		-- 					bufs[vim.api.nvim_win_get_buf(win)] = true
-		-- 				end
-		-- 				return vim.tbl_keys(bufs)
-		-- 			end,
-		-- 		},
-		-- 	},
-		-- 	{
-		-- 		name = "emoji",
-		-- 		keyword_length = 2,
-		-- 		group_index = 6,
-		-- 	},
-		-- 	{
-		-- 		name = "nerdfont",
-		-- 		keyword_length = 2,
-		-- 		group_index = 6,
-		-- 	},
-		-- }),
 		formatting = {
-			format = lspkind.cmp_format({
-				mode = "symbol_text",
-				-- maxwidth = 50,
-				ellipsis_char = "...",
-				before = function(entry, vim_item)
-					cmp_tailwind.formatter(entry, vim_item)
-					return vim_item
-				end,
-				-- menu = source_mapping,
-			}),
+			-- format = lspkind.cmp_format({
+			-- 	mode = "symbol_text",
+			-- 	-- maxwidth = 50,
+			-- 	ellipsis_char = "...",
+			-- 	before = function(entry, vim_item)
+			-- 		-- cmp_tailwind.formatter(entry, vim_item)
+			-- 		return vim_item
+			-- 	end,
+			-- 	-- menu = source_mapping,
+			-- }),
 		},
 		sorting = {
 			priority_weight = 2,
@@ -202,10 +141,10 @@ return {
 		config = config,
 		event = { "InsertEnter", "BufReadPost" },
 		dependencies = {
-			-- "jiangmiao/auto-pairs", --auto pairs
 			"hrsh7th/cmp-nvim-lsp",
 			"L3MON4D3/LuaSnip", -- Snippet engine
-			"roobert/tailwindcss-colorizer-cmp.nvim",
+			-- "jiangmiao/auto-pairs", --auto pairs
+			-- "roobert/tailwindcss-colorizer-cmp.nvim",
 			{
 				"rafamadriz/friendly-snippets",
 				-- dependencies = "L3MON4D3/LuaSnip",

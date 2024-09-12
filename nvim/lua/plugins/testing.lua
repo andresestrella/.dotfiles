@@ -16,13 +16,13 @@ vim.api.nvim_set_keymap( "n",
 )
 
 return { --testing
-	{
-		"vim-test/vim-test",
-	},
+	-- {
+	-- 	"vim-test/vim-test",
+	-- },
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
-			"antoinemadec/FixCursorHold.nvim",
+			-- "antoinemadec/FixCursorHold.nvim", -- might not be needed anymore
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-jest",
 		},

@@ -139,13 +139,6 @@ return {
 			})
 		end,
 	},
-	{ --marks visualizer
-		"chentoast/marks.nvim",
-		opts = marksOpts,
-		-- config = function()
-		-- 	require("marks").setup({})
-		-- end,
-	},
 	{ -- greet screen
 		"goolord/alpha-nvim",
 		event = "VimEnter",

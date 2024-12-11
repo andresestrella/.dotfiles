@@ -10,13 +10,13 @@ local masonDapOpts = {
 	ensure_installed = {
 		-- "bash",
 		-- "chrome",
-		"python",
-		"codelldb",
-		"coreclr",
+		-- "python",
+		-- "codelldb",
+		-- "coreclr",
 		-- "cppdbg",
 		-- "javadbg",
 		-- "javatest",
-		"js",
+		-- "js",
 	},
 	automatic_installation = true,
 	handlers = {},
@@ -71,7 +71,6 @@ local handlers = function()
 			--command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
 			-- command = os.getenv("HOME") .. "/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
 			command = CODELLDB_DIR, -- windows, installed with mason
-			--command = "C:/User/User/AppData/Local/nvim-data/mason/packages/codelldb/extension/adapter/codelldb", -- windows, installed with mason
 			-- command = (function()
 			--         return os.getenv("HOME") ..
 			--             "/AppData/Local/nvim-data/mason/packages/codelldb/extension/lldb/bin/lldb"

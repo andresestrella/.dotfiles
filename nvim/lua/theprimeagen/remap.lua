@@ -96,6 +96,11 @@ vim.keymap.set("n", "<C-c>", ":close<CR>",
 vim.keymap.set("n", "<C-q>", ":bd<CR>",
   {silent = true, noremap = true}
 );
+
+
+-- buffers
+vim.keymap.set("n", "gb", ":pop<CR>"); -- or use <C-O>
+
 --close buffer
 -- vim.keymap.set("n", "<C-c>", ":bd<CR>");
 

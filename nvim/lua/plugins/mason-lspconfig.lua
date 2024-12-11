@@ -19,16 +19,16 @@ return {
 		-- require('mason').setup({})
 		require("mason-lspconfig").setup({
 			ensure_installed = {
-				"tsserver",
-				"cssls",
-				"cssmodules_ls",
+				-- "tsserver",
+				-- "cssls",
+				-- "cssmodules_ls",
 				"docker_compose_language_service",
 				"dockerls",
 				"html",
 				"jsonls",
-				"marksman",
-				"sqlls",
-				"yamlls",
+				-- "marksman",
+				-- "sqlls",
+				-- "yamlls",
 				-- "diagnosticls",
 				-- "jedi_language_server",
 				-- "tailwindcss",

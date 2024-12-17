@@ -93,6 +93,9 @@ return {
 		    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", nowait = false, remap = true, silent = false },
 		    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", nowait = false, remap = true, silent = false },
 		    { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Git Diff", nowait = false, remap = true, silent = false },
+		    { "gr", ":Trouble lsp_references toggle<cr>", desc = "LSP References", },
+		    -- { "gr", ":Trouble lsp toggle<cr>", desc = "LSP Definitions / references / ... (Trouble)", },
+		    { "<leader>gr", ":Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP References", },
 		    { "<leader>gh", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk", nowait = false, remap = true, silent = false },
 		    { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", desc = "Next Hunk", nowait = false, remap = true, silent = false },
 		    { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", desc = "Prev Hunk", nowait = false, remap = true, silent = false },
@@ -160,11 +163,12 @@ return {
 		    { "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>", desc = "Remove Folder", nowait = false, remap = true, silent = false },
 		    { "<leader>ws", "<cmd>lua vim.lsp.buf.workspace_symbol()<cr>", desc = "Workspace Symbol", nowait = false, remap = true, silent = false },
 		    { "<leader>x", group = "Trouble", nowait = false, remap = true, silent = false },
-		    { "<leader>xa", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", desc = "Workspace", nowait = false, remap = true, silent = false },
-		    { "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", desc = "Document", nowait = false, remap = true, silent = false },
-		    { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Location List", nowait = false, remap = true, silent = false },
-		    { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix", nowait = false, remap = true, silent = false },
-		    { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Trouble", nowait = false, remap = true, silent = false },
+			{ "<leader>x", ":Trouble diagnostics toggle filter.buf=0<CR>", desc = "Togle trouble document diagnostics" },
+			{ "<leader>xx", ":Trouble diagnostics toggle<CR>", desc = "Toggle trouble diagnostics" },
+			{ "<leader>xa", ":Trouble diagnostics toggle<CR>", desc = "Toggle trouble diagnostics" },
+			{ "<leader>xt", ":Trouble todo toggle<CR>", desc = "Toggle trouble todos list" },
+			{ "<leader>xq", ":Trouble quickfix toggle<CR>", desc = "Toggle trouble quickfix list" },
+			{ "<leader>xl", ":Trouble loclist toggle<CR>", desc = "Toggle trouble location list" },
 		}
 
 		local vmappings =  {

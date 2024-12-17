@@ -84,6 +84,11 @@ vim.keymap.set("n", "<C-Up>", ":resize -4<CR>");
 vim.keymap.set("n", "<C-Down>", ":resize +4<CR>");
 vim.keymap.set("n", "<C-Left>", ":vertical resize +6<CR>");
 vim.keymap.set("n", "<C-Right>", ":vertical resize -6<CR>");
+vim.keymap.set("n", "<D-Up>", ":resize -4<CR>")
+vim.keymap.set("n", "<D-Down>", ":resize +4<CR>")
+vim.keymap.set("n", "<D-Left>", ":vertical resize +6<CR>")
+vim.keymap.set("n", "<D-Right>", ":vertical resize -6<CR>")
+
 --window splitting
 vim.keymap.set("n", "<A-s>", ":split<CR>");
 vim.keymap.set("n", "<C-s>", ":vsplit<CR>");

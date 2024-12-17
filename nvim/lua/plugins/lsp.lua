@@ -33,7 +33,7 @@
 
 local masonNullOpts = {
 	automatic_installation = true,
-	ensure_installed = { "prettier", "eslint_d" },
+	ensure_installed = { "prettierd", "eslint_d" },
 	automatic_setup = true,
 	handlers = {},
 }

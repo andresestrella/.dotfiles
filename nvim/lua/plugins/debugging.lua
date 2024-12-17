@@ -6,8 +6,6 @@ vim.fn.sign_define("DapLogPoint", { text = "📝", texthl = "", linehl = "", num
 
 -- local VSCODE_JS_DIR = "~/AppData/Local/nvim-data/lazy/vscode-js-debug"
 local VSCODE_JS_DIR = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
--- local NODE_DIR = require('mason-registry').get_package('node-debug2-adapter'):get_install_path() .. '/out/src/nodeDebug.js'
--- local VSCODE_JS_DIR = require("mason-registry").get_package("js-debug-adapter"):get_install_path() .. "/js-debug"
 
 return { --debugging
 	{
@@ -130,9 +128,7 @@ return { --debugging
 		ft = { "javascript", "typescript", "typescriptreact", "svelte", "javascriptreact" },
 		config = function()
 			require("dap-vscode-js").setup({
-				-- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
 				debugger_path = VSCODE_JS_DIR, -- Path to vscode-js-debug installation.
-				-- debugger_cmd = { "extension" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
 				adapters = {
 					"chrome",
 					"pwa-node",
@@ -168,9 +164,11 @@ return { --debugging
 	{ -- vscode's js dbug adapter
 		"microsoft/vscode-js-debug",
 		lazy = true,
-		build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && move dist out",
-		--linux
-		-- build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+		build = function()
+			local is_win = vim.loop.os_uname().version:match("Windows")
+			local move_cmd = is_win and "move dist out" or "mv dist out"
+			os.execute("npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && " .. move_cmd)
+		end,
 	},
 }
 
@@ -215,7 +213,6 @@ return { --debugging
 -- 	}
 -- 	require("mason-nvim-dap").default_setup(config)
 -- end,
-
 
 
 -- vim.api.nvim_set_keymap('n', '<Leader>db', [[:lua require"dapui".float_element("breakpoints", {position = "nil", enter = true})<CR>]], { noremap = true })

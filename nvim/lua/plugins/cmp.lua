@@ -47,8 +47,8 @@ local config = function()
 			entries = { name = "custom", selection_order = "near_cursor" },
 		},
 		mapping = cmp.mapping.preset.insert({
-			["C-j"] = cmp.mapping.select_next_item(),
-			["C-k"] = cmp.mapping.select_prev_item(),
+			["<C-j>"] = cmp.mapping.select_next_item(),
+			["<C-k>"] = cmp.mapping.select_prev_item(),
 			["C-n"] = cmp_action.luasnip_jump_forward(),
 			["C-p"] = cmp_action.luasnip_jump_backward(),
 			["<C-b>"] = cmp.mapping.scroll_docs(-5),
@@ -99,14 +99,6 @@ local config = function()
 			ghost_text = false,
 		},
 	})
-
-	-- remaps to jump around snippet placeholders
-	local keymap = vim.api.nvim_set_keymap
-	local opts = { noremap = true, silent = true }
-	-- keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
-	keymap("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
-	-- keymap("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
-	keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
 
 	local cmp_select = { behavior = cmp.SelectBehavior.Select }
 

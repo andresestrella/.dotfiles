@@ -1,49 +1,9 @@
--- specifying to use null-ls for formatting
--- local lsp_formatting = function(bufnr)
--- 	vim.lsp.buf.format({
--- 		filter = function(client)
--- 			-- apply whatever logic you want (in this example, we'll only use null-ls)
--- 			return client.name == "null-ls"
--- 		end,
--- 		bufnr = bufnr,
--- 	})
--- end
---
--- if I use eslint-lsp, I can use this
--- require("lspconfig").eslint.setup({
--- 	-...
--- 	on_attach = function(client, bufnr)
--- 		vim.api.nvim_create_autocmd("BufWritePre", {
--- 			buffer = bufnr,
--- 			command = "EslintFixAll",
--- 		})
--- 	end,
--- })
-
--- local kindConfig = function()
--- 	require("lspkind").init({
--- 		mode = "symbol_text",
--- 		preset = "default",
--- 		symbol_map = {
--- 			Copilot = "",
--- 			Codeium = "",
--- 		},
--- 	})
--- end
-
 local masonNullOpts = {
 	automatic_installation = true,
 	ensure_installed = { "prettierd", "eslint_d" },
 	automatic_setup = true,
 	handlers = {},
 }
-
--- local cratesOpts = {
--- 	null_ls = {
--- 		enabled = true,
--- 		name = "crates.nvim",
--- 	},
--- }
 
 local nullConfig = function()
 	local null_ls = require("null-ls")
@@ -55,7 +15,7 @@ local nullConfig = function()
 		-- d.eslint,
 		-- f.eslint,
 		-- f.clang_format,
-		d.eslint_d.with({ filetypes = { "svelte" } }), -- looks like this works how I inteded... instead of extra_filetypes...
+		d.eslint_d.with({ filetypes = { "svelte" } }),
 		-- f.eslint_d.with({ extre_filetypes = { "svelte" } }),
 		-- a.eslint_d,
 		-- f.prettier,
@@ -77,14 +37,6 @@ local nullConfig = function()
 end
 
 return {
-	{ -- lsp icons, doesn't supply extra info
-		-- "onsails/lspkind-nvim",
-		-- event = "InsertEnter",
-		-- dependencies = {
-		-- 	"hrsh7th/nvim-cmp",
-		-- },
-		-- config = kindConfig,
-	},
 	{ --lsp for non lsp
 		"jose-elias-alvarez/null-ls.nvim",
 		event = "BufReadPost",
@@ -106,48 +58,6 @@ return {
 		config = function()
 			require("lsp-file-operations").setup()
 		end,
-	},
-	{
-		-- "saecki/crates.nvim",
-		-- tag = "v0.4.0",
-		-- ft = { "toml" },
-		-- dependencies = { "nvim-lua/plenary.nvim" },
-		-- event = { "BufRead Cargo.toml" },
-		-- opts = cratesOpts,
-		-- config = function()
-		-- 	local crates = require("crates")
-		-- 	crates.setup({
-		-- 		src = {
-		-- 			cmp = {
-		-- 				enabled = true,
-		-- 			},
-		-- 		},
-		-- 	})
-
-		-- 	local opts = { silent = true }
-		-- 	--keymaps
-		-- 	vim.keymap.set("n", "<leader>ct", crates.toggle, opts)
-		-- 	vim.keymap.set("n", "<leader>cr", crates.reload, opts)
-
-		-- 	vim.keymap.set("n", "<leader>cv", crates.show_versions_popup, opts)
-		-- 	vim.keymap.set("n", "<leader>cf", crates.show_features_popup, opts)
-		-- 	vim.keymap.set("n", "<leader>cd", crates.show_dependencies_popup, opts)
-
-		-- 	vim.keymap.set("n", "<leader>cu", crates.update_crate, opts)
-		-- 	vim.keymap.set("v", "<leader>cu", crates.update_crates, opts)
-		-- 	vim.keymap.set("n", "<leader>ca", crates.update_all_crates, opts)
-		-- 	vim.keymap.set("n", "<leader>cU", crates.upgrade_crate, opts)
-		-- 	vim.keymap.set("v", "<leader>cU", crates.upgrade_crates, opts)
-		-- 	vim.keymap.set("n", "<leader>cA", crates.upgrade_all_crates, opts)
-
-		-- 	vim.keymap.set("n", "<leader>ce", crates.expand_plain_crate_to_inline_table, opts)
-		-- 	vim.keymap.set("n", "<leader>cE", crates.extract_crate_into_table, opts)
-
-		-- 	vim.keymap.set("n", "<leader>cH", crates.open_homepage, opts)
-		-- 	vim.keymap.set("n", "<leader>cR", crates.open_repository, opts)
-		-- 	vim.keymap.set("n", "<leader>cD", crates.open_documentation, opts)
-		-- 	vim.keymap.set("n", "<leader>cC", crates.open_crates_io, opts)
-		-- end,
 	},
 	{ --lsp all in one
 		"VonHeikemen/lsp-zero.nvim",
@@ -231,18 +141,9 @@ return {
 			-- require("luasnip").filetype_extend("htmldjango", { "html" })
 
 			-- show diagnostics in virtual text
-			vim.diagnostic.config({
-				virtual_text = true,
-			})
+			vim.diagnostic.config({ virtual_text = true })
 
 			lsp.on_attach(function(client, bufnr)
-				--comment this out to enable eslint
-				-- if client.name == "eslint" then
-				-- 	vim.cmd([[ LspStop eslint ]])
-				-- 	return
-				-- end
-				-- if client.name ==
-
 				--keymaps
 				lsp.default_keymaps({ buffer = bufnr })
 

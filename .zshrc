@@ -1,3 +1,9 @@
+# Source pre-oh-my-zsh configurations
+[ -f "$HOME/.zshrc.pre-oh-my-zsh" ] && source "$HOME/.zshrc.pre-oh-my-zsh"
+
+# alias to rebase current branch with updated main branch
+alias update-branch="git checkout main && git pull && git checkout - && git rebase main && git push -f"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -5,7 +11,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion (optional)
 
-export GITHUB_TOKEN="token here"
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
@@ -63,7 +68,6 @@ ZSH_THEME="robbyrussell" # 'random'
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git z zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

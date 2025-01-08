@@ -156,10 +156,12 @@ return {
 			math.randomseed(os.time())
 
 			dashboard.section.buttons.val = {
-				dashboard.button("SPC s l", "󰘁 Open last session", "<cmd>SessionManager load_last_session<CR>"),
+				dashboard.button("SPC s l", "󰘁 Open last session",
+					"<cmd>SessionManager load_last_session<CR>"),
 				dashboard.button("SPC s s", "󱃐 Open sessions", "<cmd>SessionManager load_session<CR>"),
 				dashboard.button("a", "  New file", ":ene <BAR> startinsert <CR>"),
-				dashboard.button("SPC f f", "󰈞 Find file", ":Telescope find_files hidden=true no_ignore=true<CR>"),
+				dashboard.button("SPC f f", "󰈞 Find file",
+					":Telescope find_files hidden=true no_ignore=true<CR>"),
 				dashboard.button("SPC f h", "󰷊 Recently opened files", "<cmd>Telescope oldfiles<CR>"),
 				-- dashboard.button("SPC f r", "  Frecency/MRU"),
 				dashboard.button("SPC f g", "  Find word", "<cmd>Telescope live_grep<cr>"),
@@ -272,7 +274,8 @@ return {
 			local total_plugins = require("lazy").stats().count
 			local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
 			local version = vim.version()
-			local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+			local nvim_version_info = "   v" ..
+			    version.major .. "." .. version.minor .. "." .. version.patch
 			local footer = datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
 			--
 			dashboard.section.footer.val = footer
@@ -281,6 +284,47 @@ return {
 			dashboard.section.footer.opts.hl = "Constant"
 			alpha.setup(dashboard.config)
 			vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
+
+
+			-- Set working directory to project root after loading a session
+			local Path = require('plenary.path')
+			-- Function to set the working directory to the project root
+			local function set_project_root()
+				local root_patterns = { 'package.json', 'tsconfig.json', '.git' }
+				local cwd = vim.loop.cwd()
+
+				-- Traverse upward to find a root marker
+				for _, pattern in ipairs(root_patterns) do
+					local dir = Path:new(cwd):find_upwards(pattern)
+					if dir then
+						vim.cmd('cd ' .. dir)
+						print('Project root set to:', dir)
+						return
+					end
+				end
+
+				-- If no marker is found, fall back to the current working directory
+				vim.cmd('cd ' .. cwd)
+				print('No root marker found. Using current directory:', cwd)
+			end
+
+			-- Hook into `SessionLoadPost` to override the session's working directory
+			vim.api.nvim_create_autocmd('User', {
+				pattern = 'SessionLoadPost',
+				callback = function()
+					-- Set the project root after the session is loaded
+					set_project_root()
+
+					-- Optionally restart LSP clients to use the updated root directory
+					vim.defer_fn(function()
+						for _, client in pairs(vim.lsp.get_active_clients()) do
+							client.stop()
+						end
+						vim.cmd('LspStart')
+						print('LSP restarted with new project root.')
+					end, 100) -- Delay to ensure LSP clients are ready
+				end,
+			})
 		end,
 	},
 }

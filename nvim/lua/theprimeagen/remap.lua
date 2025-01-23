@@ -46,9 +46,6 @@ vim.keymap.set("x", "<leader>p", [["_dP]]) -- paste over selected text without y
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- copy current file path to clipboard
-vim.keymap.set("n", "<leader>yp", [[:let @*=expand('%:p')<CR>]])
-
 --maps leader d to delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
@@ -87,10 +84,11 @@ vim.keymap.set("n", "<C-Up>", ":resize -4<CR>");
 vim.keymap.set("n", "<C-Down>", ":resize +4<CR>");
 vim.keymap.set("n", "<C-Left>", ":vertical resize +6<CR>");
 vim.keymap.set("n", "<C-Right>", ":vertical resize -6<CR>");
-vim.keymap.set("n", "<D-Up>", ":resize -4<CR>")
-vim.keymap.set("n", "<D-Down>", ":resize +4<CR>")
-vim.keymap.set("n", "<D-Left>", ":vertical resize +6<CR>")
-vim.keymap.set("n", "<D-Right>", ":vertical resize -6<CR>")
+-- Resize windows with cmd + shift + hjkl
+vim.keymap.set('n', '<C-S-h>', ':vertical resize -6<CR>', { desc = 'Decrease window width (left)' })
+vim.keymap.set('n', '<C-S-l>', ':vertical resize +6<CR>', { desc = 'Increase window width (right)' })
+vim.keymap.set('n', '<C-S-k>', ':resize +6<CR>', { desc = 'Increase window height (up)' })
+vim.keymap.set('n', '<C-S-j>', ':resize -6<CR>', { desc = 'Decrease window height (down)' })
 
 --window splitting
 vim.keymap.set("n", "<A-s>", ":split<CR>");

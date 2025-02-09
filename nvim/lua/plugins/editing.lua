@@ -69,6 +69,7 @@ return {
 	{ --auto close html tags
 		"windwp/nvim-ts-autotag",
 		event = { "InsertEnter", "BufRead" },
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("nvim-ts-autotag").setup()
 		end,

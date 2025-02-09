@@ -19,17 +19,14 @@ return { --parse tree, syntax highlighting, folds, and more
 		require("nvim-treesitter.install").prefer_git = true
 		require("nvim-treesitter.configs").setup({
 			-- A list of parser names, or "all"
-			ensure_installed = { "javascript", "lua" },
+			ensure_installed = { "javascript", "lua", "html" },
 
 			-- Install parsers synchronously (only applied to `ensure_installed`)
-			sync_install = false,
+			sync_install = true,
 
 			-- Automatically install missing parsers when entering buffer
 			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 			auto_install = true,
-			autotag = {
-				enable = true,
-			},
 			textobjects = {
 				select = {
 					enable = true,

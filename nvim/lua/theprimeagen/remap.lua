@@ -46,6 +46,9 @@ vim.keymap.set("x", "<leader>p", [["_dP]]) -- paste over selected text without y
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
+-- yank current file path
+vim.keymap.set("n", "<leader>yp", [[:let @+ = expand("%")<CR>]])
+
 --maps leader d to delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 

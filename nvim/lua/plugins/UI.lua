@@ -142,7 +142,7 @@ return {
 	{ -- greet screen
 		"goolord/alpha-nvim",
 		event = "VimEnter",
-		dependencies = { "Shatur/neovim-session-manager", "stevearc/dressing.nvim" },
+		dependencies = { "Shatur/neovim-session-manager", "stevearc/dressing.nvim", "nvim-lua/plenary.nvim" },
 		config = function()
 			local is_status_ok, alpha = pcall(require, "alpha")
 
@@ -156,15 +156,15 @@ return {
 			math.randomseed(os.time())
 
 			dashboard.section.buttons.val = {
-				dashboard.button("SPC s l", "󰘁 Open last session",
+				dashboard.button("l", "󰘁 Open last session",
 					"<cmd>SessionManager load_last_session<CR>"),
-				dashboard.button("SPC s s", "󱃐 Open sessions", "<cmd>SessionManager load_session<CR>"),
+				dashboard.button("s", "󱃐 Open sessions", "<cmd>SessionManager load_session<CR>"),
 				dashboard.button("a", "  New file", ":ene <BAR> startinsert <CR>"),
-				dashboard.button("SPC f f", "󰈞 Find file",
+				dashboard.button("f", "󰈞 Find file",
 					":Telescope find_files hidden=true no_ignore=true<CR>"),
-				dashboard.button("SPC f h", "󰷊 Recently opened files", "<cmd>Telescope oldfiles<CR>"),
+				dashboard.button("r", "󰷊 Recently opened files", "<cmd>Telescope oldfiles<CR>"),
 				-- dashboard.button("SPC f r", "  Frecency/MRU"),
-				dashboard.button("SPC f g", "  Find word", "<cmd>Telescope live_grep<cr>"),
+				dashboard.button("w", "  Find word", "<cmd>Telescope live_grep<cr>"),
 				-- dashboard.button("SPC f m", "  Jump to bookmarks"),
 				dashboard.button("q", "󰩈  Quit NVIM", ":qa<CR>"),
 			}
@@ -256,31 +256,13 @@ return {
 
 			dashboard.section.header.val = Headers[math.random(#Headers)]
 
-			-- local Quotes = {
-			-- 	{},
-			-- }
-			-- local footer = {
-			-- 	type = "text",
-			-- 	-- Change 'rdn' to any program that gives you a random quote.
-			-- 	-- https://github.com/BeyondMagic/scripts/blob/master/quotes/rdn
-			-- 	-- Which returns one to three lines, being each divided by a line break.
-			-- 	-- Or just an array: { "I see you:", "Above you." }
-			-- 	val = split(capture("quote")),
-			-- 	opts = {
-			-- 		position = "center",
-			-- 		hl = "Number",
-			-- 	},
-			-- }
 			local total_plugins = require("lazy").stats().count
 			local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
 			local version = vim.version()
 			local nvim_version_info = "   v" ..
 			    version.major .. "." .. version.minor .. "." .. version.patch
 			local footer = datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
-			--
 			dashboard.section.footer.val = footer
-			-- dashboard.section.footer.val = split(capture("quote"))
-			-- dashboard.section.footer.val = Quotes[math.random(#Quotes)]
 			dashboard.section.footer.opts.hl = "Constant"
 			alpha.setup(dashboard.config)
 			vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])

@@ -29,7 +29,7 @@ local config = function()
 			{ name = "luasnip" },
 			{ name = "vsnip" },
 			{ name = "nvim_lsp_signature_help" },
-			{ name = "buffer", keyword_length = 4 },
+			{ name = "buffer",                 keyword_length = 4 },
 			-- { name = "crates" },
 		},
 		preselect = cmp.PreselectMode.Item,
@@ -134,12 +134,15 @@ return {
 		event = { "InsertEnter", "BufReadPost" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
-			"L3MON4D3/LuaSnip", -- Snippet engine
-			-- "jiangmiao/auto-pairs", --auto pairs
-			-- "roobert/tailwindcss-colorizer-cmp.nvim",
+			{
+				"L3MON4D3/LuaSnip",
+				-- follow latest release.
+				version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+				-- install jsregexp (optional!).
+				build = "make install_jsregexp"
+			},
 			{
 				"rafamadriz/friendly-snippets",
-				-- dependencies = "L3MON4D3/LuaSnip",
 				lazy = true,
 				config = function()
 					require("luasnip.loaders.from_vscode").lazy_load()
@@ -156,13 +159,6 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-vsnip",
 			"hrsh7th/vim-vsnip",
-			-- "hrsh7th/cmp-emoji",
-			-- "chrisgrieser/cmp-nerdfont",
-			-- {
-			-- "tzachar/cmp-ai",
-			-- dependencies = "nvim-lua/plenary.nvim",
-			-- },
-			-- "jcdickinson/codeium.nvim",
 		},
 	},
 }

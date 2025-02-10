@@ -2,8 +2,6 @@
 local config = function()
 	local telescope = require("telescope")
 	local actions = require("telescope.actions")
-	require("telescope").load_extension("neoclip")
-	require("telescope").load_extension("macroscope")
 	require("telescope").setup({
 		defaults = {
 			prompt_prefix = "> ",
@@ -80,7 +78,6 @@ local config = function()
 
 					["<C-n>"] = actions.cycle_history_next,
 					["<C-p>"] = actions.cycle_history_prev,
-
 					["<c-j>"] = actions.move_selection_next,
 					["<c-k>"] = actions.move_selection_previous,
 
@@ -114,30 +111,29 @@ local config = function()
 			},
 		},
 		pickers = {
-			-- marks = {
-			-- 	ignore_current_buffer = true,
-			-- 	sort_mru = true,
-			-- 	sort_lastused = true,
-			-- 	mappings = {
-			-- 		i = {
-			-- 			["<c-x>"] = actions.delete_mark + actions.move_to_top,
-			-- 		},
-			-- 		n = {
-			-- 			["x"] = actions.delete_mark + actions.move_to_top,
-			-- 		},
-			-- 	},
-			-- },
+			marks = {
+				ignore_current_buffer = true,
+				sort_mru = true,
+				sort_lastused = true,
+				-- mappings = {
+				-- 	i = {
+				-- 		["<c-x>"] = actions.delete_mark + actions.move_to_top,
+				-- 	},
+				-- 	n = {
+				-- 		["x"] = actions.delete_mark + actions.move_to_top,
+				-- 	},
+				-- },
+			},
 			buffers = {
 				ignore_current_buffer = true,
 				sort_mru = true,
 				sort_lastused = true,
-				-- previewer = false,
 				mappings = {
 					i = {
-						["<c-x>"] = actions.delete_buffer + actions.move_to_top,
+						["<c-d>"] = actions.delete_buffer + actions.move_to_top,
 					},
 					n = {
-						["x"] = actions.delete_buffer + actions.move_to_top,
+						["<c-d>"] = actions.delete_buffer + actions.move_to_top,
 					},
 				},
 			},
@@ -167,9 +163,8 @@ local config = function()
 		},
 	})
 	local extensions = {
-		"neoclip",
-		"macroscope",
 		"harpoon",
+		"fzf",
 		-- "ui-select",
 		-- "lazy",
 	}
@@ -181,10 +176,12 @@ end
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "0.1.2",
-		-- or, branch = '0.1.1',
+		version = "0.1.8",
 		config = config,
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+		},
 		cmd = "Telescope",
 		keys = {
 			{ "?",          ":Telescope current_buffer_fuzzy_find<CR>" },
@@ -200,23 +197,20 @@ return {
 			},
 			{ "<leader>fd", ":Telescope live_grep <CR>" },
 			{ "<leader>fh", ":Telescope help_tags <CR>" },
-			{ "<leader>fp", ":Telescope neoclip <CR>" },
-			{ "<leader>fq", ":Telescope macroscope <CR>" },
 			{ "<leader>fb", ":Telescope buffers <CR>" },
 		},
 	},
-	{ --neoclip
-		"AckslD/nvim-neoclip.lua",
+	{ --:Telescope frecency
+		"nvim-telescope/telescope-frecency.nvim",
+		-- install the latest stable version
+		version = "*",
 		config = function()
-			require("neoclip").setup({
-				-- uncomment if I want to use persistent history
-				-- enable_persistant_history = true,
-			})
+			require("telescope").load_extension "frecency"
 		end,
 	},
 	{ -- auto close buffers https://github.com/axkirillov/hbac.nvim
-	  'axkirillov/hbac.nvim',
-	  config = true,
-	  event = 'VeryLazy',
+		'axkirillov/hbac.nvim',
+		config = true,
+		event = 'VeryLazy',
 	}
 }

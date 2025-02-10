@@ -1,6 +1,3 @@
---open neo tree
--- require("neo-tree").setup({
--- })
 local opts = {
 	sources = { "filesystem" },
 	add_blank_line_at_top = false,

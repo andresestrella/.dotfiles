@@ -163,10 +163,7 @@ local config = function()
 		},
 	})
 	local extensions = {
-		"harpoon",
 		"fzf",
-		-- "ui-select",
-		-- "lazy",
 	}
 	for e in ipairs(extensions) do
 		telescope.load_extension(extensions[e])

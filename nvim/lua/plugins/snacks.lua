@@ -56,7 +56,6 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
-		---@type snacks.Config
 		opts = {
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
@@ -65,6 +64,12 @@ return {
 			quickfile = { enabled = true },
 			indent = { enabled = true },
 			words = { enabled = true },
+			input = { enabled = true },
+			terminal = {
+				win = {
+					position = "float",
+				},
+			},
 
 			dashboard = {
 				enabled = false,
@@ -74,13 +79,16 @@ return {
 			},
 
 			rename = { enabled = false }, --tested this one didn't work, couldn't replace nvim-lsp-file-operations
-			input = { enabled = false },
 			picker = { enabled = false },
 			explorer = { enabled = false },
 			notifier = { enabled = false },
 			scope = { enabled = false },
 			scroll = { enabled = false },
 			statuscolumn = { enabled = false },
+		},
+		keys = {
+			{ "<A-t>", "<cmd>lua Snacks.terminal.toggle()<cr>", desc = "Toggle terminal", mode = { "n", "t" } },
+			-- { "<A-t>", "1<cmd>lua Snacks.terminal.toggle()<cr>", desc = "Toggle terminal 1", mode = { "n", "t" } },
 		},
 	}
 }

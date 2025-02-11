@@ -1,37 +1,3 @@
-local marksOpts = {
-	-- whether to map keybinds or not. default true
-	default_mappings = true,
-	-- which builtin marks to show. default {}
-	builtin_marks = { ".", "<", ">", "^" },
-	-- whether movements cycle back to the beginning/end of buffer. default true
-	cyclic = true,
-	-- whether the shada file is updated after modifying uppercase marks. default false
-	force_write_shada = false,
-	-- how often (in ms) to redraw signs/recompute mark positions.
-	-- higher values will have better performance but may cause visual lag,
-	-- while lower values may cause performance penalties. default 150.
-	refresh_interval = 250,
-	-- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-	-- marks, and bookmarks.
-	-- can be either a table with all/none of the keys, or a single number, in which case
-	-- the priority applies to all marks.
-	-- default 10.
-	sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
-	-- disables mark tracking for specific filetypes. default {}
-	excluded_filetypes = {},
-	-- marks.nvim allows you to configure up to 10 bookmark groups, each with its own
-	-- sign/virttext. Bookmarks can be used to group together positions and quickly move
-	-- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
-	-- default virt_text is "".
-	bookmark_0 = {
-		sign = "⚑",
-		virt_text = "hello world",
-		-- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
-		-- defaults to false.
-		annotate = false,
-	},
-	mappings = {},
-}
 local iconsOpts = {
 	-- your personnal icons can go here (to override)
 	-- you can specify color or cterm_color instead of specifying both of them
@@ -142,7 +108,7 @@ return {
 	{ -- greet screen
 		"goolord/alpha-nvim",
 		event = "VimEnter",
-		dependencies = { "Shatur/neovim-session-manager", "stevearc/dressing.nvim", "nvim-lua/plenary.nvim" },
+		dependencies = { "Shatur/neovim-session-manager", "nvim-lua/plenary.nvim" },
 		config = function()
 			local is_status_ok, alpha = pcall(require, "alpha")
 
@@ -211,7 +177,6 @@ return {
 					"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
 					"                                                     ",
 				},
-
 				{
 					[[ ██▒   █▓  ██████     ▄████▄   ▒█████  ▓█████▄ ▓█████ ]],
 					[[▓██░   █▒▒██    ▒   ▒██▀  ▀█  ▒██▒  ██▒▒██▀ ██▌▓█   ▀ ]],
@@ -223,17 +188,6 @@ return {
 					[[     ░░  ░  ░  ░     ░        ░ ░ ░ ▒   ░ ░  ░    ░   ]],
 					[[      ░        ░     ░ ░          ░ ░     ░       ░  ░]],
 					[[     ░               ░                  ░            ]],
-				},
-
-				{
-					"                                                     ",
-					"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-					"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-					"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-					"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-					"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-					"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
-					"                                                     ",
 				},
 				{
 					[[                               __                ]],
@@ -250,7 +204,6 @@ return {
 					[[ ╚██╗ ██╔╝╚════██║   ██║     ██║   ██║██║  ██║██╔══╝   ]],
 					[[  ╚████╔╝ ███████║   ╚██████╗╚██████╔╝██████╔╝███████╗ ]],
 					[[   ╚═══╝  ╚══════╝    ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝ ]],
-					[[														 ]],
 				},
 			}
 
@@ -267,44 +220,28 @@ return {
 			alpha.setup(dashboard.config)
 			vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
 
-
-			-- Set working directory to project root after loading a session
-			local Path = require('plenary.path')
-			-- Function to set the working directory to the project root
-			local function set_project_root()
-				local root_patterns = { 'package.json', 'tsconfig.json', '.git' }
-				local cwd = vim.loop.cwd()
-
-				-- Traverse upward to find a root marker
-				for _, pattern in ipairs(root_patterns) do
-					local dir = Path:new(cwd):find_upwards(pattern)
-					if dir then
-						vim.cmd('cd ' .. dir)
-						print('Project root set to:', dir)
-						return
-					end
-				end
-
-				-- If no marker is found, fall back to the current working directory
-				vim.cmd('cd ' .. cwd)
-				print('No root marker found. Using current directory:', cwd)
-			end
-
 			-- Hook into `SessionLoadPost` to override the session's working directory
 			vim.api.nvim_create_autocmd('User', {
 				pattern = 'SessionLoadPost',
 				callback = function()
-					-- Set the project root after the session is loaded
-					set_project_root()
+					local Path = require('plenary.path')
+					local root_patterns = { '.git', 'package.json', 'tsconfig.json' }
+					local cwd = vim.loop.cwd()
 
-					-- Optionally restart LSP clients to use the updated root directory
-					vim.defer_fn(function()
-						for _, client in pairs(vim.lsp.get_active_clients()) do
-							client.stop()
+					-- Traverse upward to find a root marker
+					for _, pattern in ipairs(root_patterns) do
+						local file_path = Path:new(cwd):find_upwards(pattern)
+						if file_path then
+							local dir = Path:new(file_path):parent()
+							vim.cmd('cd ' .. dir.filename)
+							print('Project root set to:', dir.filename)
+							return
 						end
-						vim.cmd('LspStart')
-						print('LSP restarted with new project root.')
-					end, 100) -- Delay to ensure LSP clients are ready
+					end
+
+					-- If no marker is found, fall back to the current working directory
+					vim.cmd('cd ' .. cwd)
+					print('No root marker found. Using current directory:', cwd)
 				end,
 			})
 		end,

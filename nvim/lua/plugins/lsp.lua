@@ -1,21 +1,15 @@
-local masonNullOpts = {
-	automatic_installation = true,
-	ensure_installed = { "prettierd", "eslint_d" },
-	automatic_setup = true,
-	handlers = {},
-}
-
 local nullConfig = function()
 	local null_ls = require("null-ls")
-	local ca = null_ls.builtins.code_actions
-	local d = null_ls.builtins.diagnostics
-	local f = null_ls.builtins.formatting
+	-- local ca = null_ls.builtins.code_actions
+	-- local d = null_ls.builtins.diagnostics
+	-- local f = null_ls.builtins.formatting
 
 	local sources = {
 		-- d.eslint,
 		-- f.eslint,
 		-- f.clang_format,
-		d.eslint_d.with({ filetypes = { "svelte" } }),
+		-- d.eslint_d.with({ filetypes = { "svelte" } }),
+		require("none-ls.diagnostics.eslint_d"),
 		-- f.eslint_d.with({ extre_filetypes = { "svelte" } }),
 		-- a.eslint_d,
 		-- f.prettier,
@@ -38,13 +32,21 @@ end
 
 return {
 	{ --lsp for non lsp
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
+		dependencies = {
+			"nvimtools/none-ls-extras.nvim",
+		},
 		event = "BufReadPost",
 		config = nullConfig,
 	},
 	{
 		"jay-babu/mason-null-ls.nvim",
-		opts = masonNullOpts,
+		opts = {
+			automatic_installation = true,
+			ensure_installed = { "prettierd", "eslint_d" },
+			automatic_setup = true,
+			handlers = {},
+		},
 		event = "BufReadPost",
 		dependencies = "williamboman/mason.nvim",
 	},
@@ -163,19 +165,15 @@ return {
 					vim.lsp.buf.rename()
 				end, bufopts)
 				--show signature help
-				vim.keymap.set("i", "<C-h>", function()
-					vim.lsp.buf.signature_help()
-				end, bufopts)
+				-- vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, bufopts)
 				-- vim.keymap.set("n,i", "<C-k>", function() vim.lsp.buf.signature_help() end, bufopts)
-				vim.keymap.set("n", "<leader>f", function()
-					vim.lsp.buf.format()
-				end, bufopts) --maps leader f to format code
-				vim.keymap.set("n", "<leader>wa", function()
-					vim.lsp.buf.add_workspace_folder()
-				end, bufopts)
-				vim.keymap.set("n", "<leader>wr", function()
-					vim.lsp.buf.remove_workspace_folder()
-				end, bufopts)
+				vim.keymap.set("n", "<S-h>", function() vim.lsp.buf.hover() end, bufopts)
+
+				vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, bufopts) --maps leader f to format code
+				vim.keymap.set("n", "<leader>wa", function() vim.lsp.buf.add_workspace_folder() end,
+					bufopts)
+				vim.keymap.set("n", "<leader>wr", function() vim.lsp.buf.remove_workspace_folder() end,
+					bufopts)
 			end)
 
 			lsp.setup()

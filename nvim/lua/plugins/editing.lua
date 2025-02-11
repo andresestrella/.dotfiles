@@ -103,14 +103,15 @@ return {
 		"Wansmer/treesj",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			require("treesj").setup({--[[ your config ]]
+			require("treesj").setup({ --[[ your config ]]
 			})
 			vim.keymap.set("n", "<leader>m", ":lua require('treesj').toggle()<cr>")
 		end,
 	},
-	{ --commenting
-		"numToStr/Comment.nvim",
-		keys = { { "gcc" }, { "gbc" }, { "gc", mode = "v" }, { "gb", mode = "v" } },
-		opts = commentOpts,
-	},
+	{ -- small plugin that enhances nvim built-in comments. need this mainly for jsx comments
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+		enabled = vim.fn.has("nvim-0.10.0") == 1,
+	}
 }

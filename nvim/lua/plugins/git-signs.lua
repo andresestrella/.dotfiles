@@ -1,18 +1,9 @@
--- Gitsigns
 -- See `:help gitsigns.txt`
 return {
 	"lewis6991/gitsigns.nvim", --git signs
 	event = "BufRead",
     config = function()
     	require("gitsigns").setup({
-		signs = {
-			add = { text = "+" },
-			change = { text = "~" },
-			delete = { text = "_" },
-			topdelete = { text = "‾" },
-			changedelete = { text = "~" },
-		},
-		current_line_blame = false,
 		on_attach = function(bufnr)
 			local gs = package.loaded.gitsigns
 

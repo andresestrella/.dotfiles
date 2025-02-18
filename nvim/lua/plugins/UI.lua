@@ -127,10 +127,10 @@ return {
 				dashboard.button("s", "󱃐 Open sessions", "<cmd>SessionManager load_session<CR>"),
 				dashboard.button("a", "  New file", ":ene <BAR> startinsert <CR>"),
 				dashboard.button("f", "󰈞 Find file",
-					":Telescope find_files hidden=true no_ignore=true<CR>"),
-				dashboard.button("r", "󰷊 Recently opened files", "<cmd>Telescope oldfiles<CR>"),
+					":lua Snacks.picker.files()<CR>"),
+				dashboard.button("r", "󰷊 Recently opened files", ":lua Snacks.picker.recent()<CR>"),
 				-- dashboard.button("SPC f r", "  Frecency/MRU"),
-				dashboard.button("w", "  Find word", "<cmd>Telescope live_grep<cr>"),
+				dashboard.button("w", "  Find word", ":lua Snacks.picker.grep()<CR>"),
 				-- dashboard.button("SPC f m", "  Jump to bookmarks"),
 				dashboard.button("q", "󰩈  Quit NVIM", ":qa<CR>"),
 			}

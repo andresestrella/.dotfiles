@@ -12,13 +12,8 @@ return {}
 -- 	---@module 'blink.cmp'
 -- 	---@type blink.cmp.Config
 -- 	opts = {
--- 		-- 'default' for mappings similar to built-in completion
--- 		-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
--- 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
--- 		-- See the full "keymap" documentation for information on defining your own keymap.
 -- 		keymap = {
--- 			-- set to 'none' to disable the 'default' preset
--- 			preset = 'default',
+-- 			preset = 'default', --default, none, super-tab, enter
 -- 			-- ['<C-k>'] = { 'select_prev', 'fallback' },
 -- 			-- ['<C-j>'] = { 'select_next', 'fallback' },
 -- 			-- ['<C-h>'] = { 'show_signature', 'hide_signature' },

@@ -4,15 +4,15 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.g.gruvbox_material_background = "medium" -- hard, medium, soft, none
+			vim.g.gruvbox_material_background = "hard" -- hard, medium, soft, none
 			vim.cmd.colorscheme("gruvbox-material")
 		end,
 	},
 	-- {
 	-- 	"catppuccin/nvim",
 	-- 	name = "catppuccin",
-	--catppuccin = "catppuccin-mocha"
-	--catppuccin = "catppuccin-macchiato"
+	-- 	catppuccin = "catppuccin-mocha"
+	-- 	-- catppuccin = "catppuccin-macchiato"
 	-- },
 	-- {
 	-- 	"rebelot/kanagawa.nvim",

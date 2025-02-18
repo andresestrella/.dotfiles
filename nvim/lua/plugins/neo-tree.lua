@@ -1,32 +1,19 @@
 local opts = {
-	sources = { "filesystem" },
-	add_blank_line_at_top = false,
-	close_if_last_window = false,
-	enable_git_status = true,
-	enable_diagnostics = true,
-	hide_root_node = false,
 	retain_hidden_root_indent = true,
 	popup_border_style = "rounded",
 	filesystem = {
 		filtered_items = {
-			visible = false,
 			hide_dotfiles = false,
-			hide_gitignored = true,
 			hide_by_name = {
 				"node_modules",
 			},
 		},
 		follow_current_file = {
-			enabled = false, -- This will find and focus the file in the active buffer every time
-			--               -- the current file is changed while the tree is open.
+			enabled = true, -- This will find and focus the file in the active buffer every time
 			leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 		},
 	},
 	window = {
-		mapping_options = {
-			noremap = true,
-			nowait = true,
-		},
 		mappings = {
 			["<c-s>"] = "open_vsplit",
 			["<a-s>"] = "open_split",
@@ -87,7 +74,6 @@ return {
 		end,
 		cmd = "Neotree",
 		branch = "v3.x",
-		-- branch = "v2.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
@@ -109,4 +95,9 @@ return {
 		-- 	require("window-picker").setup()
 		-- end,
 	},
+	{ -- auto close buffers https://github.com/axkirillov/hbac.nvim
+		'axkirillov/hbac.nvim',
+		config = true,
+		event = 'VeryLazy',
+	}
 }

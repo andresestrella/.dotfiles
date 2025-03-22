@@ -1,5 +1,4 @@
 local opts = {
-	retain_hidden_root_indent = true,
 	popup_border_style = "rounded",
 	filesystem = {
 		filtered_items = {
@@ -69,17 +68,11 @@ return {
 	{ -- file tree UI
 		"nvim-neo-tree/neo-tree.nvim",
 		opts = opts,
-		init = function()
-			vim.g.neo_tree_remove_legacy_commands = 1
-		end,
 		cmd = "Neotree",
-		branch = "v3.x",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"s1n7ax/nvim-window-picker",
-			"nvim-tree/nvim-web-devicons",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			'nvim-lua/plenary.nvim',
+			'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+			'MunifTanjim/nui.nvim',
 		},
 		keys = {
 			{ "<leader>e",  ":Neotree filesystem toggle right<cr>" },

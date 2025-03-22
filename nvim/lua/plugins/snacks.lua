@@ -104,7 +104,7 @@ return {
 			-- { "<A-t>", "1<cmd>lua Snacks.terminal.toggle()<cr>", desc = "Toggle terminal 1", mode = { "n", "t" } },
 
 			-- Snacks Picker
-			{ "<leader><space>", function() Snacks.picker.smart() end,                                        desc = "Smart Find Files" },
+			{ "<leader><space>", function() require("snacks").picker.smart() end,                             desc = "Smart Find Files" },
 			{ "<leader>pa",      function() require("snacks").picker() end,                                   desc = "Find all pickers" },
 			{ "<leader>pf",      function() require("snacks").picker.files() end,                             desc = "Find Files (Snacks Picker)" },
 			{ "<leader>ps",      function() require("snacks").picker.grep() end,                              desc = "Grep word" },
@@ -113,21 +113,35 @@ return {
 			{ "<leader>ph",      function() require("snacks").picker.help() end,                              desc = "Help Pages" },
 			{ "<leader>pg",      function() require("snacks").picker.git_branches({ layout = "select" }) end, desc = "Pick and Switch Git Branches" },
 			{ "<leader>pl",      function() require("snacks").picker.resume() end,                            desc = "Resume last picker" },
+
 			-- LSP
-			{ "gd",              function() Snacks.picker.lsp_definitions() end,                              desc = "Goto Definition" },
-			{ "gD",              function() Snacks.picker.lsp_declarations() end,                             desc = "Goto Declaration" },
-			{ "gr",              function() Snacks.picker.lsp_references() end,                               nowait = true,                            desc = "References" },
-			{ "gI",              function() Snacks.picker.lsp_implementations() end,                          desc = "Goto Implementation" },
-			{ "gy",              function() Snacks.picker.lsp_type_definitions() end,                         desc = "Goto T[y]pe Definition" },
-			{ "<leader>ss",      function() Snacks.picker.lsp_symbols() end,                                  desc = "LSP Symbols" },
-			{ "<leader>sS",      function() Snacks.picker.lsp_workspace_symbols() end,                        desc = "LSP Workspace Symbols" },
+			{ "gd",              function() require("snacks").picker.lsp_definitions() end,                   desc = "Goto Definition" },
+			{ "gD",              function() vim.lsp.buf.declaration() end,                                    desc = "Goto Declaration" },
+			{ "gr",              function() require("snacks").picker.lsp_references() end,                    nowait = true,                            desc = "References" },
+			{ "gI",              function() require("snacks").picker.lsp_implementations() end,               desc = "Goto Implementation" },
+			{ "gy",              function() require("snacks").picker.lsp_type_definitions() end,              desc = "Goto T[y]pe Definition" },
+			{ "<leader>ss",      function() require("snacks").picker.lsp_symbols() end,                       desc = "LSP Symbols" },
+			{ "<leader>sS",      function() require("snacks").picker.lsp_workspace_symbols() end,             desc = "LSP Workspace Symbols" },
+			{ "<leader>rn",      function() vim.lsp.buf.rename() end,                                         desc = "[R]e[n]ame" },
+			{ "<leader>ca",      function() vim.lsp.buf.code_action() end,                                    desc = "[C]ode [A]ction",                 mode = { "n", "x" } },
+
+			-- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+			-- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+			-- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+			--
+			-- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+			-- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+			-- map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+			-- map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+			-- map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+			-- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
 
-			{ "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-			{ "<leader>gB",      function() Snacks.gitbrowse() end,                                           desc = "Git Browse",                      mode = { "n", "v" } },
+			{ "<leader>gg",      function() require("snacks").lazygit() end,                                  desc = "Lazygit" },
+			{ "<leader>gB",      function() require("snacks").gitbrowse() end,                                desc = "Git Browse",                      mode = { "n", "v" } },
 
-			{ "]]",              function() Snacks.words.jump(vim.v.count1) end,                              desc = "Next Reference",                  mode = { "n", "t" } },
-			{ "[[",              function() Snacks.words.jump(-vim.v.count1) end,                             desc = "Prev Reference",                  mode = { "n", "t" } },
+			{ "]]",              function() require("snacks").words.jump(vim.v.count1) end,                   desc = "Next Reference",                  mode = { "n", "t" } },
+			{ "[[",              function() require("snacks").words.jump(-vim.v.count1) end,                  desc = "Prev Reference",                  mode = { "n", "t" } },
 			--
 			-- { "<leader>rf",  function() require("snacks").rename.rename_file() end,                       desc = "Fast Rename Current File" },
 			-- { "<leader>es",      function() require("snacks").explorer() end,                                 desc = "Open File Explorer" },

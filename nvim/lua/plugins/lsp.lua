@@ -10,6 +10,7 @@ local nullConfig = function()
 		-- f.clang_format,
 		-- d.eslint_d.with({ filetypes = { "svelte" } }),
 		require("none-ls.diagnostics.eslint_d"),
+		require("none-ls.code_actions.eslint_d"),
 		-- f.eslint_d.with({ extre_filetypes = { "svelte" } }),
 		-- a.eslint_d,
 		-- f.prettier,
@@ -43,7 +44,7 @@ return {
 		"jay-babu/mason-null-ls.nvim",
 		opts = {
 			automatic_installation = true,
-			ensure_installed = { "prettierd", "eslint_d" },
+			ensure_installed = { "prettierd" },
 			automatic_setup = true,
 			handlers = {},
 		},

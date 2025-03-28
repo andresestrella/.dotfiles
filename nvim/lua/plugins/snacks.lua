@@ -84,17 +84,18 @@ return {
 				},
 			},
 
+			explorer = { enabled = true }, -- renaming on the tree doesn't work
+			-- requires 'fd' to be installed
+
+			rename = { enabled = false }, --this renames the current open file and updates imports with LSP
+			-- rename didn't work as expected, I opened a bug issue on snacks.nvim repo
+
 			dashboard = { -- restoring sessions don't work unless using lazyvim
 				enabled = false,
 				-- preset = {
 				-- 	header = Headers[math.random(#Headers)],
 				-- },
 			},
-			rename = { enabled = false }, --this renames the current open file and updates imports with LSP
-			-- rename didn't work as expected, I opened a bug issue on snacks.nvim repo
-
-			explorer = { enabled = false }, -- renaming on the tree doesn't work
-			-- requires 'fd' to be installed
 			notifier = { enabled = false },
 			scroll = { enabled = false },
 			statuscolumn = { enabled = false },
@@ -144,7 +145,8 @@ return {
 			{ "[[",              function() require("snacks").words.jump(-vim.v.count1) end,                  desc = "Prev Reference",                  mode = { "n", "t" } },
 			--
 			-- { "<leader>rf",  function() require("snacks").rename.rename_file() end,                       desc = "Fast Rename Current File" },
-			-- { "<leader>es",      function() require("snacks").explorer() end,                                 desc = "Open File Explorer" },
+			{ "<leader>e",       function() require("snacks").explorer() end,                                 desc = "Open File Explorer" },
+			-- { "<leader>e",       function() require("snacks").picker.explorer() end,                          desc = "Smart Find Files" },
 		},
 	},
 	-- NOTE: todo comments w/ snacks

@@ -36,32 +36,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 --vim.opt.colorcolumn = "80"
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.title = true -- set the title of window to the value of the titlestring
+vim.opt.title = true              -- set the title of window to the value of the titlestring
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
-
-
--- set up folding based on treesitter
-local opt = vim.opt
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-
--- vim.opt.foldmethod = "indent"
-
--- opt.foldmethod = "syntax"
--- opt.foldnestmax = 1
-
-opt.foldenable = false
-opt.foldlevel = 99
---open all fold on startup
--- autocmd("BufReadPost", {
---   pattern = "*.*",
---   callback = function()
---     vim.cmd("normal! zR")
---   end,
--- })
-
-vim.opt.fillchars = { fold = " " }
-vim.g.markdown_folding = 1 -- enable markdown folding

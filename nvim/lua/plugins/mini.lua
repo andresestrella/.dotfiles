@@ -2,6 +2,7 @@ return {
 	{
 		'echasnovski/mini.nvim',
 		version = '*',
+		event = 'BufReadPre',
 		config = function()
 			require('mini.surround').setup() -- change surrounding characters
 			require('mini.ai').setup() -- new  text objects for functions and function arguments, f(functions), a(arguments), q(quotes), p(parentheses), b(brackets), c(curly braces), t(tags), <space>

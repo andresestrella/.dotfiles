@@ -11,7 +11,14 @@ return {
 			'WhoIsSethDaniel/mason-tool-installer.nvim',
 			-- Useful status updates for LSP.
 			{ 'j-hui/fidget.nvim',       opts = {} },
-			'saghen/blink.cmp'
+			'saghen/blink.cmp', -- completion
+			{
+				'akinsho/flutter-tools.nvim',
+				dependencies = { 'nvim-lua/plenary.nvim' },
+				config = true,
+			}, -- flutter support
+			-- 'dart-lang/dart-vim-plugin',
+			-- 'Nash0x7E2/awesome-flutter-snippets'
 		},
 		opts = {
 			servers = {
@@ -176,6 +183,15 @@ return {
 						lspconfig[server_name].setup(server)
 					end,
 				},
+			}
+
+			-- setup flutter-tools defaults
+			-- don't manually configure dartls with lsp-config or nvim-dap since flutter-tools does that
+			-- if flutter isn't installed in $PATH, need to do some more configuring
+			require('flutter-tools').setup {
+				debugger = {
+					enabled = true,
+				}
 			}
 		end,
 	},

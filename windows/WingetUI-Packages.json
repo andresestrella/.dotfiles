@@ -9,9 +9,6 @@
                         "PackageIdentifier": "SomePythonThings.WingetUIStore"
                     },
                     {
-                        "PackageIdentifier": "Neovim.Neovim"
-                    },
-                    {
                         "PackageIdentifier": "lars-berger.GlazeWM"
                     },
                     {
@@ -24,16 +21,7 @@
                         "PackageIdentifier": "VideoLAN.VLC"
                     },
                     {
-                        "PackageIdentifier": "BurntSushi.ripgrep.MSVC"
-                    },
-                    {
-                        "PackageIdentifier": "Python.Python.3.9"
-                    },
-                    {
                         "PackageIdentifier": "Obsidian.Obsidian"
-                    },
-                    {
-                        "PackageIdentifier": "OpenJS.NodeJS"
                     },
                     {
                         "PackageIdentifier": "Mozilla.Firefox"
@@ -52,9 +40,6 @@
                     },
                     {
                         "PackageIdentifier": "Git.Git"
-                    },
-                    {
-                        "PackageIdentifier": "junegunn.fzf"
                     },
                     {
                         "PackageIdentifier": "Discord.Discord"
@@ -79,9 +64,6 @@
     "chocolatey": {
         "apps": [
             {
-                "Name": "mingw"
-            },
-            {
                 "Name": "Chocolatey"
             }
         ]
@@ -90,10 +72,6 @@
         "apps": []
     },
     "npm": {
-        "apps": [
-            {
-                "Name": "neovim"
-            }
-        ]
+        "apps": []
     }
 }

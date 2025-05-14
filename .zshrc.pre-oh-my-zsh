@@ -1,0 +1,8 @@
+# env vars should go in this file
+export GITHUB_TOKEN="replace with your token"
+
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+
+#$HOME/.zshrc:
+    . $HOMEBREW_PREFIX/etc/profile.d/z.sh

@@ -75,7 +75,8 @@ return {
 				},
 			},
 			picker = {
-				enabled = true,
+				-- hidden = true,
+				ignored = true,
 				formatters = {
 					file = {
 						truncate = 80, -- truncate the file path to (roughly) this length
@@ -83,8 +84,7 @@ return {
 				},
 			},
 
-			explorer = { enabled = true }, -- renaming on the tree doesn't work
-			-- requires 'fd' to be installed
+			explorer = {}, -- requires 'fd' to be installed
 
 			rename = { enabled = false }, --this renames the current open file and updates imports with LSP
 			-- rename didn't work as expected, I opened a bug issue on snacks.nvim repo

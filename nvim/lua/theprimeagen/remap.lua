@@ -1,29 +1,25 @@
 --exit insert mode with jk
 vim.keymap.set("i", "jk", "<ESC>")
 
+--exit terminal mode with esc
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
 -- go to end of line with =
-vim.keymap.set("n", "=", "$")
 vim.keymap.set("v", "=", "$")
 
 --clear search highlighting with <leader>nh
 vim.keymap.set("n", "<leader>nh", ":nohl<CR>")
-
 --delete current letter without yankin
 vim.keymap.set("n", "x", '"_x')
 
 -- maps shift tab to insert backwards tab
 vim.keymap.set("i", "<S-Tab>", "<C-d>")
 
-
 --add new below current line in normal mode and maintain cursor postion
 vim.keymap.set("n", "oo", "m`o<Esc>``")
 vim.keymap.set("n", "OO", "m`O<Esc>``")
 --add new line above and below current line in normal mode and maintain cursor postion
 vim.keymap.set("n", "<leader>o", "m`o<Esc>kO<Esc>``i")
-
---open neotree
---vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
---vim.keymap.set('n', '<leader>pv', ':Neotree filesystem toggle left<cr>')
 
 --move lines up and down when highlighted
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -69,13 +65,8 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 --find all occurrences of selected text and replace all of them with the same text
 vim.keymap.set("v", "<leader>s", [["hy:%s/<C-r>h//gc<left><left><left>]])
 
-vim.api.nvim_set_keymap('x', '<C-s>', [[<Cmd>let @h = @"<CR>:%s/\%V\%V<C-R>=escape(@h, '/\')<CR>//gc<left><left><left>]], { noremap = true, silent = true })
-
---tabs
-vim.keymap.set("n", "<leader>to", ":tabnew<CR>");
-vim.keymap.set("n", "<leader>tx", ":tabclose<CR>");
-vim.keymap.set("n", "<leader>tn", ":tabn<CR>");
-vim.keymap.set("n", "<leader>tp", ":tabp<CR>");
+vim.api.nvim_set_keymap('x', '<C-s>', [[<Cmd>let @h = @"<CR>:%s/\%V\%V<C-R>=escape(@h, '/\')<CR>//gc<left><left><left>]],
+  { noremap = true, silent = true })
 
 --windows navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h");
@@ -99,31 +90,17 @@ vim.keymap.set("n", "<C-s>", ":vsplit<CR>");
 vim.keymap.set("n", "<C-w>s", ":vsplit<CR>");
 vim.keymap.set("n", "<C-w>S", ":split<CR>");
 --close window
-vim.keymap.set("n", "<C-c>", ":close<CR>",
-  {silent = true, noremap = true}
-);
-vim.keymap.set("n", "<C-q>", ":bd<CR>",
-  {silent = true, noremap = true}
-);
-
-
--- buffers
-vim.keymap.set("n", "gb", ":pop<CR>"); -- or use <C-O>
-
---close buffer
--- vim.keymap.set("n", "<C-c>", ":bd<CR>");
+vim.keymap.set("n", "<C-c>", ":close<CR>", { silent = true, noremap = true });
+vim.keymap.set("n", "<C-q>", ":bd<CR>", { silent = true, noremap = true });
+vim.keymap.set("n", "<C-S-c>", ":bd<CR>");
 
 --better indenting
 vim.keymap.set("v", "<", "<gv");
 vim.keymap.set("v", ">", ">gv");
 
---tab
-vim.keymap.set("n", "<Tab>", "gt");
-vim.keymap.set("n", "<S-Tab>", "gT");
+--tabs
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>");
 vim.keymap.set("n", "<C-w>t", ":bufdo tab split<CR>");
-vim.keymap.set("n", "<A-Left>", ":tabmove -<CR>");
-vim.keymap.set("n", "<A-Right>", ":tabmove +<CR>");
 
 --bracket remaps
 vim.keymap.set("n", "[b", ":bprevious<CR>");

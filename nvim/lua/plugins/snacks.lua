@@ -107,6 +107,7 @@ return {
 			{ "<leader><space>", function() require("snacks").picker.smart() end,                             desc = "Smart Find Files" },
 			{ "<leader>pa",      function() require("snacks").picker() end,                                   desc = "Find all pickers" },
 			{ "<leader>pf",      function() require("snacks").picker.files() end,                             desc = "Find Files (Snacks Picker)" },
+			{ "<leader>pb",      function() require("snacks").picker.buffers() end,                           desc = "Find Files (Snacks Picker)" },
 			{ "<leader>ps",      function() require("snacks").picker.grep() end,                              desc = "Grep word" },
 			{ "<leader>pws",     function() require("snacks").picker.grep_word() end,                         desc = "Search Visual selection or Word", mode = { "n", "x" } },
 			{ "<leader>pk",      function() require("snacks").picker.keymaps({ layout = "ivy" }) end,         desc = "Search Keymaps (Snacks Picker)" },

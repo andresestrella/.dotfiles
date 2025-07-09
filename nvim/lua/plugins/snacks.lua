@@ -117,6 +117,8 @@ return {
 
 			-- LSP
 			{ "gd",              function() require("snacks").picker.lsp_definitions() end,                   desc = "Goto Definition" },
+			{ "gt",              function() vim.cmd("tab split | lua vim.lsp.buf.definition()") end,          desc = "Goto Definition in new tab" },
+			-- function declaration is the function prototype
 			{ "gD",              function() vim.lsp.buf.declaration() end,                                    desc = "Goto Declaration" },
 			{ "gr",              function() require("snacks").picker.lsp_references() end,                    nowait = true,                            desc = "References" },
 			{ "gI",              function() require("snacks").picker.lsp_implementations() end,               desc = "Goto Implementation" },
@@ -126,10 +128,6 @@ return {
 			{ "<leader>rn",      function() vim.lsp.buf.rename() end,                                         desc = "[R]e[n]ame" },
 			{ "<leader>ca",      function() vim.lsp.buf.code_action() end,                                    desc = "[C]ode [A]ction",                 mode = { "n", "x" } },
 
-			-- map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-			-- map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-			-- map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-			--
 			-- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 			-- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 			-- map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')

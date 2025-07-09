@@ -11,7 +11,9 @@ return { --parse tree, syntax highlighting, folds, and more
 	dependencies = {
 		{
 			"nvim-treesitter/nvim-treesitter-context",
-			opts = {},
+			opts = {
+				max_lines = 5,
+			},
 		},
 	},
 	config = function()

@@ -1,5 +1,8 @@
 # env vars should go in this file
-export GITHUB_TOKEN="replace with your token"
+export GITHUB_TOKEN=replace-with-your-token
+export AVANTE_GEMINI_API_KEY=replace-with-your-token
+export GEMINI_API_KEY=replace-with-your-token
+export EDITOR="nvim"
 
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm

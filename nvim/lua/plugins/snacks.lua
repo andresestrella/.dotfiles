@@ -75,8 +75,8 @@ return {
 				},
 			},
 			picker = {
-				-- hidden = true,
-				ignored = true,
+				hidden = true,
+				-- ignored = true,
 				formatters = {
 					file = {
 						truncate = 80, -- truncate the file path to (roughly) this length

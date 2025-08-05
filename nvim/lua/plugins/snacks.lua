@@ -75,8 +75,13 @@ return {
 				},
 			},
 			picker = {
-				hidden = true,
-				-- ignored = true,
+				sources = {
+					files = { hidden = true, ignored = false },
+					grep = { hidden = true, ignored = false },
+					explorer = { hidden = true, ignored = true },
+				},
+				-- hidden = true,
+				-- ignored = false,
 				formatters = {
 					file = {
 						truncate = 80, -- truncate the file path to (roughly) this length

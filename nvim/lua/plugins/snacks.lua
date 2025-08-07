@@ -68,7 +68,7 @@ return {
 			gitbrowse = { enabled = true }, -- open hub branch on browser
 			image = { enabled = true },
 			scope = { enabled = true },
-			lazygit = { enabled = true }, -- <leader>gg aa
+			lazygit = { enabled = true }, -- <leader>gg
 			terminal = {
 				win = {
 					position = "float",

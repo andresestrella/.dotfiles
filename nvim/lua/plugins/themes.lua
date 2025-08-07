@@ -8,18 +8,17 @@ return {
 			vim.cmd.colorscheme("gruvbox-material")
 		end,
 	},
-	-- { 	-- lua/plugins/rose-pine.lua
+	-- { -- lua/plugins/rose-pine.lua
 	-- 	"rose-pine/neovim",
 	-- 	name = "rose-pine",
 	-- 	config = function()
 	-- 		vim.cmd("colorscheme rose-pine")
 	-- 	end
-	-- }
+	-- },
 	-- {
 	-- 	"catppuccin/nvim",
 	-- 	name = "catppuccin",
-	-- 	catppuccin = "catppuccin-mocha"
-	-- 	-- catppuccin = "catppuccin-macchiato"
+	-- 	priority = 1000,
 	-- },
 	-- {
 	-- 	"rebelot/kanagawa.nvim",

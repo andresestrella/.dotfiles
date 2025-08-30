@@ -233,6 +233,17 @@ return {
 			-- lint.linters_by_ft['dockerfile'] = nil
 			-- lint.linters_by_ft['inko'] = nil
 
+			-- Set pylint to work in virtualenv
+			lint.linters.pylint.cmd = 'python3'
+			lint.linters.pylint.args = { '-m', 'pylint', '-f', 'json' }
+			--
+			-- local python_cmd = 'python'
+			-- if vim.env.VIRTUAL_ENV then
+			-- 	python_cmd = vim.env.VIRTUAL_ENV .. '/bin/python'
+			-- end
+			-- lint.linters.pylint.cmd = python_cmd
+			-- lint.linters.pylint.args = { '-m', 'pylint', '-f', 'json' }
+
 			-- Create autocommand which carries out the actual linting
 			-- on the specified events.
 			local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
@@ -270,25 +281,23 @@ return {
 		opts = {
 			notify_on_error = false,
 			format_on_save = function(bufnr)
-				-- Disable format on save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional languages here or re-enable it for the disabled ones.
-				local disable_filetypes = {
-					c = true,
-					cpp = true,
-					-- javascript = true,
-					-- javascriptreact = true,
-					-- typescript = true,
-					typescriptreact = true,
+				-- A table of filetypes to DISABLE format-on-save for
+				local disable_on_save = {
+					typescriptreact = true, -- This will disable formatting for .tsx files
+					-- typescript = true,   -- You can uncomment this to also disable for .ts files
+					-- c = true,
+					-- cpp = true,
 				}
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = 'never'
-				else
-					lsp_format_opt = 'fallback'
+
+				-- If the filetype is in our disable list, return nil to skip formatting
+				if disable_on_save[vim.bo[bufnr].filetype] then
+					return nil
 				end
+
+				-- For all other filetypes, proceed with formatting
 				return {
 					timeout_ms = 500,
-					lsp_format = lsp_format_opt,
+					lsp_format = 'fallback', -- Or 'never' if you prefer
 				}
 			end,
 			formatters_by_ft = {

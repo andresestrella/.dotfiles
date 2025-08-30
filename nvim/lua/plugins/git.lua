@@ -37,8 +37,11 @@ return {
 	},
 	{ -- merge conflict keymaps
 		'akinsho/git-conflict.nvim',
+		event = "BufRead",
 		version = "*",
-		config = true
+		config = {
+			disable_diagnostics = true, -- disable diagnostics in git conflict buffers
+		}
 	},
 	-- See `:help gitsigns.txt`
 	{

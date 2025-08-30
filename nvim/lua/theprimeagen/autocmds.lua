@@ -35,3 +35,9 @@ autocmd("BufReadPost", {
     end
   end,
 })
+
+autocmd({ "FocusGained", "BufEnter" }, {
+  group = ThePrimeagenGroup,
+  command = "checktime",
+  desc = "Check for file changes outside of Neovim",
+})

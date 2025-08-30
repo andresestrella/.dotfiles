@@ -11,3 +11,13 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 require "theprimeagen.lazy"
+
+-- set colorscheme
+--
+-- vim.o.background = "dark" -- or "light" for light mode
+-- vim.cmd([[colorscheme gruvbox]])
+--
+vim.cmd.colorscheme("catppuccin")
+-- vim.cmd.colorscheme("catppuccin-frappe")
+-- vim.cmd.colorscheme("catppuccin-macchiato")
+-- vim.cmd.colorscheme("catppuccin-latte")

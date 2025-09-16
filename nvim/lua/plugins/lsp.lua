@@ -285,8 +285,6 @@ return {
 				local disable_on_save = {
 					typescriptreact = true, -- This will disable formatting for .tsx files
 					-- typescript = true,   -- You can uncomment this to also disable for .ts files
-					-- c = true,
-					-- cpp = true,
 				}
 
 				-- If the filetype is in our disable list, return nil to skip formatting

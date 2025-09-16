@@ -44,6 +44,8 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- yank current file path from project root
 vim.keymap.set("n", "<leader>yp", [[:let @+ = fnamemodify(expand("%"), ":~:.")<CR>]])
+-- yank current absolute file
+vim.keymap.set("n", "<leader>yP", [[:let @+ = expand("%:p")<CR>]])
 
 --maps leader d to delete without yanking
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])

@@ -1,0 +1,14 @@
+{
+  "general": {
+    "preferredEditor": "neovim",
+    "vimMode": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "context": {
+    "fileName": ["AGENTS.md", "GEMINI.md"]
+  }
+}

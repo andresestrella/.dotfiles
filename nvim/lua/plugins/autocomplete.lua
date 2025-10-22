@@ -29,6 +29,16 @@ return {
 				-- ['<C-h>'] = { 'show_signature', 'hide_signature' }, -- I think doesn't work bc documentation autoshow is set to true.
 				['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
 				['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
+				["<Tab>"] = {
+					"snippet_forward",
+					function() -- sidekick next edit suggestion
+						return require("sidekick").nes_jump_or_apply()
+					end,
+					-- function() -- if you are using Neovim's native inline completions. requires nvim 0.12+
+					-- 	return vim.lsp.inline_completion.get()
+					-- end,
+					"fallback",
+				},
 			},
 			appearance = { nerd_font_variant = 'mono' },
 

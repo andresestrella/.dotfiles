@@ -1,0 +1,9 @@
+theme = Gruvbox Dark Hard
+background-opacity = 0.90
+background-blur-radius = 15
+
+macos-option-as-alt = true
+macos-non-native-fullscreen = true
+macos-window-buttons = hidden
+macos-titlebar-style = tabs
+window-save-state = never

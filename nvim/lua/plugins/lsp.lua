@@ -52,7 +52,6 @@ return {
 			}
 		},
 		config = function(_, opts)
-			local lspconfig = require('lspconfig')
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -150,17 +149,6 @@ return {
 				},
 			}
 
-			-- LSP servers and clients are able to communicate to each other what features they support.
-			--  By default, Neovim doesn't support everything that is in the LSP specification.
-			--  When you add nvim-cmp (blink.cmp), luasnip, etc. Neovim now has *more* capabilities.
-			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-			for server, config in pairs(opts.servers) do
-				-- passing config.capabilities to blink.cmp merges with the capabilities in your
-				-- opts[server].capabilities, if you've defined it
-				config.capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-				lspconfig[server].setup(config)
-			end
-
 			-- Ensure the servers and tools are installed
 			-- mason had to be setup earlier: to configure its options see the
 			-- You can add other tools here that you want Mason to install for you, so that they are available from within Neovim.
@@ -172,20 +160,14 @@ return {
 			})
 			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+			for server, config in pairs(opts.servers) do
+				config.capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+				vim.lsp.start(server, config)
+			end
+
 			require('mason-lspconfig').setup {
 				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
 				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = opts.servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend('force', {}, capabilities,
-							server.capabilities or {})
-						lspconfig[server_name].setup(server)
-					end,
-				},
 			}
 
 			-- setup flutter-tools defaults

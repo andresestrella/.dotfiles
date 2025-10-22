@@ -19,11 +19,12 @@ autocmd('TextYankPost', {
   end,
 })
 
-autocmd({ "BufWritePre" }, {
-  group = ThePrimeagenGroup,
-  pattern = "*",
-  command = [[%s/\s\+$//e]],
-})
+-- removes trailing whitespace on save
+-- autocmd({ "BufWritePre" }, {
+--   group = ThePrimeagenGroup,
+--   pattern = "*",
+--   command = [[%s/\s\+$//e]],
+-- })
 
 -- Persistent Cursor
 autocmd("BufReadPost", {

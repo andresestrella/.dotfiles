@@ -243,20 +243,20 @@ return { --debugging
 	-- 		})
 	-- 	end,
 	-- },
-	{
-		"mfussenegger/nvim-dap-python",
-		ft = "python",
-		config = function()
-			--dap python setup
-			-- require('dap-python').setup('~/.virtualenvs/debugpy/Scripts/python') --directly pass path to a python venv that has debugpy installed
-			--windows, installed by mason
-			require("dap-python").setup(
-				"~/AppData/Local/nvim-data/mason/packages/debugpy/venv/Scripts/python") --directly pass path to a python venv that has debugpy installed
-			--for linux:
-			--require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-		end,
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-	},
+	-- {
+	-- 	"mfussenegger/nvim-dap-python",
+	-- 	ft = "python",
+	-- 	config = function()
+	-- 		--dap python setup
+	-- 		-- require('dap-python').setup('~/.virtualenvs/debugpy/Scripts/python') --directly pass path to a python venv that has debugpy installed
+	-- 		--windows, installed by mason
+	-- 		require("dap-python").setup(
+	-- 			"~/AppData/Local/nvim-data/mason/packages/debugpy/venv/Scripts/python") --directly pass path to a python venv that has debugpy installed
+	-- 		--for linux:
+	-- 		--require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"mfussenegger/nvim-dap",
+	-- 	},
+	-- },
 }

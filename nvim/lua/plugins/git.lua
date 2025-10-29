@@ -90,7 +90,37 @@ return {
 					map("n", "<leader>hp", gs.preview_hunk)
 					map("n", "<leader>hb", function() gs.blame_line({ full = true }) end)
 					map("n", "<leader>tb", gs.toggle_current_line_blame)
-					map("n", "<leader>hd", gs.diffthis)
+					-- Make diffthis a toggle: close diff view if already open, otherwise open it
+					map("n", "<leader>hd", function()
+						if vim.wo.diff then
+							local current_buf = vim.api.nvim_get_current_buf()
+							local windows = vim.api.nvim_list_wins()
+							
+							-- Find and close diff windows, but keep the original buffer
+							for _, win in ipairs(windows) do
+								local win_buf = vim.api.nvim_win_get_buf(win)
+								local buf_name = vim.api.nvim_buf_get_name(win_buf)
+								
+								-- Close window if it's in diff mode and is a gitsigns:// buffer
+								if vim.wo[win].diff and buf_name:match("^gitsigns://") then
+									vim.api.nvim_win_close(win, true)
+								end
+							end
+							
+							-- Turn off diff mode in remaining windows
+							vim.cmd.diffoff()
+							
+							-- Return to the original buffer
+							for _, win in ipairs(vim.api.nvim_list_wins()) do
+								if vim.api.nvim_win_get_buf(win) == current_buf then
+									vim.api.nvim_set_current_win(win)
+									break
+								end
+							end
+						else
+							gs.diffthis()
+						end
+					end)
 					map("n", "<leader>hD", function() gs.diffthis("~") end)
 					map("n", "<leader>td", gs.toggle_deleted)
 

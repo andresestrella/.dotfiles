@@ -14,15 +14,15 @@ Follow these steps:
 3. Understand the intent of the PR using the PR description and the additional context provided {{context}}
 4. If PR description is not detailed enough to understand the intent of the PR,
    make sure to note it in your review.
-5. Make sure the PR title follows Conventional Commits, here are the last five
-   commits to the repo as examples: !{git log --pretty=format:"%s" -n 5}
-6. Search the codebase if required.
-7. use `touch review.txt` to create a review.txt file.
-8. use `echo "Your review here" > review.txt` to write to that file a concise review of the PR, keeping in mind to encourage strong code quality and best practices
-9. At the end of the review append the following line: "(This review was AI generated and manually verified and edited)".
-10. Use `gh pr comment {{pr_number}} --body-file review.txt` to post the review to the PR.
-11. Use `rm review.txt` to delete the review.txt file after posting the comment.
+5. Search the codebase if required.
+6. use `touch review.txt` to create a review.txt file.
+7. use `echo "Your review here" > review.txt` to write to that file a concise review of the PR, keeping in mind to encourage strong code quality and best practices
+8. At the end of the review append the following line: "(This review was AI generated and manually verified and edited)".
+9. Use `gh pr comment {{pr_number}} --body-file review.txt` to post the review to the PR.
+10. Use `rm review.txt` to delete the review.txt file after posting the comment.
 
 Remember to use the GitHub CLI (`gh`) with the Shell tool for all
 GitHub-related tasks.
 """
+
+#5. Make sure the PR title follows Conventional Commits, here are the last five commits to the repo as examples: !{git log --pretty=format:"%s" -n 5}

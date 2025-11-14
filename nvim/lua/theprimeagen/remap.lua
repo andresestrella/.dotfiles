@@ -87,10 +87,11 @@ vim.keymap.set('n', '<C-S-k>', ':resize +6<CR>', { desc = 'Increase window heigh
 vim.keymap.set('n', '<C-S-j>', ':resize -6<CR>', { desc = 'Decrease window height (down)' })
 
 --window splitting
-vim.keymap.set("n", "<A-s>", ":split<CR>");
-vim.keymap.set("n", "<C-s>", ":vsplit<CR>");
-vim.keymap.set("n", "<C-w>s", ":vsplit<CR>");
-vim.keymap.set("n", "<C-w>S", ":split<CR>");
+vim.keymap.set("n", "<A-s>", ":split<CR>");   -- Alt+s for horizontal split
+vim.keymap.set("n", "<C-s>", ":vsplit<CR>");  -- Ctrl+s for vertical split
+vim.keymap.set("n", "<C-S-s>", ":split<CR>"); -- Ctrl+Shift+s for horizontal split
+vim.keymap.set("n", "<C-w>s", ":vsplit<CR>"); -- Ctrl+w s for vertical split
+vim.keymap.set("n", "<C-w>S", ":split<CR>");  -- Ctrl+w S for horizontal split
 --close window
 vim.keymap.set("n", "<C-c>", ":close<CR>", { silent = true, noremap = true });
 vim.keymap.set("n", "<C-q>", ":bd<CR>", { silent = true, noremap = true });

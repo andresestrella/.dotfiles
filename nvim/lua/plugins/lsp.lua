@@ -160,15 +160,22 @@ return {
 			})
 			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-			for server, config in pairs(opts.servers) do
-				config.capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-				vim.lsp.start(server, config)
-			end
-
-			require('mason-lspconfig').setup {
-				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-				automatic_installation = false,
+		require('mason-lspconfig').setup {
+			ensure_installed = vim.tbl_keys(opts.servers or {}),
+			automatic_installation = false,
+			handlers = {
+				function(server)
+					local lspconfig = require('lspconfig')
+					local config = opts.servers[server] or {}
+					config.capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+					
+					-- Use the default lspconfig setup for this server
+					if lspconfig[server] then
+						lspconfig[server].setup(config)
+					end
+				end,
 			}
+		}
 
 			-- setup flutter-tools defaults
 			-- don't manually configure dartls with lsp-config or nvim-dap since flutter-tools does that

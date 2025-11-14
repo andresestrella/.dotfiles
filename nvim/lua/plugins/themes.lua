@@ -5,15 +5,15 @@ return {
 	-- 	config = true,
 	-- 	opts = ...
 	-- },
-	-- {
-	-- 	"sainnhe/gruvbox-material",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		vim.g.gruvbox_material_background = "hard" -- hard, medium, soft, none
-	-- 		vim.cmd.colorscheme("gruvbox-material")
-	-- 	end,
-	-- },
+	{
+		"sainnhe/gruvbox-material",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.gruvbox_material_background = "hard" -- hard, medium, soft, none
+			vim.cmd.colorscheme("gruvbox-material")
+		end,
+	},
 	-- {
 	-- 	'sainnhe/sonokai',
 	-- 	lazy = false,
@@ -27,10 +27,16 @@ return {
 	-- 	lazy = false,
 	-- 	priority = 1000,
 	-- 	config = function()
+	-- 		-- Configure edge theme for darker variant
+	-- 		vim.g.edge_style = 'aura' -- Options: 'default', 'neon', 'aura'
+	-- 		vim.g.edge_dim_foreground = 1
+	-- 		vim.g.edge_transparent_background = 0
+	-- 		vim.g.edge_enable_italic = 1
+	-- 		vim.g.edge_dim_inactive_windows = 1
 	-- 		vim.cmd.colorscheme('edge')
 	-- 	end,
 	-- },
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 }, -- colorscheme init is in nvim/lua/theprimeagen/init.lua
+	-- { "catppuccin/nvim", name = "catppuccin", priority = 1000 }, -- colorscheme init is in nvim/lua/theprimeagen/init.lua
 	-- {
 	-- 	"rebelot/kanagawa.nvim",
 	-- 	-- lazy= false,

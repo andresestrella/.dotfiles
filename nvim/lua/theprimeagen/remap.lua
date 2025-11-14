@@ -67,6 +67,7 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 --find all occurrences of selected text and replace all of them with the same text
 vim.keymap.set("v", "<leader>s", [["hy:%s/<C-r>h//gc<left><left><left>]])
 
+-- find and replace in visual mode for current selection
 vim.api.nvim_set_keymap('x', '<C-s>', [[<Cmd>let @h = @"<CR>:%s/\%V\%V<C-R>=escape(@h, '/\')<CR>//gc<left><left><left>]],
   { noremap = true, silent = true })
 
@@ -87,11 +88,14 @@ vim.keymap.set('n', '<C-S-k>', ':resize +6<CR>', { desc = 'Increase window heigh
 vim.keymap.set('n', '<C-S-j>', ':resize -6<CR>', { desc = 'Decrease window height (down)' })
 
 --window splitting
-vim.keymap.set("n", "<A-s>", ":split<CR>");   -- Alt+s for horizontal split
-vim.keymap.set("n", "<C-s>", ":vsplit<CR>");  -- Ctrl+s for vertical split
-vim.keymap.set("n", "<C-S-s>", ":split<CR>"); -- Ctrl+Shift+s for horizontal split
-vim.keymap.set("n", "<C-w>s", ":vsplit<CR>"); -- Ctrl+w s for vertical split
-vim.keymap.set("n", "<C-w>S", ":split<CR>");  -- Ctrl+w S for horizontal split
+vim.keymap.set("n", "<A-s>", ":split<CR>");       -- Alt+s for horizontal split
+vim.keymap.set("n", "<C-S-s>", ":split<CR>");     -- Ctrl+Shift+s for horizontal split
+vim.keymap.set("n", "<C-_>", ":split<CR>");       -- Ctrl+- for horizontal split
+vim.keymap.set("n", "<leader>_", ":split<CR>");   -- Ctrl+- for horizontal split
+
+vim.keymap.set("n", "<C-s>", ":vsplit<CR>");      -- Ctrl+s for vertical split
+vim.keymap.set("n", "<C-\\>", ":vsplit<CR>");     -- Ctrl+w s for vertical split
+vim.keymap.set("n", "<leader>\\", ":vsplit<CR>"); -- Ctrl+w s for vertical split
 --close window
 vim.keymap.set("n", "<C-c>", ":close<CR>", { silent = true, noremap = true });
 vim.keymap.set("n", "<C-q>", ":bd<CR>", { silent = true, noremap = true });

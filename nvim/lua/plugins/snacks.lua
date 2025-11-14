@@ -105,33 +105,37 @@ return {
 			statuscolumn = { enabled = false },
 		},
 		keys = {
-			{ "<A-t>",           "<cmd>lua Snacks.terminal.toggle()<cr>",                                     desc = "Toggle terminal",                 mode = { "n", "t" } },
+			{ "<A-t>",           "<cmd>lua Snacks.terminal.toggle()<cr>",                                            desc = "Toggle terminal",                 mode = { "n", "t" } },
 			-- { "<A-t>", "1<cmd>lua Snacks.terminal.toggle()<cr>", desc = "Toggle terminal 1", mode = { "n", "t" } },
 
 			-- Snacks Picker
-			{ "<leader><space>", function() require("snacks").picker.smart() end,                             desc = "Smart Find Files" },
-			{ "<leader>pa",      function() require("snacks").picker() end,                                   desc = "Find all pickers" },
-			{ "<leader>pf",      function() require("snacks").picker.files() end,                             desc = "Find Files (Snacks Picker)" },
-			{ "<leader>pb",      function() require("snacks").picker.buffers() end,                           desc = "Find Files (Snacks Picker)" },
-			{ "<leader>ps",      function() require("snacks").picker.grep() end,                              desc = "Grep word" },
-			{ "<leader>pws",     function() require("snacks").picker.grep_word() end,                         desc = "Search Visual selection or Word", mode = { "n", "x" } },
-			{ "<leader>pk",      function() require("snacks").picker.keymaps({ layout = "ivy" }) end,         desc = "Search Keymaps (Snacks Picker)" },
-			{ "<leader>ph",      function() require("snacks").picker.help() end,                              desc = "Help Pages" },
-			{ "<leader>pg",      function() require("snacks").picker.git_branches({ layout = "select" }) end, desc = "Pick and Switch Git Branches" },
-			{ "<leader>pl",      function() require("snacks").picker.resume() end,                            desc = "Resume last picker" },
+			{ "<leader><space>", function() require("snacks").picker.smart() end,                                    desc = "Smart Find Files" },
+			{ "<leader>pa",      function() require("snacks").picker() end,                                          desc = "Find all pickers" },
+			{ "<leader>pf",      function() require("snacks").picker.files() end,                                    desc = "Find Files (Snacks Picker)" },
+			{ "<C-->",           function() require("snacks").picker.files({ win_opts = { split = "split" } }) end,  desc = "Find Files (Horizontal Split)" },
+			{ "<leader>-",       function() require("snacks").picker.files({ win_opts = { split = "split" } }) end,  desc = "Find Files (Horizontal Split)" },
+			{ "<C-\\>",          function() require("snacks").picker.files({ win_opts = { split = "vsplit" } }) end, desc = "Find Files (Vertical Split)" },
+			{ "<leader>\\",      function() require("snacks").picker.files({ win_opts = { split = "vsplit" } }) end, desc = "Find Files (Vertical Split)" },
+			{ "<leader>pb",      function() require("snacks").picker.buffers() end,                                  desc = "Find Files (Snacks Picker)" },
+			{ "<leader>ps",      function() require("snacks").picker.grep() end,                                     desc = "Grep word" },
+			{ "<leader>pws",     function() require("snacks").picker.grep_word() end,                                desc = "Search Visual selection or Word", mode = { "n", "x" } },
+			{ "<leader>pk",      function() require("snacks").picker.keymaps({ layout = "ivy" }) end,                desc = "Search Keymaps (Snacks Picker)" },
+			{ "<leader>ph",      function() require("snacks").picker.help() end,                                     desc = "Help Pages" },
+			{ "<leader>pg",      function() require("snacks").picker.git_branches({ layout = "select" }) end,        desc = "Pick and Switch Git Branches" },
+			{ "<leader>pl",      function() require("snacks").picker.resume() end,                                   desc = "Resume last picker" },
 
 			-- LSP
-			{ "gd",              function() require("snacks").picker.lsp_definitions() end,                   desc = "Goto Definition" },
-			{ "gt",              function() vim.cmd("tab split | lua vim.lsp.buf.definition()") end,          desc = "Goto Definition in new tab" },
+			{ "gd",              function() require("snacks").picker.lsp_definitions() end,                          desc = "Goto Definition" },
+			{ "gt",              function() vim.cmd("tab split | lua vim.lsp.buf.definition()") end,                 desc = "Goto Definition in new tab" },
 			-- function declaration is the function prototype
-			{ "gD",              function() vim.lsp.buf.declaration() end,                                    desc = "Goto Declaration" },
-			{ "gr",              function() require("snacks").picker.lsp_references() end,                    nowait = true,                            desc = "References" },
-			{ "gI",              function() require("snacks").picker.lsp_implementations() end,               desc = "Goto Implementation" },
-			{ "gy",              function() require("snacks").picker.lsp_type_definitions() end,              desc = "Goto T[y]pe Definition" },
-			{ "<leader>ss",      function() require("snacks").picker.lsp_symbols() end,                       desc = "LSP Symbols" },
-			{ "<leader>sS",      function() require("snacks").picker.lsp_workspace_symbols() end,             desc = "LSP Workspace Symbols" },
-			{ "<leader>rn",      function() vim.lsp.buf.rename() end,                                         desc = "[R]e[n]ame" },
-			{ "<leader>ca",      function() vim.lsp.buf.code_action() end,                                    desc = "[C]ode [A]ction",                 mode = { "n", "x" } },
+			{ "gD",              function() vim.lsp.buf.declaration() end,                                           desc = "Goto Declaration" },
+			{ "gr",              function() require("snacks").picker.lsp_references() end,                           nowait = true,                            desc = "References" },
+			{ "gI",              function() require("snacks").picker.lsp_implementations() end,                      desc = "Goto Implementation" },
+			{ "gy",              function() require("snacks").picker.lsp_type_definitions() end,                     desc = "Goto T[y]pe Definition" },
+			{ "<leader>ss",      function() require("snacks").picker.lsp_symbols() end,                              desc = "LSP Symbols" },
+			{ "<leader>sS",      function() require("snacks").picker.lsp_workspace_symbols() end,                    desc = "LSP Workspace Symbols" },
+			{ "<leader>rn",      function() vim.lsp.buf.rename() end,                                                desc = "[R]e[n]ame" },
+			{ "<leader>ca",      function() vim.lsp.buf.code_action() end,                                           desc = "[C]ode [A]ction",                 mode = { "n", "x" } },
 
 			-- map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 			-- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -141,14 +145,14 @@ return {
 			-- map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
 
-			{ "<leader>gg",      function() require("snacks").lazygit() end,                                  desc = "Lazygit" },
-			{ "<leader>gB",      function() require("snacks").gitbrowse() end,                                desc = "Git Browse",                      mode = { "n", "v" } },
+			{ "<leader>gg",      function() require("snacks").lazygit() end,                                         desc = "Lazygit" },
+			{ "<leader>gB",      function() require("snacks").gitbrowse() end,                                       desc = "Git Browse",                      mode = { "n", "v" } },
 
-			{ "]]",              function() require("snacks").words.jump(vim.v.count1) end,                   desc = "Next Reference",                  mode = { "n", "t" } },
-			{ "[[",              function() require("snacks").words.jump(-vim.v.count1) end,                  desc = "Prev Reference",                  mode = { "n", "t" } },
+			{ "]]",              function() require("snacks").words.jump(vim.v.count1) end,                          desc = "Next Reference",                  mode = { "n", "t" } },
+			{ "[[",              function() require("snacks").words.jump(-vim.v.count1) end,                         desc = "Prev Reference",                  mode = { "n", "t" } },
 			--
 			-- { "<leader>rf",  function() require("snacks").rename.rename_file() end,                       desc = "Fast Rename Current File" },
-			{ "<leader>e",       function() require("snacks").explorer() end,                                 desc = "Open File Explorer" },
+			{ "<leader>e",       function() require("snacks").explorer() end,                                        desc = "Open File Explorer" },
 			-- { "<leader>e",       function() require("snacks").picker.explorer() end,                          desc = "Smart Find Files" },
 		},
 	},

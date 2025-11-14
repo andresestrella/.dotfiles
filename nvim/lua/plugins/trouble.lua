@@ -23,8 +23,8 @@ return { -- LSP troubleshooting
 				-- icons = false,
 				action_keys = {
 					close = { "q", "<c-x>", "<c-c>" },
-					open_vsplit = "<c-s>",
-					open_split = "<a-s>",
+					open_vsplit = "<c-\\>",
+					open_split = "<c-_>",
 				},
 			})
 		end,

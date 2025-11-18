@@ -9,3 +9,22 @@ export NVM_DIR="$HOME/.nvm"
 
 # Load zoxide, a smarter cd command (z)
 eval "$(zoxide init zsh)"
+
+# aliases
+alias ll='ls -al'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+alias g='git'
+alias ga='git add'
+alias gc='git commit'
+
+alias v='nvim'
+alias vi='nvim'
+alias note = 'nvim ~/Downloads/notes.md'
+
+alias tma='tmux attach -t'
+alias tmn='tmux new -s'
+alias tmk='tmux kill-session -t'
+alias tml='tmux ls'
+alias tmsrc='tmux source-file ~/.config/.tmux.conf'

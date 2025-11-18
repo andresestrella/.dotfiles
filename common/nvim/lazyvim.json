@@ -10,6 +10,7 @@
     "lazyvim.plugins.extras.editor.refactoring",
     "lazyvim.plugins.extras.lang.git",
     "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.python",
     "lazyvim.plugins.extras.lang.toml",
     "lazyvim.plugins.extras.test.core",
     "lazyvim.plugins.extras.ui.treesitter-context",

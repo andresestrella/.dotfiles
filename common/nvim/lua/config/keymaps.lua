@@ -6,9 +6,6 @@
 vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
---exit terminal mode with esc
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-
 -- go to end of line with =
 vim.keymap.set("v", "=", "$")
 

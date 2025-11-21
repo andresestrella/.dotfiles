@@ -1,23 +1,22 @@
-description="Reviews a pull request based on issue number and accepts extra context."
+description = "Reviews a pull request based on issue number and accepts extra context."
 args = [
-    { name = "pr_number", description = "The GitHub pull request number." },
-    { name = "context", description = "Optional: Additional context like a Jira ticket description.", optional = true }
+  { name = "pr_number", description = "The GitHub pull request number." },
+  { name = "context", description = "Optional: Additional context like a Jira ticket description.", optional = true },
 ]
 prompt = """
-You are an expert code reviewer. Your task is to provide a detailed pull request review on GitHub issue number {{pr_number}}.
-Be concise so that readers can quickly grasp the key points, no greetings or sign-offs. 
-Don't praise the code, point out specific issues and suggest concrete improvements if there are any.
+You are an expert code reviewer. Your task is to provide a detailed pull request review on GitHub issue: {{pr_number}}.
+Be concise so that readers can quickly grasp the key points, no greetings or sign-offs and 
+don't praise the code, only point out specific issues and suggest concrete improvements if there are any.
 
 Follow these steps:
+
 1. Use `gh pr view {{pr_number}}` to pull the information of the PR.
 2. Use `gh pr diff {{pr_number}}` to view the diff of the PR.
-3. Understand the intent of the PR using the PR description and the additional context provided {{context}}
+3. Understand the intent of the PR using the PR description and the additional context provided (if there is any): "{{context}}".
 4. If PR description is not detailed enough to understand the intent of the PR, make sure to note it in your review.
 5. Search the codebase if required.
-6. At the end of the review append the following line: "(This review was AI generated and manually verified and edited)".
-7. Ask me if I want to post the review and if yes, use `gh pr comment {{pr_number}}` to post the review to the PR.
+6. Write a concise review of the PR, keeping in mind to encourage strong code quality and best practices. At the end of the review append the following line: "(This review was AI generated and manually verified and edited)".
+7. Use `gh pr comment {{args}} --body {{review}}` to post the review to the PR.
 
 Remember to use the GitHub CLI (`gh`) with the Shell tool for all GitHub-related tasks.
 """
-
-#5. Make sure the PR title follows Conventional Commits, here are the last five commits to the repo as examples: !{git log --pretty=format:"%s" -n 5}

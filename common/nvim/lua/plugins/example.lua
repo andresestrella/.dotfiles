@@ -94,14 +94,14 @@ return {
       max_lines = 5,
     },
   },
-  -- { -- merge conflict keymaps
-  -- 	'akinsho/git-conflict.nvim',
-  -- 	event = "BufRead",
-  -- 	version = "*",
-  -- 	config = {
-  -- 		disable_diagnostics = true, -- disable diagnostics in git conflict buffers
-  -- 	}
-  -- },
+  { -- merge conflict keymaps
+  	'akinsho/git-conflict.nvim',
+  	event = "BufRead",
+  	version = "*",
+  	config = {
+  		disable_diagnostics = true, -- disable diagnostics in git conflict buffers
+  	}
+  },
   {
     "folke/snacks.nvim",
     opts = {

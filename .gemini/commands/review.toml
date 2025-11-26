@@ -16,7 +16,7 @@ Follow these steps:
 4. If PR description is not detailed enough to understand the intent of the PR, make sure to note it in your review.
 5. Search the codebase if required.
 6. Write a concise review of the PR, keeping in mind to encourage strong code quality and best practices. At the end of the review append the following line: "(This review was AI generated and manually verified and edited)".
-7. Use `gh pr comment {{args}} --body {{review}}` to post the review to the PR.
+7. Use `gh pr comment --body {{review}}` to post the review to the PR.
 
 Remember to use the GitHub CLI (`gh`) with the Shell tool for all GitHub-related tasks.
 """

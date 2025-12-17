@@ -85,3 +85,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nvim'
 fi
+
+# Added by Antigravity
+export PATH="/Users/andres/.antigravity/antigravity/bin:$PATH"

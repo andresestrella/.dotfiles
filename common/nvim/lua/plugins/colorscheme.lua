@@ -42,13 +42,13 @@ return {
   -- 	end,
   -- },
   -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  -- {
-  -- 	"rebelot/kanagawa.nvim",
-  -- 	-- lazy= false,
-  -- 	config = function()
-  -- 		vim.cmd("colorscheme kanagawa")
-  -- 		-- vim.cmd("colorscheme kanagawa-dragon")
-  -- 		-- vim.cmd("colorscheme kanagawa-wave")
-  -- 	end
-  -- }
+  {
+  	"rebelot/kanagawa.nvim",
+  	lazy= false,
+  	config = function()
+  		vim.cmd("colorscheme kanagawa")
+  		-- vim.cmd("colorscheme kanagawa-dragon")
+  		-- vim.cmd("colorscheme kanagawa-wave")
+  	end
+  }
 }

@@ -21,3 +21,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.b.autoformat = false
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { ".env", ".env.*" }, -- Covers .env, .env.local, .env.production, etc.
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})

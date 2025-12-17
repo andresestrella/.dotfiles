@@ -15,7 +15,6 @@ enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#layouts
-# specifies the size of accordion padding.
 accordion-padding = 40
 
 # Possible values: tiles|accordion
@@ -37,7 +36,6 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = true
 
-# Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
     preset = 'qwerty'
@@ -57,6 +55,14 @@ automatically-unhide-macos-hidden-apps = true
     outer.bottom =     10
     outer.top =        10
     outer.right =      10
+
+# Assign workspaces to monitors
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+1 = 'XV271U M3'
+2 = 'XV271U M3'
+3 = 'Built-in Retina Display'
+4 = 'Built-in Retina Display'
 
 # 'main' binding mode declaration, must be present.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

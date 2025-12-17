@@ -95,12 +95,12 @@ return {
     },
   },
   { -- merge conflict keymaps
-  	'akinsho/git-conflict.nvim',
-  	event = "BufRead",
-  	version = "*",
-  	config = {
-  		disable_diagnostics = true, -- disable diagnostics in git conflict buffers
-  	}
+    "akinsho/git-conflict.nvim",
+    event = "BufRead",
+    version = "*",
+    config = {
+      disable_diagnostics = true, -- disable diagnostics in git conflict buffers
+    },
   },
   {
     "folke/snacks.nvim",
@@ -145,11 +145,21 @@ return {
       },
     },
   },
-  -- Extend the list of default treesitter parsers installed: (Your override for a LazyVim plugin)
   {
+    {
+      "mfussenegger/nvim-lint",
+      opts = {
+        linters = {
+          ["markdownlint-cli2"] = {
+            args = { "--config", '{ "config": { "MD013": false } }', "--" },
+          },
+        },
+      },
+    },
+  },
+  { -- Extend the list of default treesitter parsers installed: (Your override for a LazyVim plugin)
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-      -- add tsx and treesitter
       vim.list_extend(opts.ensure_installed, {
         "bash",
         "html",

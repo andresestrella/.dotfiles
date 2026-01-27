@@ -88,3 +88,4 @@ fi
 
 # Added by Antigravity
 export PATH="/Users/andres/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

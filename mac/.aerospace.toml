@@ -59,10 +59,11 @@ outer.right = 10
 # Assign workspaces to monitors
 # See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [workspace-to-monitor-force-assignment]
-1 = 'XV271U M3'
-2 = 'XV271U M3'
+1 = 'MAG 274U E16M'
+2 = 'MAG 274U E16M'
 3 = 'Built-in Retina Display'
 4 = 'Built-in Retina Display'
+5 = 'Built-in Retina Display'
 
 # 'main' binding mode declaration, must be present.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes

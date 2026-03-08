@@ -14,9 +14,9 @@ Follow these steps:
 2. Use `gh pr diff {{pr_number}}` to view the diff of the PR.
 3. Understand the intent of the PR using the PR description and the additional context provided (if there is any): "{{context}}".
 4. If PR description is not detailed enough to understand the intent of the PR, make sure to note it in your review.
-5. Search the codebase if required.
+5. Search the codebase if required (The currently checked out branch might be different from the PR branch, so make sure you are looking at the code from the correct branch)
 6. Write a concise review of the PR, keeping in mind to encourage strong code quality and best practices. At the end of the review append the following line: "(This review was AI generated and manually verified and edited)".
-7. Use `gh pr comment --body {{review}}` to post the review to the PR.
+7. save the review as a file in the `./reviews` directory in the Desktop with the name `pr-{{pr_number}}.md`.
 
 Remember to use the GitHub CLI (`gh`) with the Shell tool for all GitHub-related tasks.
 """
